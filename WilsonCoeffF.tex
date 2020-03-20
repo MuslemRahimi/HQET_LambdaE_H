@@ -1,0 +1,48 @@
+\documentclass[openright,twoside,12pt,a4paper,final]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+%\usepackage{classicthesis}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage[ngerman]{datetime}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{slashed}
+%\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+
+\allowdisplaybreaks
+
+\begin{document}
+	\noindent
+	In this document we try to prove the following value of the Wilson coefficient for the perturbative diagram:
+	
+	\begin{align}
+		C_I^F (p) = -\frac{N_c}{2\pi^2} p^2 \;  \mathrm{ln}\big(\frac{-p}{\mu}\big)
+	\end{align}
+	\noindent	
+	We start by the following correlation function and contract the $q$ and $b_v$ fields with Wicks theorem:
+	\begin{align}
+		I_{C^F_I} =& i \int \mathrm{d}^d x e^{-ipv \cdot x} \tilde{\mu}^{2\epsilon} \bra{0} \bar{q}(0) \Gamma_1 b_v(0) \bar{b_v}(x) \Gamma_2 q(x) \ket{0} \nonumber \\ =& i \int \mathrm{d}^d x e^{-ipv \cdot x} \tilde{\mu}^{2\epsilon} \;  \mathrm{Tr} \{\slashed{x} \Gamma_1 P_+ \Gamma_2\} \cdot \frac{i \Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} \cdot (-x^2 + i0)^{\frac{d}{2}}} \Theta(-v \cdot x) \delta^{(d - 1)}(x_{\perp}) \nonumber \\ =& -i \int_{-\infty}^{0} \mathrm{d} x^0 e^{-ipv_0 \cdot x^0} \tilde{\mu}^{2\epsilon} \;  \mathrm{Tr} \{x^0 \gamma_0 \Gamma_1 P_+ \Gamma_2\} \cdot \frac{i \Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} \cdot (-(x^0)^2 + i0)^{\frac{d}{2}}} \nonumber
+	\end{align}
+	Note that $P_+ = \frac{1 + \slashed{v}}{2} = \frac{1 + \gamma^0}{2}$, hence we get an additional minus sign by permuting $\Gamma_2 = \gamma_5$ and $\gamma^0$ and use $P_+ \gamma_0 = P_+$. We arrive at:
+	\begin{align}
+		I_{C^F_I} =& \frac{\Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} }\tilde{\mu}^{2\epsilon} \; \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot \int_{-\infty}^{0} \mathrm{d} x^0 e^{-ipv_0 \cdot x^0}  \frac{x^0}{(-(x^0)^2 + i0)^{\frac{d}{2}}} \nonumber \\ =& \frac{-\Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} }\tilde{\mu}^{2\epsilon} \; \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot (-p)^{-2 \epsilon} p^2 \Gamma[-2 - 2\epsilon] \nonumber \\ =& \frac{-4^{-\epsilon}}{2 \pi^2} \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot  p^2 \cdot  \Big[\frac{1}{4 \epsilon} + \frac{1}{2} - \frac{1}{2} \; \mathrm{ln} \big(\frac{-p}{\mu}\big)\Big]
+	\end{align}
+	We see that the pole in $\epsilon$ and the $\frac{1}{2}$ are wrong, the term containing the $\mathrm{ln}$ in nearly the same as desired apart from $4^{-\epsilon}$ and $N_c$. Notice that one factor of $\frac{1}{2}$ is absorbed into the definition as well as the $\mathrm{Tr}$, see (7).
+\end{document}
