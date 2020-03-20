@@ -1,0 +1,60 @@
+\documentclass[openright,twoside,12pt,a4paper,final]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+%\usepackage{classicthesis}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage[ngerman]{datetime}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{slashed}
+%\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+
+\allowdisplaybreaks
+
+\begin{document}
+	\noindent
+	Here, we would like to derive the quark propagator in an external gluon field up to the first order correction. Starting point is the leading order contribution:
+	\begin{align}
+		S^{(0)} (x,0) =& \; i \int \frac{\mathrm{d}^dp}{(2 \pi)^d} e^{-ipx} \frac{\slashed{p}}{p^2 + i 0^+} \nonumber \\ =& \; i \int \frac{\mathrm{d}^d \vec{p}}{(2 \pi)^d} e^{i\vec{p} \vec{x}} \frac{- \slashed{\vec{p}}}{- \vec{p}^2 + i 0^+} \nonumber \\ =& - \slashed{\partial}_x \int \frac{\mathrm{d}^d \vec{p}}{(2 \pi)^d} e^{i\vec{p} \vec{x}} \frac{1}{- \vec{p}^2 + i 0^+} \nonumber \\ =& \; \frac{i}{4} \pi^{-\frac{d}{2}} \cdot \Gamma\Big[\frac{d}{2} - 1\Big] \Big(1 - \frac{d}{2}\Big) \frac{-2 \slashed{x}}{(-x^2 - i0^+)^{\frac{d}{2}}} \nonumber \\ =& \; i \frac{\Gamma\Big[\frac{d}{2}\Big]}{2 \pi^{\frac{d}{2}}} \frac{\slashed{x}}{(-x^2 - i0^+)^{\frac{d}{2}}}
+	\end{align}
+	Notice an important point: The $i0^+$ prescription is different compared to the one in the Japanese paper. This might cause trouble at some point. \\
+	Now consider the correction to the quark propagator:
+	\begin{align}
+		S(x,0) = S^{(0)}(x,0) \underbrace{-g_s \int \mathrm{d}^d p S^{(0)}(x - p,0) \gamma^{\mu} T^a A^a_{\mu}(p) S^{(0)}(0,p)}_{S^{(1)}(x,0)}
+	\end{align}
+	\begin{align}
+		S^{(1)}(x,0) =& \; \frac{g_s}{2} \int \mathrm{d}^d p T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^dk}{(2 \pi)^d} e^{-ik\cdot(x - p)} \frac{\slashed{k}}{k^2 + i0^+} \gamma^{\mu} \int \frac{\mathrm{d}^dk_1}{(2 \pi)^d} \frac{\slashed{k_1}}{k_1^2 + i0^+} \frac{\partial}{\partial k_{1,\alpha}} e^{-ik_1p} \nonumber \\ =& \; - \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^dk}{(2 \pi)^d} e^{-ikx} \frac{\slashed{k}}{k^2 + i0^+} \gamma^{\mu} \frac{\partial}{\partial k_{\alpha}} \frac{\slashed{k}}{k^2 + i0^+} \nonumber \\ =& \; - \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^dk}{(2 \pi)^d} e^{-ikx} \frac{\slashed{k}}{k^2 + i0^+} \gamma^{\mu} \Bigg[ \frac{\gamma^{\alpha}}{k^2 + i0^+} - \frac{\slashed{k}}{(k^2 + i0^+)^2} \cdot 2 k^{\alpha}\Bigg] \nonumber \\ =& \; - \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^d\vec{k}}{(2 \pi)^d} e^{i\vec{k}\vec{x}} \frac{-\slashed{\vec{k}}}{-\vec{k}^2 + i0^+} \gamma^{\mu} \Bigg[ \frac{\gamma^{\alpha}}{-\vec{k}^2 + i0^+} - \frac{\slashed{\vec{k}}}{(-\vec{k}^2 + i0^+)^2} \cdot 2 \vec{k}^{\alpha}\Bigg] \nonumber
+	\end{align}
+	We now use the following relation between two gamma matrices:
+	\begin{align}
+		\gamma^{\mu} \gamma^{\alpha} = -i \sigma^{\mu \alpha} + g^{\mu \alpha}
+	\end{align}
+	Using this relation, we obtain:
+	\begin{footnotesize}
+	\begin{align}
+		S^{(1)}(x,0) =& \;\frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^d\vec{k}}{(2 \pi)^d} e^{i\vec{k}\vec{x}} \frac{\slashed{\vec{k}}}{-\vec{k}^2 + i0^+} \Bigg[ \frac{-i \sigma^{\mu \alpha} + g^{\mu \alpha}}{-\vec{k}^2 + i0^+} - \frac{4 \vec{k}^{\mu} \vec{k}^{\alpha}}{(-\vec{k}^2 + i0^+)^2} + \frac{2 \slashed{\vec{k}} \gamma^{\mu} \vec{k}^{\alpha}}{(-\vec{k}^2 + i0^+)^2} +  \frac{ \slashed{\vec{k}} \gamma^{\alpha} \vec{k}^{\mu}}{(-\vec{k}^2 + i0^+)^2} -  \\& \frac{ \slashed{\vec{k}} \gamma^{\alpha} \vec{k}^{\mu}}{(-\vec{k}^2 + i0^+)^2} \Bigg] \nonumber
+	\end{align}
+	\end{footnotesize} \normalsize
+	\noindent
+	Now we need to keep in mind that $S^{(1)}$ is invariant under the exchange of two Lorentz indices, while $G^a_{\alpha \mu}$ is not. Hence all symmetric terms can be dropped and only the antisymmetric terms survive:
+	\begin{align}
+		S^{(1)}(x,0) =& \; -i \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^d\vec{k}}{(2 \pi)^d} e^{i\vec{k}\vec{x}} \Bigg[ \frac{\slashed{\vec{k}} \sigma^{\mu \alpha}}{(-\vec{k}^2 + i0^+)^2} - i\frac{ \gamma^{\mu} \vec{k}^{\alpha} - \gamma^{\alpha} \vec{k}^{\mu}}{(-\vec{k}^2 + i0^+)^2} \Bigg] \nonumber \\ =& \; i \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \int \frac{\mathrm{d}^d\vec{k}}{(2 \pi)^d} e^{i\vec{k}\vec{x}} \Bigg[ \frac{\slashed{\vec{k}} \sigma^{ \alpha \mu}}{(-\vec{k}^2 + i0^+)^2} + i\frac{ \gamma^{\mu} \vec{k}^{\alpha} - \gamma^{\alpha} \vec{k}^{\mu}}{(-\vec{k}^2 + i0^+)^2} \Bigg] \nonumber \\ =& \; -i \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \frac{1}{16 \pi^\frac{d}{2}} \Gamma\Big[\frac{d}{2} - 2\Big] \Big(2 - \frac{d}{2}\Big) \frac{1}{(-x^2 - i0^+)^{\frac{d}{2} - 1}} \Bigg[ -2\slashed{x} \sigma^{ \alpha \mu} + i\big( -2 \gamma^{\mu} x^{\alpha} +2 \gamma^{\alpha} x^{\mu}\big) \Bigg] \nonumber \\ =& \; -i \frac{g_s}{2} T^a G^a_{\alpha \mu}(0) \frac{1}{16 \pi^\frac{d}{2}} \Gamma\Big[\frac{d}{2} - 1\Big]  \frac{1}{(-x^2 - i0^+)^{\frac{d}{2} - 1}} \underbrace{\Bigg[ 2\slashed{x} \sigma^{ \alpha \mu} + i \big( 2 \gamma^{\mu} x^{\alpha} - 2 \gamma^{\alpha} x^{\mu}\big) \Bigg]}_{ = \{\slashed{x},\sigma^{\alpha \mu}\}} \nonumber
+	\end{align}
+\end{document}
