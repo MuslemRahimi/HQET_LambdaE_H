@@ -8,10 +8,11 @@ Computing lambda_E &amp; lambda_H
 4. Gleichung (30)
 5. Gleichung (12) für unseren Ansatz
 6. Berechnung der Wilson Koeffizienten für unseren Ansatz.
+7. Gleichungen (9) bis (20) verstehen und für unseren Fall herleiten
 
 Bei einem Lösungsvorschlag oder Lösung die Nummer in der commit message bitte angeben. Bei erfolgter Lösung Problem hier
 streichen. 
 
-Problem 6.: Diese Relation ist natürlich auch in unserem Fall gültig. In die entsprechende Korrelationsfunktion für die Ströme wird lediglich ein pseudoskalares B-Meson eingefügt, die Zerlegung in Lorentz-Kovariante bleibt die gleiche.
+Problem 5.: Diese Relation ist natürlich auch in unserem Fall gültig. In die entsprechende Korrelationsfunktion für die Ströme wird lediglich ein pseudoskalares B-Meson eingefügt, die Zerlegung in Lorentz-Kovariante bleibt die gleiche.
 
 ZIEL: BIS WIR UNS WIEDERSEHEN, HABEN WIR NEUBERTS ERGEBNIS REPRODUZIERT!
