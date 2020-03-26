@@ -1,0 +1,55 @@
+\documentclass[openright,twoside,12pt,a4paper,final]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+%\usepackage{classicthesis}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage[ngerman]{datetime}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{slashed}
+\usepackage{simplewick}
+
+\begin{document}
+	\noindent 
+	Here, we show that the subdiagrams (a) to (c) on p.6 vanish (at least (a) and (b) are properly investigated here):
+	
+	\begin{itemize}
+		\item subdiagram (a):
+			\begin{align}
+				\contraction{}{h_v(0)}{}{\bar{h}_v(x)} h_v(0) \bar{h}_v(x)
+				 =& \; \Theta(-v\cdot x) \delta^{(d - 1)}(x_{\perp}) P_+ i g_s \int_{v\cdot x} \mathrm{d} s v^{\mu} A_{\mu}(sv) \nonumber \\ =& \; \Theta(-v\cdot x) \delta^{(d - 1)}(x_{\perp}) P_+ i g_s \int_{v\cdot x} \mathrm{d} s \; v^{\mu} \int_0^1 \mathrm{d} u \;  u s v^{\nu} G_{\nu \mu}(usv) \nonumber \\ =& \; 0
+			\end{align} 
+			since 
+			\begin{align}
+				v^{\mu} v^{\nu} G_{\nu \mu}(...) = -v^{\mu} v^{\nu} G_{\mu \nu}(...) = -v^{\nu} v^{\mu} G_{\mu \nu}(...) = -v^{\mu} v^{\nu} G_{\nu \mu}(...)
+			\end{align}
+			
+			Generally, a product of an antisymmetric and a symmetric tensor leads $0$. We immediately started this investigation at $\mathcal{O}(g_s)$, because an emission of a background gluon field is an NLO effect.
+		\item subdiagram (b): \\ \\
+			Here, the heavy quark propagator is again expanded to $\mathcal{O}(g_s)$ and the appearing backgound field gluon is contracted with the field strength tensor from the three-body current.
+			\begin{align}
+				&\Theta(-v\cdot x) \delta^{(d - 1)}(x_{\perp}) P_+ \bra{0}T\{\bar{q} \Gamma_1 g_s \contraction[2ex]{}{G_{\mu \nu}}{ i g_s \int_{v \cdot x} \mathrm{d}s \; v^{\lambda}}{A_{\lambda}(sv)} G_{\mu \nu} i g_s \int_{v \cdot x} \mathrm{d}s \; v^{\lambda} A_{\lambda}(sv) \Gamma_2 q\}\ket{0} \nonumber \\ =& \; \Theta(-v\cdot x) \delta^{(d - 1)}(x_{\perp}) P_+ \bra{0}T\{\bar{q} \Gamma_1 \Gamma_2 q\}\ket{0} i g_s^2 \int_{v \cdot x} \mathrm{d}s \; \frac{\Gamma\Big(\frac{d}{2}\Big) \delta^{ab}}{2 \pi^{\frac{d}{2}} (-s^2v^2 + i0^+)^{\frac{d}{2}}} s (g_{\nu \lambda} v_{\mu} - g_{\mu \lambda} v_{\nu}) v^{\lambda} \nonumber \\ =& \; 0
+			\end{align}
+			since 
+			\begin{align}
+				(g_{\nu \lambda} v_{\mu} - g_{\mu \lambda} v_{\nu}) v^{\lambda} = v_{\mu} v_{\nu} - v_{\nu} v_{\mu} = 0
+			\end{align}
+			The only missing piece seems to be subdiagram (c). The proof might be as simple as to take equation (30) and set z=0, because the gluon line is connected to the same on-shell quark line.
+	\end{itemize}
+	
+\end{document}

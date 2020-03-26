@@ -1,0 +1,41 @@
+\documentclass[openright,twoside,12pt,a4paper,final]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+%\usepackage{classicthesis}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage[ngerman]{datetime}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{slashed}
+
+\begin{document}
+	\noindent
+	Here, we would like to prove eq. (25).
+	After contracting the heavy-quark propagator, we start at the following point:
+	\begin{align}
+		&\Theta(-v \cdot x) \delta^{(3)}(x_{\perp}) \bra{0}\bar{q}(0) \Gamma_1 P_+ \Gamma_2 q(x)\ket{0} \nonumber \\ =& \; \Theta(-v \cdot x) \delta^{(3)}(x_{\perp}) \Big[ \bra{0}\bar{q}(0) \Gamma_1 P_+ \Gamma_2 q(0)\ket{0} + x^{\mu} \bra{0}\bar{q}(0) \Gamma_1 P_+ \Gamma_2 D_{\mu} q(0)\ket{0} + \nonumber \\& \; \frac{1}{2} x^{\mu} x^{\nu} \bra{0}\bar{q}(0) \Gamma_1 P_+ \Gamma_2 D_{\mu} D_{\nu} q(0)\ket{0} + ...\Big]
+	\end{align}
+	Now we start by investigating the first term in the sum:
+	\begin{align}
+		\bra{0}\bar{q}_{\alpha}^i(0) \Gamma_{1,\alpha \beta} P_{+,\beta \gamma} \Gamma_{2,\gamma \delta} q_{\delta}^j(0)\ket{0} =& \; A \delta^{ij} \delta_{\alpha \delta} \\ \Leftrightarrow \delta^{ij} \delta_{\alpha \delta} \bra{0}\bar{q}_{\alpha}^i(0) \Gamma_{1,\alpha \beta} P_{+,\beta \gamma} \Gamma_{2,\gamma \delta} q_{\delta}^j(0)\ket{0} =& \; 4 \cdot A N_c 
+	\end{align}
+	Notice that we implicitly sum over the flavors $i,j$, hence $N_c$ also appears in the RHS and cancels the one on the LHS. So we can solve for $A$:
+	\begin{align}
+		A = \frac{1}{4} \underbrace{\Gamma_{1,\alpha \beta} P_{+,\beta \gamma} \Gamma_{2,\gamma \delta} \delta_{\alpha \delta}}_{ = \; \mathrm{Tr}[\Gamma_1 P_+ \Gamma_2]} \bra{0}\bar{q}q\ket{0}
+	\end{align}
+\end{document}

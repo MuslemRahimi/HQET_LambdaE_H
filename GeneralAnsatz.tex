@@ -24,7 +24,91 @@
 \usepackage{slashed}
 
 \begin{document}
+	\noindent 
+	First, we are going to derive the HQET sum rules for the parameters $\lambda_E$ and $\lambda_H$ by Nishikawa and Tanaka. I have also derived the sum rules for the HQET coupling constant $F(\mu)$, but since the steps are similar to the more involved three-body current calculation, i will only state the latter. In the end i am deriving the sum rules for our double three-body current considerations. \\
+	NOTICE: \textcolor{red}{There is a step in the calculation that i can not explain. I will explicitly mark that point. It appears when we take the product of the matrix elements for the inserted B-meson containing two disjoint traces and somehow merge them to one trace such that we can match this to our definition of the correlation functions.} \\
+	The starting point for the calculation is the correlation function: \\
 	\begin{align}
-		&i \int \mathrm{d}^d x e^{-i p v \cdot x} g_s^2 \bra{0} T\{\bar{q}(0) \Gamma_1 G_{\mu \nu}(0) b_v(0) \bar{b}_v(x) \Gamma_2 G_{\rho \sigma}(x) q(x)\} \ket{0} \noindent \\ &= -\frac{1}{2} \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+ \sigma_{\rho \sigma} \Gamma_2\} \Pi_{\sigma} - \frac{1}{2} \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+ (i v_{\rho} \gamma_{\sigma} - i v_{\sigma} \gamma_{\rho}) \Gamma_2\} \Pi_{\sigma \gamma} \noindent \\ &- \frac{1}{2} \mathrm{Tr} \{(i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu}) \Gamma_1 P_+ (i v_{\rho} \gamma_{\sigma} - i v_{\sigma} \gamma_{\rho}) \Gamma_2\} \Pi_{\sigma \gamma}
+		\Pi_{\Gamma_1 \Gamma_2,3}(\omega) =& \; i \int \mathrm{d}^d x e^{-i \omega v \cdot x} g_s \bra{0} T\{\bar{q}(0) \Gamma_1 G_{\mu \nu}(0) b_v(0) \bar{b}_v(x) \Gamma_2 q(x)\} \ket{0}  \nonumber \\ =& \; - \frac{1}{2} \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+  \Gamma_2\} \Pi_{3H}(\omega) - \frac{1}{2} \mathrm{Tr} \{(i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu}) \Gamma_1 P_+  \Gamma_2\} \Pi_{3S}(\omega)
+	\end{align} \\
+	Another important relation comes from the unitary condition, where the ground state B-meson is separated from the continuum excited states: \\
+	\begin{align}
+		\frac{1}{\pi} \mathrm{Im} \Pi_{\Gamma_1 \Gamma_2,3}(\omega) =& \sum_n \bra{0} \bar{q}(0) \Gamma_1 g_s G_{\mu \nu}(0) b_v(0)\ket{n} \bra{n} \bar{b}_v(x) \Gamma_2 q(x) \ket{0} \mathrm{d} \Phi_n \cdot (2\pi)^3 \delta(\omega - p_n) \nonumber \\ =& \bra{0} \bar{q}(0) \Gamma_1 g_s G_{\mu \nu}(0) b_v(0)\ket{B} \bra{B} \bar{b}_v(x) \Gamma_2 q(x) \ket{0} \delta(\omega^2 - \bar{\Lambda}^2) \Theta(\omega^0) + \nonumber \\& \rho_3^{hadr.}(\omega) \Theta(\omega^2 - s_3^h)
+	\end{align} \\
+	The matrix elements can be decomposed in the following way (see paper):
+	\begin{align}
+		\bra{0} \bar{q}(0) \Gamma_1 b_v(0) \ket{B} = -\frac{i}{2} F(\mu) \mathrm{Tr}[\Gamma_1 P_+ \gamma_5] \label{MatrixEF}
 	\end{align}
+	\begin{align}
+		\bra{0} \bar{q}(0) \Gamma_1 G_{\mu \nu}(0) b_v(0) \ket{B} =& \; \frac{-i}{6} F(\mu) \{\lambda_H^2(\mu) \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 \sigma_{\mu \nu}] \nonumber \\& + [\lambda_H^2(\mu) - \lambda_E^2(\mu)] \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 (i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu})]\}
+	\end{align}
+	The next step will be to use the standard dispersion relation (after using residue theorem, Schwartz reflection principle,...): \\
+	\begin{align}
+		\Pi_{\Gamma_1 \Gamma_2,3}(\omega) =& \frac{1}{\pi} \int_0^{\infty} \mathrm{d}s \frac{\mathrm{Im} \Pi_{\Gamma_1 \Gamma_2,3}(\omega)}{s - \omega^2 - i0^+} \nonumber \\ =& \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} \bra{0} \bar{q}(0) \Gamma_1 g_s G_{\mu \nu}(0) b_v(0)\ket{B} \bra{B} \bar{b}_v(x) \Gamma_2 q(x) \ket{0} + \int_{s_3^h}^{\infty} \mathrm{d} s \frac{\rho_3^{hadr.}(s)}{s - \omega^2 - i0^+} 
+	\end{align} \\
+	Here, $\bar{\Lambda}$ is defined to be $m_B - m_b$ and a typically chosen HQET parameter.
+	At this stage we assume that we can rewrite the hadronic continuum spectrum as: \\
+	\begin{align}
+		\rho_3^{hadr.}(s) \Theta(s - s_3^h) :=& - \frac{1}{2} \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+  \Gamma_2\} \rho_{3,\sigma}^{hadr.}(s) \Theta(s - s_{3,\sigma}^h) - \nonumber \\& \frac{1}{2} \mathrm{Tr} \{(i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu}) \Gamma_1 P_+  \Gamma_2\} \rho_{3,v}^{hadr.}(s) \Theta(s - s_{3,v}^h) \label{hadrSpectr}
+	\end{align} \\
+	The matrix elements can also be evaluated:
+	\begin{align}
+		&\bra{0} \bar{q}(0) \Gamma_1 g_s G_{\mu \nu}(0) b_v(0)\ket{B} \bra{B} \bar{b}_v(x) \Gamma_2 q(x) \ket{0} \nonumber \\ =& \; \frac{-i}{6} F(\mu) \{\lambda_H^2(\mu) \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 \sigma_{\mu \nu}] \nonumber + [\lambda_H^2(\mu) - \lambda_E^2(\mu)] \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 (i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu})]\} \cdot \\& \frac{-i}{2} F^{\dagger}(\mu) \mathrm{Tr}[\gamma_5 P_+ \Gamma_2] \nonumber \\ \overset{\textcolor{red}{?}}{=}& \; \frac{-1}{12} F(\mu)^2 \big[\lambda_H^2 \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+  \Gamma_2\} + (\lambda_H^2 - \lambda_E^2) \mathrm{Tr} \{(i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu}) \Gamma_1 P_+  \Gamma_2\}\big]
+	\end{align} \\
+	In the first line we took the complex conjugate of eq. \eqref{MatrixEF} and got an additional minus sign due to the permuting a $\gamma^0$ with $\gamma_5$. Note that the last line represents the crucial step in the calculation which is not clear to me. I am using this notation, because it works for both the coupling constant $F(\mu)$ as well for the HQET parameters. In our case it seems to work as well (at least up to now). \\ Using all these relations, we can obtain expressions for $\Pi_{3H}$ and $\Pi_{3S}$: \\
+	\begin{align}
+		\Pi_{3H}(\omega) =& \frac{1}{6} F(\mu)^2 \lambda_H^2 \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} + \int_{s_{3,\sigma}^h}^{\infty} \mathrm{d}s \frac{\rho_{3,\sigma}^{hadr.}(s)}{s - \omega^2 - i0^+} \\
+		\Pi_{3S}(\omega) =& \frac{1}{6} F(\mu)^2 (\lambda_H^2 - \lambda_E^2) \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} + \int_{s_{3,v}^h}^{\infty} \mathrm{d}s \frac{\rho_{3,v}^{hadr.}(s)}{s - \omega^2 - i0^+}
+	\end{align} \\
+	Since we do not know any concrete information about the hadronic spectral density, we make use of the global and semi-local quark-hadron duality (QHD) in order to connect the hadronic spectral density with the spectral density which is described by the OPE: \\
+	Global QHD: \begin{align} \Pi_X^{hadr.} = \Pi_X^{OPE} \; \; \; \; X \in \{3H,3S\} \label{GlobalQHD} \end{align} 
+	Semi-local QHD: \begin{align} \int_{s_{3,X}^h}^{\infty} \mathrm{d}s \frac{\rho_{3,X}^{hadr.}(s)}{s - \omega^2 - i0^+} = \int_{s_{3,X}^{th}}^{\infty} \mathrm{d}s \frac{\rho_{3,X}^{OPE}(s)}{s - \omega^2 - i0^+} \; \; \; \; X \in \{3H,3S\} \label{LocalQHD} \end{align}  \\
+	By using \eqref{GlobalQHD} and \eqref{LocalQHD}, we obtain:
+	\begin{align}
+		\frac{1}{6} F(\mu)^2 \lambda_H^2 \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} =& \int_{s_{3,\sigma}^h}^{s_{3,\sigma}^{th}} \mathrm{d}s \frac{\rho_{3,\sigma}^{OPE}(s)}{s - \omega^2 - i0^+} \\
+		\frac{1}{6} F(\mu)^2 (\lambda_H^2 - \lambda_E^2) \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} =& \int_{s_{3,v}^h}^{s_{3,v}^{th}} \mathrm{d}s \frac{\rho_{3,v}^{OPE}(s)}{s - \omega^2 - i0^+}
+	\end{align} \\
+	Finally we perform a Borel transformation, which removes possible substraction terms and leads to an exponential suppression of higher resonances:\\
+	\begin{align}
+		\frac{1}{6} F(\mu)^2 \lambda_H^2 e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{3,\sigma}^h}^{s_{3,\sigma}^{th}} \mathrm{d}s \;  \rho_{3,\sigma}^{OPE}(s) e^{-\frac{s}{M^2}} = \int_{s_{3,\sigma}^h}^{s_{3,\sigma}^{th}} \mathrm{d}s \; \frac{1}{\pi} \mathrm{Im} \Pi_{3,\sigma}^{OPE}(s) e^{-\frac{s}{M^2}}
+	\end{align} 
+	\begin{align}
+		\frac{1}{6} F(\mu)^2 (\lambda_H^2 - \lambda_E^2) e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{3,v}^h}^{s_{3,v}^{th}} \mathrm{d}s \;  \rho_{3,v}^{OPE}(s) e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{3,v}^h}^{s_{3,v}^{th}} \mathrm{d}s \; \frac{1}{\pi} \mathrm{Im} \Pi_{3,v}^{OPE}(s) e^{-\frac{s}{M^2}}
+	\end{align} \\
+	These are the HQET sum rules presented in the paper. We can now move on and derive the corresponding relations for our case: \\
+	\noindent \\
+	We can perform a general ansatz of the following form based on Lorentz covariance:
+	\begin{align}
+		\Pi_{\Gamma_1 \Gamma_2,33} =& \; i \int \mathrm{d}^d x e^{-i \omega v \cdot x} g_s^2 \bra{0} T\{\bar{q}(0) \Gamma_1 G_{\mu \nu}(0) b_v(0) \bar{b}_v(x) \Gamma_2 G_{\rho \sigma}(x) q(x)\} \ket{0} \nonumber \\ =& -\frac{1}{2} \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+ \Gamma_2\sigma_{\rho \sigma}\} \Pi_{33,\sigma} \textcolor{red}{+} \frac{1}{2} \mathrm{Tr} \{\sigma_{\mu \nu} \Gamma_1 P_+  \Gamma_2 (i v_{\rho} \gamma_{\sigma} - i v_{\sigma} \gamma_{\rho})\} \Pi_{33,\sigma v} \nonumber \\& - \frac{1}{2} \mathrm{Tr} \{(i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu}) \Gamma_1 P_+  \Gamma_2 \sigma_{\rho \sigma}\} \Pi_{33, v \sigma} \textcolor{red}{+} \frac{1}{2} \mathrm{Tr} \{(i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu}) \Gamma_1 P_+  \Gamma_2 (i v_{\rho} \gamma_{\sigma} - i v_{\sigma} \gamma_{\rho})\} \Pi_{33,v}
+	\end{align}
+	Some signs above are marked in red since i adjusted them such that there are no minus signs in the sum rule. Due to the fact that the decomposition above seems to be a definition, this should be justified. \\
+	\begin{align}
+		\frac{1}{\pi} \mathrm{Im} \Pi_{\Gamma_1 \Gamma_2,3}(\omega) =& \sum_n \bra{0} \bar{q}(0) \Gamma_1 g_s G_{\mu \nu}(0) b_v(0)\ket{n} \bra{n} \bar{b}_v(x) \Gamma_2 g_s G_{\rho \sigma}(x) q(x) \ket{0} \mathrm{d} \Phi_n \cdot (2\pi)^3 \delta(\omega - p_n) \nonumber \\ =& \bra{0} \bar{q}(0) \Gamma_1 g_s G_{\mu \nu}(0) b_v(0)\ket{B} \bra{B} \bar{b}_v(x) \Gamma_2 g_s G_{\rho \sigma} q(x) \ket{0} \delta(\omega^2 - \bar{\Lambda}^2) \Theta(\omega^0) \; + \nonumber \\& \rho_{33}^{hadr.}(\omega) \Theta(\omega^2 - s_{33}^h)
+	\end{align} \\
+	Using this relation and remembering that the matrix elements are still the same, we get: \\
+	\begin{align}
+		\Pi_{\Gamma_1 \Gamma_2,33}(\omega) =& \frac{1}{\pi} \int_0^{\infty} \mathrm{d}s \frac{\mathrm{Im} \Pi_{\Gamma_1 \Gamma_2,3}(\omega)}{s - \omega^2 - i0^+} \nonumber \\ =& \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} \Big[\frac{-i}{6} F(\mu) \{\lambda_H^2(\mu) \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 \sigma_{\mu \nu}] \nonumber \\& + [\lambda_H^2(\mu) - \lambda_E^2(\mu)] \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 (i v_{\mu} \gamma_{\nu} - i v_{\nu} \gamma_{\mu})]\} \cdot \frac{-i}{6} F^{\dagger}(\mu) \{\lambda_H^2(\mu) \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 \sigma_{\rho \sigma}] \nonumber \\& - [\lambda_H^2(\mu) - \lambda_E^2(\mu)] \cdot \mathrm{Tr}[\Gamma_1 P_+ \gamma_5 (i v_{\rho} \gamma_{\sigma} - i v_{\sigma} \gamma_{\rho})]\} \Big] + \int_{s_{33}^h}^{\infty} \mathrm{d} s \frac{\rho_{33}^{hadr.}(s)}{s - \omega^2 - i0^+} 
+	\end{align} \\
+	After decomposing $\rho_{33}^{hadr.}(s)$ in a similar way as \eqref{hadrSpectr}, we obtain the following relations: \\
+	\begin{align}
+		\Pi_{33,\sigma}(\omega) =& \frac{1}{18} F(\mu)^2 \lambda_H^4 \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} + \int_{s_{33,\sigma}^h}^{\infty} \mathrm{d}s \frac{\rho_{33,\sigma}^{hadr.}(s)}{s - \omega^2 - i0^+} \\
+		\Pi_{33,\sigma v}(\omega) =& \textcolor{red}{+} \frac{1}{18} F(\mu)^2 \lambda_H^2 (\lambda_H^2 - \lambda_E^2) \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} + \int_{s_{33,\sigma v}^h}^{\infty} \mathrm{d}s \frac{\rho_{33,\sigma v}^{hadr.}(s)}{s - \omega^2 - i0^+} \\
+		\Pi_{33,v \sigma}(\omega) =& \frac{1}{18} F(\mu)^2 \lambda_H^2 (\lambda_H^2 - \lambda_E^2) \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} + \int_{s_{33,v \sigma}^h}^{\infty} \mathrm{d}s \frac{\rho_{33,v \sigma}^{hadr.}(s)}{s - \omega^2 - i0^+} \\
+		\Pi_{33,v}(\omega) =& \textcolor{red}{+} \frac{1}{18} F(\mu)^2 (\lambda_H^2 - \lambda_E^2)^2 \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} + \int_{s_{33, v}^h}^{\infty} \mathrm{d}s \frac{\rho_{33, v}^{hadr.}(s)}{s - \omega^2 - i0^+}
+	\end{align} \\
+	Notice that there might be some HQET symmetry which leads to a cancellation of the two mixing terms (if the ansatz only contains - signs). Now we make use of \eqref{GlobalQHD} and \eqref{LocalQHD}:
+	\begin{align}
+		\frac{1}{18} F(\mu)^2 \lambda_H^4 \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} = \int_{s_{33,\sigma}^h}^{s_{33,\sigma}^{th}} \mathrm{d}s \frac{\rho_{33,\sigma}^{OPE}(s)}{s - \omega^2 - i0^+} \\
+		\frac{1}{18} F(\mu)^2 \lambda_H^2 (\lambda_H^2 - \lambda_E^2) \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} = \int_{s_{33,\sigma v}^h}^{s_{33,\sigma v}^{th}} \mathrm{d}s \frac{\rho_{33,\sigma v}^{OPE}(s)}{s - \omega^2 - i0^+} \\
+		\frac{1}{18} F(\mu)^2 \lambda_H^2 (\lambda_H^2 - \lambda_E^2) \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} = \int_{s_{33,v \sigma}^h}^{s_{33,v \sigma}^{th}} \mathrm{d}s \frac{\rho_{33,v \sigma}^{OPE}(s)}{s - \omega^2 - i0^+} \\
+		\frac{1}{18} F(\mu)^2 (\lambda_H^2 - \lambda_E^2)^2 \frac{1}{\bar{\Lambda}^2 - \omega^2 - i0^+} = \int_{s_{33,v}^h}^{s_{33,v}^{th}} \mathrm{d}s \frac{\rho_{33,v}^{OPE}(s)}{s - \omega^2 - i0^+}
+	\end{align}
+	Finally, we perform a Borel transformation:
+	\begin{align}
+		\frac{1}{18} F(\mu)^2 \lambda_H^4 e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33,\sigma}^h}^{s_{33,\sigma}^{th}} \mathrm{d}s \;  \rho_{33,\sigma}^{OPE}(s) e^{-\frac{s}{M^2}} = \int_{s_{33,\sigma}^h}^{s_{33,\sigma}^{th}} \mathrm{d}s \; \frac{1}{\pi} \mathrm{Im} \Pi_{33,\sigma}^{OPE}(s) e^{-\frac{s}{M^2}} \\
+		\frac{1}{18} F(\mu)^2 \lambda_H^2 (\lambda_H^2 - \lambda_E^2) 	e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33,\sigma v}^h}^{s_{33,\sigma v}^{th}} \mathrm{d}s \;  \rho_{33, \sigma v}^{OPE}(s) e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33,\sigma v}^h}^{s_{33, \sigma v}^{th}} \mathrm{d}s \; \frac{1}{\pi} \mathrm{Im} \Pi_{33, \sigma v}^{OPE}(s) e^{-\frac{s}{M^2}} \\
+		\frac{1}{18} F(\mu)^2 \lambda_H^2 (\lambda_H^2 - \lambda_E^2) 	e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33,v \sigma}^h}^{s_{33,v \sigma}^{th}} \mathrm{d}s \;  \rho_{33,v \sigma}^{OPE}(s) e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33,v \sigma}^h}^{s_{33,v \sigma}^{th}} \mathrm{d}s \; \frac{1}{\pi} \mathrm{Im} \Pi_{33,v \sigma}^{OPE}(s) e^{-\frac{s}{M^2}} \\
+		\frac{1}{18} F(\mu)^2 (\lambda_H^2 - \lambda_E^2)^2 	e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33,v}^h}^{s_{33, v}^{th}} \mathrm{d}s \;  \rho_{33,v}^{OPE}(s) e^{-\frac{\bar{\Lambda}^2}{M^2}} = \int_{s_{33, v}^h}^{s_{33, v}^{th}} \mathrm{d}s \; \frac{1}{\pi} \mathrm{Im} \Pi_{33, v}^{OPE}(s) e^{-\frac{s}{M^2}} 
+	\end{align} \\
+	
 \end{document}
