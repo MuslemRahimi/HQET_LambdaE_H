@@ -1,0 +1,84 @@
+\documentclass[openright,twoside,12pt,a4paper,final]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+%\usepackage{classicthesis}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage[ngerman]{datetime}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{slashed}
+\usepackage{simplewick}
+
+\begin{document}
+\section{Reproduce Eq.(25)}
+	First we Taylor expand the following matrix element:
+	\begin{align}
+	    \bra{0} \bar{q}(0) \Gamma_{1} P_{+} \Gamma_{2} \,q(x) \ket{0} &= \bra{0} \bar{q}(0) \Gamma_{1} P_{+} \Gamma_{2} q(0) \ket{0} + x^{\mu} \bra{0} \bar{q}(0) \Gamma_{1} P_{+} \Gamma_{2} D_{\mu} q(0) \ket{0} \nonumber \\
+	    & +\frac{1}{2} x^{\mu} x^{\nu} \bra{0} \bar{q}(0) \Gamma_{1} P_{+} \Gamma_{2} D_{\mu} D_{\nu} q(0) \ket{0} + \cdots
+	    \label{eq::matrix25}
+	\end{align}
+    First term in Eq.(\ref{eq::matrix25}) corresponds to the quark-antiquark condensate. 
+    \begin{align}
+         \bra{0} \bar{q}^{i}_{\alpha}(0) \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \,q^{j}_{\delta}(0) \ket{0} \delta^{ij} &= A \delta^{ij} \delta_{\alpha \delta} \nonumber \\
+         \Leftrightarrow \bra{0} \bar{q}^{i}_{\alpha}(0) \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \,q^{j}_{\delta}(0) \ket{0} \delta^{ij} \delta^{ij}\delta_{\alpha \delta} &= A \delta^{ij} \delta^{ij} \delta_{\alpha \delta} \delta_{\alpha \delta}\nonumber \\
+          \Leftrightarrow \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}] \braket{\bar{q} q} N_{c}  &= 4 A N_{c} \nonumber \\
+          \Rightarrow A = \frac{1}{4} \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}] \braket{\bar{q} q}
+         \label{eq::quark-antiquark}
+    \end{align}
+    where $(i,j)$ are color indices and $(\alpha, \beta,\gamma,\delta)$ are spinor indices. In the second line of Eq.(\ref{eq::quark-antiquark}) we multiplied on both sides $\delta^{ij} \delta_{\alpha \delta}$.
+    
+    The second term in Eq.(\ref{eq::matrix25}) does not contribute since according to Dirac's equation we can rewrite the covariant derivative as:
+    \begin{align}
+        \slashed{D} q = - i m_{q} q.
+    \end{align}
+    In HQET we assume $m_{q} = 0$ for light quarks.
+    
+    The third term in Eq.(\ref{eq::matrix25}) corresponds to the quark-antiquark-gluon condensate.
+    \begin{align}
+        \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0}  &= C_{1} \delta^{ij} \delta_{\alpha \delta} \, g_{\mu \nu} + C_{2}  \delta^{ij} \delta_{\alpha \delta} \sigma_{\mu \nu},
+        \label{eq::quark-antiquark-gluon1}
+    \end{align}
+    where we are only interested in the symmetric part. Now to compute $C_{1}$ we rewrite again Eq.(\ref{eq::quark-antiquark-gluon1}) using translation invariance as:
+    \begin{align}
+        \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} &= \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} G_{\mu \nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} \nonumber \\
+        & +\bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\nu} D_{\mu} q^{j}_{\delta}(0) \ket{0} \delta^{ij}.
+    \end{align}
+    Now by using Lorentz covariance we can re-express the first term:
+    \begin{align}
+        \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} G_{\mu \nu} q^{j}_{\delta}(0) \ket{0}  &= E \delta^{ij} \delta_{\alpha \delta} \sigma_{\mu\nu} \nonumber \\
+        \Leftrightarrow \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} G_{\mu \nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} \delta_{\alpha \delta} \sigma^{\mu \nu} &= E \delta^{ij} \delta_{\alpha \delta} \sigma_{\mu\nu} \delta^{ij} \delta_{\alpha \delta} \sigma^{\mu\nu} \nonumber \\
+        \Rightarrow E = \frac{1}{12 d(d-1)} \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}]\braket{\bar{q} \, G \cdot \sigma q},
+    \end{align}
+    where we multiplied both sides with $\delta^{ij} \delta_{\alpha \delta} \sigma^{\mu\nu}$ and used $\sigma_{\mu \nu} \sigma^{\mu \nu} = d(d-1)$.
+    
+    \newpage
+    \textcolor{red}{To obtain $C_{1}$ is not written here very clear but will do it very soon.}
+    Hence, the result for $C_{1}$ is:
+    \begin{align}
+        C_{1} &= i \left(\frac{1-d}{2} \right) E.
+    \end{align}
+    
+    Therefore, we obtain for the hadronic matrix element:
+    \begin{align}
+        \frac{1}{2} x^{\mu} x^{\nu} \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} &= C_{1} \delta^{ij} \delta^{ij} \delta_{\alpha \delta} g_{\mu \nu} \nonumber \\
+        &=  \frac{1}{2} x^{\mu} x^{\nu} i \left(\frac{1-d}{2} \right) \frac{1}{12 d (d-1)} g_{\mu \nu} \nonumber \\
+        & \times \text{Tr}[\Gamma_{3} P_{+} \Gamma_{2}] \braket{\bar{q} \, G \cdot \sigma q} \nonumber \\
+        &= \frac{1}{4} \text{Tr}[\Gamma_{3} P_{+} \Gamma_{2}] \left(\frac{-i}{16} \braket{\bar{q} \, G \cdot \sigma q} \right).
+    \end{align}
+    \textcolor{red}{Note that, we have a $(-i)$ too much. In the literature the $-i$ also appears so I have to think about it.}
+    \end{document}
