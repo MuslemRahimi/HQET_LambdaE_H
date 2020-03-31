@@ -6,7 +6,7 @@ Computing lambda_E &amp; lambda_H
 3. Gleichung (23) Faktor -1.
 4. Zeige, dass die Diagramme in der Fock-Schwinger Gleichung tatsächlich nicht beitragen.
 5. Gleichung (30)
-6. Gleichung (12) für unseren Ansatz
+6. <del>Gleichung (12) für unseren Ansatz</del>
 7. Berechnung der Wilson Koeffizienten für unseren Ansatz.
 8. Gleichungen (9) bis (20) verstehen und für unseren Fall herleiten
 
