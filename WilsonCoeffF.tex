@@ -38,11 +38,40 @@
 	\noindent	
 	We start by the following correlation function and contract the $q$ and $b_v$ fields with Wicks theorem:
 	\begin{align}
-		I_{C^F_I} =& i \int \mathrm{d}^d x e^{-ipv \cdot x} \tilde{\mu}^{2\epsilon} \bra{0} \bar{q}(0) \Gamma_1 b_v(0) \bar{b_v}(x) \Gamma_2 q(x) \ket{0} \nonumber \\ =& i \int \mathrm{d}^d x e^{-ipv \cdot x} \tilde{\mu}^{2\epsilon} \;  \mathrm{Tr} \{\slashed{x} \Gamma_1 P_+ \Gamma_2\} \cdot \frac{i \Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} \cdot (-x^2 + i0)^{\frac{d}{2}}} \Theta(-v \cdot x) \delta^{(d - 1)}(x_{\perp}) \nonumber \\ =& -i \int_{-\infty}^{0} \mathrm{d} x^0 e^{-ipv_0 \cdot x^0} \tilde{\mu}^{2\epsilon} \;  \mathrm{Tr} \{x^0 \gamma_0 \Gamma_1 P_+ \Gamma_2\} \cdot \frac{i \Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} \cdot (-(x^0)^2 + i0)^{\frac{d}{2}}} \nonumber
+		I_{C^F_I} =& i N_c \int \mathrm{d}^d x e^{-ipv \cdot x} \tilde{\mu}^{2\epsilon} \bra{0} \bar{q}(0) \Gamma_1 b_v(0) \bar{b}_v(x) \Gamma_2 q(x) \ket{0} \nonumber \\ =& i N_c \int \mathrm{d}^d x e^{-ipv \cdot x} \tilde{\mu}^{2\epsilon} \;  \mathrm{Tr} \{\slashed{x} \Gamma_1 P_+ \Gamma_2\} \cdot \frac{i \Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} \cdot (-x^2 + i0)^{\frac{d}{2}}} \Theta(-v \cdot x) \delta^{(d - 1)}(x_{\perp}) \nonumber \\ =& -i N_c \int_{-\infty}^{0} \mathrm{d} x^0 e^{-ipv_0 \cdot x^0} \tilde{\mu}^{2\epsilon} \;  \mathrm{Tr} \{x^0 \gamma_0 \Gamma_1 P_+ \Gamma_2\} \cdot \frac{i \Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} \cdot (-(x^0)^2 + i0)^{\frac{d}{2}}} \nonumber
 	\end{align}
 	Note that $P_+ = \frac{1 + \slashed{v}}{2} = \frac{1 + \gamma^0}{2}$, hence we get an additional minus sign by permuting $\Gamma_2 = \gamma_5$ and $\gamma^0$ and use $P_+ \gamma_0 = P_+$. We arrive at:
 	\begin{align}
-		I_{C^F_I} =& \frac{\Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} }\tilde{\mu}^{2\epsilon} \; \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot \int_{-\infty}^{0} \mathrm{d} x^0 e^{-ipv_0 \cdot x^0}  \frac{x^0}{(-(x^0)^2 + i0)^{\frac{d}{2}}} \nonumber \\ =& \frac{-\Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} }\tilde{\mu}^{2\epsilon} \; \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot (-p)^{-2 \epsilon} p^2 \Gamma[-2 - 2\epsilon] \nonumber \\ =& \frac{-4^{-\epsilon}}{2 \pi^2} \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot  p^2 \cdot  \Big[\frac{1}{4 \epsilon} + \frac{1}{2} - \frac{1}{2} \; \mathrm{ln} \big(\frac{-p}{\mu}\big)\Big]
+		I_{C^F_I} =& N_c \frac{\Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} }\tilde{\mu}^{2\epsilon} \; \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot \int_{-\infty}^{0} \mathrm{d} x^0 e^{-ipv_0 \cdot x^0}  \frac{x^0}{(-(x^0)^2 + i0)^{\frac{d}{2}}} \nonumber \\ =& N_c \frac{-\Gamma\Big(\frac{d}{2}\Big)}{2 \pi^{\frac{d}{2}} }\tilde{\mu}^{2\epsilon} \; \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot (-p)^{-2 \epsilon} p^2 \Gamma[-2 - 2\epsilon] \nonumber \\ =& N_c \frac{-4^{-\epsilon}}{2 \pi^2} \mathrm{Tr} \{\Gamma_1 P_+ \Gamma_2\} \cdot  p^2 \cdot  \Big[\frac{1}{4 \epsilon} + \frac{1}{2} - \frac{1}{2} \; \mathrm{ln} \big(\frac{-p}{\mu}\big)\Big]
 	\end{align}
-	We see that the pole in $\epsilon$ and the $\frac{1}{2}$ are wrong, the term containing the $\mathrm{ln}$ in nearly the same as desired apart from $4^{-\epsilon}$ and $N_c$. Notice that one factor of $\frac{1}{2}$ is absorbed into the definition as well as the $\mathrm{Tr}$, see (7).
+	We see that the pole in $\epsilon$ and the $\frac{1}{2}$ are wrong, the term containing the $\mathrm{ln}$ in nearly the same as desired apart from $4^{-\epsilon}$ and $N_c$. Notice that one factor of $\frac{1}{2}$ is absorbed into the definition as well as the $\mathrm{Tr}$, see (7). This is the final result of the calculation. When we want to apply the sum rules, it is necessary to Borel transform this expression or alternatively use formula (9) and hence calculate the imaginary part. Notice that the logarithm still carries naturally a $i \epsilon$ prescription and therefore gives a contribution to the imaginary part. The other terms vanish, as well as the term $4^{-\epsilon}$ after expansion. \\
+	We will now proceed and show how the imaginary part of the coefficients in (26) is calculated. For this, we use the following master formula in order to extract the imaginary part:
+	\begin{align}
+		\frac{1}{x \pm i \epsilon} = \frac{1}{x} \mp i \pi \delta(x)
+	\end{align}
+	The first Wilson coefficient we consider is:
+	\begin{align}
+		C_q^F (\omega) = \frac{1}{2 \omega}
+	\end{align}
+	\begin{align}
+		\mathrm{Im} C_q^F(\omega) = \frac{1}{2} \cdot  \mathrm{Im} \bigg[\underset{\epsilon \rightarrow 0^+}{\mathrm{lim}} \frac{1}{\omega + i \epsilon}\bigg] = \frac{1}{2} \cdot  \mathrm{Im} \bigg[\underset{\epsilon \rightarrow 0^+}{\mathrm{lim}} \frac{1}{\omega} - i \pi \delta(\omega) \bigg] = -\frac{1}{2} \pi \delta(\omega)
+	\end{align} 
+	Inserting this into the sum rule and performing the integration, we get:
+	\begin{align}
+		2 \int_0^{w_{th}} \mathrm{d} \omega e^{-\frac{\omega}{M}} \frac{1}{\pi} \frac{-1}{2} \pi \delta(\omega) <\bar{q}q> = - < \bar{q} q>
+	\end{align}
+	Continuing with the second Wilson coefficient $C_{\sigma}^F (\omega) = - \frac{1}{16 \omega^3}$. In order to use the above master formula, we differentiate it two times:
+	\begin{align}
+		\frac{\partial^2}{\partial \omega^2} \frac{1}{\omega + i \epsilon} =& \frac{\partial^2}{\partial \omega^2} \bigg[\frac{1}{\omega} - i \pi \delta(\omega)\bigg] \\ \Leftrightarrow  \frac{2}{(\omega + i \epsilon)^3} =& \bigg[\frac{2}{\omega} - i \pi \frac{\partial^2}{\partial \omega^2} \delta(\omega)\bigg] \label{Csig}
+	\end{align}
+	Taking the imaginary part of \eqref{Csig} and performing the integration, we get:
+	\begin{align}
+		2 \int_0^{\omega_{th}} \mathrm{d} \omega e^{-\frac{\omega}{M}} \frac{1}{\pi} \; \frac{\pi}{2\cdot 16} \; \frac{\partial^2}{\partial \omega^2} \delta(\omega) < \bar{q} g_s G \cdot \sigma q> = \frac{1}{16M^2} < \bar{q} g_s G \cdot \sigma q>
+	\end{align}
+	Here, partial integration has been performed twice and the boundary terms evaluate to $0$.
+	At last, we take a look at the Wilson coefficient $C_I^F (\omega) = - \frac{N_c}{2 \pi^2} \omega^2 \mathrm{ln}\bigg(\frac{-\omega + i \epsilon}{\mu}\bigg)$.  The master formula needs to be integrated and the corresponding imaginary part, which is $- \pi \Theta(\omega)$, we integrate once again:
+	\begin{align}
+		2 \int_0^{\omega_{th}} e^{-\frac{\omega}{M}} \frac{1}{\pi} \frac{N_c}{2 \pi^2} \omega^2 \pi \Theta(\omega) = \frac{2}{\pi^2} N_c M^3 R_2(\frac{\omega_{th}}{M}),
+	\end{align}
+	where $R_2$ corresponds to $W^{(2)}$ in the paper.
 \end{document}
