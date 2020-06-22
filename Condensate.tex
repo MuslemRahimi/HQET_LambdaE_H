@@ -34,13 +34,17 @@
 	\end{align}
     First term in Eq.(\ref{eq::matrix25}) corresponds to the quark-antiquark condensate. 
     \begin{align}
-         \bra{0} \bar{q}^{i}_{\alpha}(0) \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \,q^{j}_{\delta}(0) \ket{0} \delta^{ij} &= A \delta^{ij} \delta_{\alpha \delta} \nonumber \\
-         \Leftrightarrow \bra{0} \bar{q}^{i}_{\alpha}(0) \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \,q^{j}_{\delta}(0) \ket{0} \delta^{ij} \delta^{ij}\delta_{\alpha \delta} &= A \delta^{ij} \delta^{ij} \delta_{\alpha \delta} \delta_{\alpha \delta}\nonumber \\
-          \Leftrightarrow \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}] \braket{\bar{q} q} N_{c}  &= 4 A N_{c} \nonumber \\
-          \Rightarrow A = \frac{1}{4} \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}] \braket{\bar{q} q}
+         \bra{0} \bar{q}^{i}_{\alpha}(0) \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \,q^{j}_{\delta}(0) \ket{0} &= A \delta^{ij} \delta_{\alpha \delta} \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \nonumber \\
+         \Leftrightarrow \bra{0} \bar{q}^{i}_{\alpha}(0) \,q^{j}_{\delta}(0) \ket{0} \delta^{ij} \delta_{\alpha \delta} &= A \delta^{ij} \delta^{ij} \delta_{\alpha \delta} \delta_{\alpha \delta}\nonumber \\
+          \Leftrightarrow \braket{\bar{q} q}   &= 4 A N_{c} \nonumber \\
+          \Rightarrow A = \frac{1}{4  N_c} \braket{\bar{q} q}
          \label{eq::quark-antiquark}
     \end{align}
-    where $(i,j)$ are color indices and $(\alpha, \beta,\gamma,\delta)$ are spinor indices. In the second line of Eq.(\ref{eq::quark-antiquark}) we multiplied on both sides $\delta^{ij} \delta_{\alpha \delta}$.
+    where $(i,j)$ are color indices and $(\alpha, \beta,\gamma,\delta)$ are spinor indices. In the second line of Eq.(\ref{eq::quark-antiquark}) we multiplied on both sides $\delta^{ij} \delta_{\alpha \delta}$. Combining this result with \eqref{eq::matrix25}, we find
+    \begin{align}
+	    \bra{0} \bar{q}^{i}_{\alpha}(0) \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \,q^{j}_{\delta}(0) \ket{0} =& \; \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \cdot \bra{0} \bar{q}^{i}_{\alpha}(0) \,q^{j}_{\delta}(0) \ket{0} = \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \cdot A \delta^{ij} \delta_{\alpha \delta} \nonumber \\ =& \; \Gamma_{1,\alpha \beta} P_{+, \beta\gamma} \Gamma_{2, \gamma \delta} \cdot \frac{1}{4  N_c} \braket{\bar{q} q} \delta^{ij} \delta_{\alpha \delta} \nonumber \\ =& \frac{1}{4  N_c} \cdot \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}] \braket{\bar{q} q} \delta^{ij}
+    \end{align}
+    Here, there will be an additional $\delta^{ij}$ due to the summation over the color indices, which cancels the factor $\frac{1}{N_c}$. 
     
     The second term in Eq.(\ref{eq::matrix25}) does not contribute since according to Dirac's equation we can rewrite the covariant derivative as:
     \begin{align}
@@ -48,37 +52,30 @@
     \end{align}
     In HQET we assume $m_{q} = 0$ for light quarks.
     
+    Before we consider the third term in more detail, we take a closer look at the following matrix element:
+    \begin{align}
+	    \bra{0} \bar{q}_{\alpha}^i(0)g_s G_{\mu \nu}(0) q_{\delta}^j(0) \ket{0} =& \; E \cdot \delta^{ij} \cdot (\sigma_{\mu \nu})_{\delta \alpha} \nonumber \\ \Leftrightarrow \bra{0} \bar{q}_{\alpha}^i(0)g_s G_{\mu \nu}(0) q_{\delta}^j(0) \ket{0} \delta^{ij} (\sigma^{\mu \nu})_{\alpha \delta} =& \; E \cdot N_c \cdot \mathrm{Tr}[\sigma^{\mu \nu} \sigma_{\mu \nu}] \nonumber \\ \Leftrightarrow E = \bra{0} \bar{q} g_s \sigma \cdot G q \ket{0} \cdot \frac{1}{4 N_c d (d - 1)}
+    \end{align}
     The third term in Eq.(\ref{eq::matrix25}) corresponds to the quark-antiquark-gluon condensate.
     \begin{align}
-        \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0}  &= C_{1} \delta^{ij} \delta_{\alpha \delta} \, g_{\mu \nu} + C_{2}  \delta^{ij} \delta_{\alpha \delta} \sigma_{\mu \nu},
+        \bra{0}\bar{q}^{i}_{\alpha}(0) D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0}  &= C_{1} \delta^{ij} \delta_{\alpha \delta} \, g_{\mu \nu} + C_{2}  \delta^{ij} (\sigma_{\mu \nu})_{\delta \alpha},
         \label{eq::quark-antiquark-gluon1}
     \end{align}
-    where we are only interested in the symmetric part. Now to compute $C_{1}$ we rewrite again Eq.(\ref{eq::quark-antiquark-gluon1}) using translation invariance as:
+    where we are only interested in the symmetric part, because we will multiply this expression by $x^{\mu} x^{\nu}$ which is symmetric. Now to compute $C_{1}$ we rewrite again Eq.(\ref{eq::quark-antiquark-gluon1}) using translation invariance as:
     \begin{align}
-        \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} &= \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} G_{\mu \nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} \nonumber \\
-        & +\bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\nu} D_{\mu} q^{j}_{\delta}(0) \ket{0} \delta^{ij}.
+        \bra{0}\bar{q}^{i}_{\alpha}(0) D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0}   - \bra{0}\bar{q}^{i}_{\alpha}(0)  D_{\nu} D_{\mu} q^{j}_{\delta}(0) \ket{0}  =& \;  C_{2} \cdot \delta^{ij} \Big((\sigma_{\mu \nu})_{\delta \alpha} - (\sigma_{\nu \mu})_{\delta \alpha} \Big) \nonumber \\ =& \;  2 \cdot C_{2}  \delta^{ij} (\sigma_{\mu \nu})_{\delta \alpha}
     \end{align}
-    Now by using Lorentz covariance we can re-express the first term:
+    Using the definition of the gluon field strength tensor $G_{\mu \nu} = \frac{i}{g_s} [D_{\mu},D_{\nu}]$, we obtain
     \begin{align}
-        \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} G_{\mu \nu} q^{j}_{\delta}(0) \ket{0}  &= E \delta^{ij} \delta_{\alpha \delta} \sigma_{\mu\nu} \nonumber \\
-        \Leftrightarrow \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} G_{\mu \nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} \delta_{\alpha \delta} \sigma^{\mu \nu} &= E \delta^{ij} \delta_{\alpha \delta} \sigma_{\mu\nu} \delta^{ij} \delta_{\alpha \delta} \sigma^{\mu\nu} \nonumber \\
-        \Rightarrow E = \frac{1}{12 d(d-1)} \text{Tr}[\Gamma_{1} P_{+} \Gamma_{2}]\braket{\bar{q} \, G \cdot \sigma q},
+	    \bra{0}\bar{q}^{i}_{\alpha}(0) (-i) g_s G_{\mu \nu}(0) q_{\delta}^j(0) \ket{0} =& \;  2 \cdot C_{2}  \delta^{ij} (\sigma_{\mu \nu})_{\delta \alpha} \nonumber \\ \Rightarrow C_2 =& \; -\frac{i}{2} \cdot E
     \end{align}
-    where we multiplied both sides with $\delta^{ij} \delta_{\alpha \delta} \sigma^{\mu\nu}$ and used $\sigma_{\mu \nu} \sigma^{\mu \nu} = d(d-1)$.
-    
-    \newpage
-    \textcolor{red}{To obtain $C_{1}$ is not written here very clear but will do it very soon.}
-    Hence, the result for $C_{1}$ is:
-    \begin{align}
-        C_{1} &= i \left(\frac{1-d}{2} \right) E.
-    \end{align}
-    
-    Therefore, we obtain for the hadronic matrix element:
-    \begin{align}
-        \frac{1}{2} x^{\mu} x^{\nu} \bra{0}\bar{q}^{i}_{\alpha}(0) \Gamma_{1, \alpha \beta} P_{+, \beta \gamma} \Gamma_{2, \gamma \delta} D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0} \delta^{ij} &= C_{1} \delta^{ij} \delta^{ij} \delta_{\alpha \delta} g_{\mu \nu} \nonumber \\
-        &=  \frac{1}{2} x^{\mu} x^{\nu} i \left(\frac{1-d}{2} \right) \frac{1}{12 d (d-1)} g_{\mu \nu} \nonumber \\
-        & \times \text{Tr}[\Gamma_{3} P_{+} \Gamma_{2}] \braket{\bar{q} \, G \cdot \sigma q} \nonumber \\
-        &= \frac{1}{4} \text{Tr}[\Gamma_{3} P_{+} \Gamma_{2}] \left(\frac{-i}{16} \braket{\bar{q} \, G \cdot \sigma q} \right).
-    \end{align}
-    \textcolor{red}{Note that, we have a $(-i)$ too much. In the literature the $-i$ also appears so I have to think about it.}
+	The relation between $C_2$ and $C_1$ can be obtained by using the Dirac equation (in my notes).
+	\begin{align}
+		C_1 = \frac{d - 1}{2} \cdot E
+	\end{align}
+	So the final result for the third term is:
+	\begin{align}
+		\frac{x^{\mu} x^{\nu}}{2} \cdot \bra{0}\bar{q}^{i}_{\alpha}(0) D_{\mu} D_{\nu} q^{j}_{\delta}(0) \ket{0} = \frac{x^2}{2} \cdot C_1 \delta^{ij} \delta_{\alpha \delta} = \frac{x^2}{2} \delta^{ij} \delta_{\alpha \delta} \cdot \bra{0} \bar{q} g_s \sigma \cdot G q \ket{0} \cdot \frac{1}{8 N_c d}
+	\end{align}
+	With this expression it is possible to reproduce the desired expression.
     \end{document}
