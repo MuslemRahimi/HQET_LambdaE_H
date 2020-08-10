@@ -1,0 +1,11 @@
+reset
+
+set xrange[0.25:1.0]
+set yrange[0.05:0.20]
+set xlabel "M in GeV"
+set ylabel "$\\lambda_{H}^{2}$ in GeV^2"
+plot "LambdaH_0.85.txt" using 1:2 with lines title "0.85","LambdaH_1.0.txt" using 1:2 with lines title "1.0","LambdaH_1.15.txt" using 1:2 with lines title "1.15"
+
+set output
+
+quit
