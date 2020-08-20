@@ -67,12 +67,19 @@ fig, ax = plt.subplots()
 
 plt.ylim(0.025,0.15)
 plt.xlim(0.20,1.0)
-ax.plot(M_085, lambdaE_085, "--", color='blue',label='$\omega_{th} = 0.85$ GeV')
-ax.plot(M_10, lambdaE_10, color='black',label='$\omega_{th} = 1.0$ GeV')
-ax.plot(M_115, lambdaE_115,"--",color='red',label='$\omega_{th} = 1.15$ GeV')
+ax.plot(M_085, lambdaE_085, "--", color='blue',label='$\omega_{th} = 1.0$ GeV')
+ax.plot(M_10, lambdaE_10, color='black',label='$\omega_{th} = 1.1$ GeV')
+ax.plot(M_115, lambdaE_115,"--",color='red',label='$\omega_{th} = 1.2$ GeV')
 
 
-legend = ax.legend(loc=(0.65,0.07), shadow=True)
+
+#stability window
+#=================#
+plt.axvline(0.4,0,1,color="black",linewidth=1.2,linestyle="--")
+plt.axvline(0.6,0,1,color="black",linewidth=1.2,linestyle="--")
+#==================#
+
+legend = ax.legend(loc=(0.65,0.8), shadow=True)
 plt.xlabel("$M$ in GeV")
 plt.ylabel("$\lambda_{E} ^2$ in GeV$^2$")
 plt.grid(True)

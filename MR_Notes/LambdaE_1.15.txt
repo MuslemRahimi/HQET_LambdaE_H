@@ -1,161 +1,161 @@
-0.2	0.018077396803690908*Sqrt[378.2389815488177 - 8054.589210489096*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.20500000000000002	0.013588170548577267*Sqrt[336.5510264872729 - 6997.250510072105*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.21000000000000002	0.012011248845275132*Sqrt[301.2286852497842 - 6119.169130171769*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.21500000000000002	0.011277388482076444*Sqrt[271.08864391029243 - 5384.37948233186*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.22	0.01091843028002132*Sqrt[245.20126021227364 - 4765.107013631889*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.225	0.010763034322616053*Sqrt[222.82975635516033 - 4239.703573899056*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.23	0.010732074561059037*Sqrt[203.38538465954858 - 3791.148943294208*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.23500000000000001	0.010783425344706388*Sqrt[186.39403355219693 - 3405.951714574823*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.24000000000000002	0.01089236375528807*Sqrt[171.4711159653692 - 3073.3350286188497*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.245	0.011043303202743392*Sqrt[158.30251499314372 - 2784.627640841576*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.25	0.011225859763181191*Sqrt[146.6300020702334 - 2532.8044758688357*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.255	0.011432804577699865*Sqrt[136.23998759220459 - 2312.1370442932234*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.26	0.011658921051874487*Sqrt[126.95477590741663 - 2117.925322777902*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.265	0.011900330352312338*Sqrt[118.62571775510077 - 1946.290553024104*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.27	0.012154074560147226*Sqrt[111.12781146349987 - 1794.0139639417512*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.275	0.012417848915443928*Sqrt[104.35541847931117 - 1658.4103782856876*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.28	0.012689824062700455*Sqrt[98.21884201282545 - 1537.2285119606584*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.28500000000000003	0.012968524625468573*Sqrt[92.64157868592729 - 1428.5718399595567*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.29000000000000004	0.013252744154284561*Sqrt[87.55809828955142 - 1330.835413995437*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.29500000000000004	0.013541484212399505*Sqrt[82.91204047270276 - 1242.655130809187*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.30000000000000004	0.013833909871110345*Sqrt[78.65474250317973 - 1162.8667773494597*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.305	0.014129316603679663*Sqrt[74.74403138225763 - 1090.4727976690883*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.31	0.014427105251926323*Sqrt[71.14322816301404 - 1024.6151921813532*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.315	0.014726762811302958*Sqrt[67.8203234774633 - 964.5533129082039*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.32	0.015027847477504797*Sqrt[64.74729187166531 - 909.6455875148565*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.325	0.015329976860597134*Sqrt[61.89951920678531 - 859.3344113916567*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.33	0.015632818585775917*Sqrt[59.25532257201051 - 813.1336063251739*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.335	0.01593608271527632*Sqrt[56.79554621865285 - 770.6179678556495*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.34	0.016239515576427433*Sqrt[54.503220223689006 - 731.4145197672067*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.345	0.01654289468749079*Sqrt[52.36327112170355 - 695.1951696734043*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.35	0.016846024549490534*Sqrt[50.36227575576037 - 661.6705191383774*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.355	0.0171487331278995*Sqrt[48.48825120391352 - 630.5846288403392*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.36	0.017450868888963852*Sqrt[46.73047492620759 - 601.7105766988582*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.365	0.01775229828585447*Sqrt[45.079330314465096 - 574.8466767599143*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.37	0.018052903612655276*Sqrt[43.52617366610746 - 549.8132505845236*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.375	0.018352581161490574*Sqrt[42.06321928437839 - 526.4498621698173*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.38	0.01865123963131414*Sqrt[40.68343996241886 - 504.61294301716424*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.385	0.0189487987470763*Sqrt[39.38048056268053 - 484.1737466073102*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.39	0.01924518805590931*Sqrt[38.14858277587355 - 465.01658184017276*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.395	0.01954034587317883*Sqrt[36.98251945064759 - 447.03728341270704*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.4	0.019834218356148688*Sqrt[35.8775371389271 - 430.1418840098551*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.405	0.020126758686900087*Sqrt[34.82930571219406 - 414.2454588624254*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.41000000000000003	0.020417926349263458*Sqrt[33.833874078978596 - 399.2711179136019*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.41500000000000004	0.020707686487032164*Sqrt[32.88763117978443 - 385.14912471778206*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.42000000000000004	0.020996009332763105*Sqrt[31.98727155780996 - 371.8161244199387*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.42500000000000004	0.02128286969813069*Sqrt[31.12976490630238 - 359.21446584996124*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.43000000000000005	0.02156824651816298*Sqrt[30.312329079613097 - 347.29160501076694*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.43500000000000005	0.021852122442814897*Sqrt[29.53240612776776 - 335.99957911928357*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.44	0.02213448347026629*Sqrt[28.787640975905994 - 325.294541939044*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.445	0.022415318617112216*Sqrt[28.07586242212735 - 315.13635247364135*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.45	0.0226946196212661*Sqrt[27.39506617164832 - 305.48821021386175*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.455	0.022972380673947218*Sqrt[26.743399662977936 - 296.3163310824658*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.46	0.023248598177590032*Sqrt[26.119148474115143 - 287.5896590277594*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.465	0.023523270526909997*Sqrt[25.520724124412876 - 279.27960890367495*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.47000000000000003	0.023796397910698923*Sqrt[24.946653111478202 - 271.3598368594412*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.47500000000000003	0.024067982132214213*Sqrt[24.395567042866706 - 263.8060349620861*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.48000000000000004	0.02433802644627623*Sqrt[23.86619373990978 - 256.5957472033307*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.48500000000000004	0.024606535411405214*Sqrt[23.357349206178576 - 249.70820440997878*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.49	0.024873514755516257*Sqrt[22.867930366220865 - 243.12417589297826*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.495	0.02513897125385516*Sqrt[22.396908491582707 - 236.82583594266828*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.5	0.025402912618000466*Sqrt[21.943323241006322 - 230.79664351284907*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.505	0.025665347394882188*Sqrt[21.506277250294946 - 225.02123363969758*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.51	0.025926284874877886*Sqrt[21.084931214828128 - 219.4853193178084*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.515	0.026185735008143664*Sqrt[20.678499414252727 - 214.17560270866767*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.52	0.02644370832842312*Sqrt[20.286245634597513 - 209.07969468996365*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.525	0.02670021588365325*Sqrt[19.907479448075893 - 204.18604187010357*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.53	0.02695526917275368*Sqrt[19.54155281523487 - 199.4838602935102*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.535	0.027208880088045267*Sqrt[19.187856977981802 - 194.9630751507505*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.54	0.027461060862797745*Sqrt[18.84581961542203 - 190.61426588501956*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.545	0.027711824023453346*Sqrt[18.51490223744053 - 186.42861615444593*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.55	0.027961182346116695*Sqrt[18.19459779361289 - 182.39786816936487*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.5549999999999999	0.02820914881693862*Sqrt[17.884428477375756 - 178.51428097620897*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.56	0.02845573659605643*Sqrt[17.583943707459028 - 174.770592305917*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.565	0.02870095898478393*Sqrt[17.292718270423876 - 171.15998364557598*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.5700000000000001	0.028944829395772368*Sqrt[17.01035060978644 - 167.6760482280636*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.575	0.02918736132588789*Sqrt[16.736461248656987 - 164.31276166637016*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.5800000000000001	0.02942856833157483*Sqrt[16.470691334121497 - 161.06445498753413*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.585	0.029668464006493367*Sqrt[16.21270129274383 - 157.9257898462145*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.5900000000000001	0.029907061961239673*Sqrt[15.96216958759529 - 154.8917357201874*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.595	0.03014437580497246*Sqrt[15.718791568144583 - 151.9575489098798*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.6000000000000001	0.030380419128786*Sqrt[15.482278405152082 - 149.1187531816892*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.605	0.030615205490682453*Sqrt[15.252356103466107 - 146.3711219105823*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.6100000000000001	0.030848748402009806*Sqrt[15.028764586266673 - 143.71066159150473*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.615	0.031081061315242502*Sqrt[14.811256844901916 - 141.13359660169561*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.62	0.03131215761299236*Sqrt[14.599598148998952 - 138.6363551072317*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.625	0.03154205059814717*Sqrt[14.393565312002544 - 136.2155560171941*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.63	0.03177075348504229*Sqrt[14.192946007740575 - 133.86799689787554*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.635	0.031998279391578975*Sqrt[13.997538133992812 - 131.59064276755234*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.64	0.03222464133221032*Sqrt[13.807149219399133 - 129.38061569962858*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.645	0.032449852211721815*Sqrt[13.621595870361466 - 127.23518516851595*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.65	0.032673924819739804*Sqrt[13.440703254880368 - 125.15175907851504*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.655	0.0328968718259068*Sqrt[13.264304620524278 - 123.12787542128581*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.66	0.03311870577566717*Sqrt[13.092240843973899 - 121.16119451230004*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.665	0.033339439086611335*Sqrt[12.924360009793936 - 119.24949176100654*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.67	0.03355908404533162*Sqrt[12.76051701627343 - 117.39065093336346*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.675	0.03377765280474531*Sqrt[12.600573206367221 - 115.58265786894496*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.6799999999999999	0.033995157381845324*Sqrt[12.444396021915125 - 113.82359461804471*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.685	0.03421160965584156*Sqrt[12.291858679477572 - 112.11163396711784*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.69	0.03442702136665874*Sqrt[12.142839866245124 - 110.44503432354965*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.6950000000000001	0.03464140411375974*Sqrt[11.997223454616057 - 108.82213493314394*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7	0.03485476935526579*Sqrt[11.85489823413114 - 107.24135140591224*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7050000000000001	0.035067128407347006*Sqrt[11.715757659573322 - 105.70117152773186*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.71	0.035278492443859034*Sqrt[11.579699614116981 - 104.20015133725637*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7150000000000001	0.035488872496203465*Sqrt[11.446626186507649 - 102.73691144910912*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.72	0.03569827945339132*Sqrt[11.316443461325779 - 101.31013360590138*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7250000000000001	0.03590672406229113*Sqrt[11.189061321459857 - 99.91855744298736*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.73	0.036114216928043716*Sqrt[11.064393261977274 - 98.56097745112882*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7350000000000001	0.03632076851462791*Sqrt[10.942356214651104 - 97.23624012338684*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.74	0.03652638914556239*Sqrt[10.82287038243968 - 95.9432412736136*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7450000000000001	0.036731089004730495*Sqrt[10.705859083281416 - 94.68092351487441*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.75	0.036934878137314726*Sqrt[10.591248602606393 - 93.44827388701756*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7550000000000001	0.03713776645083036*Sqrt[10.478968054009565 - 92.24432162341365*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.76	0.037339763716247185*Sqrt[10.368949247572326 - 91.06813604763141*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7650000000000001	0.03754087956918965*Sqrt[10.26112656535236 - 89.91882459149676*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.77	0.03774112351120669*Sqrt[10.155436843597897 - 88.79553092660946*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7750000000000001	0.03794050491110333*Sqrt[10.051819261271252 - 87.69743320196572*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.78	0.03813903300632557*Sqrt[9.95021523449948 - 86.62374238086822*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7849999999999999	0.03833671690439304*Sqrt[9.850568316588104 - 85.57370067078904*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.79	0.03853356558437213*Sqrt[9.752824103262675 - 84.54658004030374*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.7949999999999999	0.038729587898383856*Sqrt[9.656930142837805 - 83.54168081762904*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8	0.03892479257314163*Sqrt[9.562835851002262 - 82.5583303656756*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8049999999999999	0.039119188211513965*Sqrt[9.470492429967456 - 81.59588182888635*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.81	0.03931278329410686*Sqrt[9.379852791714027 - 80.65371294745063*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.815	0.03950558618086322*Sqrt[9.290871485097346 - 79.7312249347908*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8200000000000001	0.03969760511267407*Sqrt[9.20350462660461 - 78.82784141449355*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.825	0.039888848212999393*Sqrt[9.117709834536258 - 77.94300741311724*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8300000000000001	0.04007932348949472*Sqrt[9.033446166429565 - 77.07618840554576*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.835	0.04026903883564071*Sqrt[8.95067405954224 - 76.22686940977967*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8400000000000001	0.04045800203237391*Sqrt[8.869355274216286 - 75.39455412826065*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.845	0.04064622074971494*Sqrt[8.789452839975871 - 74.5787641330168*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8500000000000001	0.04083370254839354*Sqrt[8.71093100419412 - 73.77903809208995*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.855	0.04102045488146725*Sqrt[8.63375518320118 - 72.99493103487333*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8600000000000001	0.04120648509593294*Sqrt[8.557891915692947 - 72.22601365413729*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.865	0.04139180043432887*Sqrt[8.483308818318369 - 71.47187164266415*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8700000000000001	0.04157640803632651*Sqrt[8.40997454333261 - 70.73210506254351*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.875	0.04176031494031033*Sqrt[8.337858738203131 - 70.00632774530268*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8800000000000001	0.04194352808494436*Sqrt[8.266932007062637 - 69.29416672115993*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.885	0.04212605431072563*Sqrt[8.197165873916509 - 68.59526167579496*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.8900000000000001	0.04230790036152172*Sqrt[8.128532747515466 - 67.90926443312975*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.895	0.042489072886093146*Sqrt[8.06100588780184 - 67.23583846270472*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9000000000000001	0.04266957843959933*Sqrt[7.994559373848461 - 66.57465841032115*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.905	0.04284942348508736*Sqrt[7.929168073221998 - 65.92540965070184*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9099999999999999	0.04302861439496339*Sqrt[7.864807612686054 - 65.28778786099495*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.915	0.04320715745244573*Sqrt[7.801454350193996 - 64.66149861401846*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9199999999999999	0.0433850588529998*Sqrt[7.739085348084581 - 64.0462569902053*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.925	0.04356232470575428*Sqrt[7.677678347440588 - 63.44178720727217*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9299999999999999	0.04373896103489789*Sqrt[7.617211743545941 - 62.84782226669187*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.935	0.043914973781057604*Sqrt[7.55766456237849 - 62.2641036161009*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.94	0.044090368802656515*Sqrt[7.499016438107616 - 61.69038082682678*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9450000000000001	0.04426515187725303*Sqrt[7.441247591524838 - 61.12641128576341*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.95	0.04443932870285965*Sqrt[7.384338809384244 - 60.57195990086909*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9550000000000001	0.04461290489924271*Sqrt[7.32827142459654 - 60.026798819601396*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.96	0.04478588600920178*Sqrt[7.273027297228664 - 59.49070715964222*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9650000000000001	0.04495827749982998*Sqrt[7.2185887962990565 - 58.96347075130261*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.97	0.045130084763753686*Sqrt[7.1649387823029524 - 58.444881891030676*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9750000000000001	0.045301313120353855*Sqrt[7.112060590440032 - 57.93473910547732*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.98	0.04547196781696658*Sqrt[7.059938014525051 - 57.43284692560573*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9850000000000001	0.04564205403006514*Sqrt[7.008555291539862 - 56.93901567035681*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.99	0.04581157686642219*Sqrt[6.957897086786873 - 56.45306123941101*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-0.9950000000000001	0.04598054136425296*Sqrt[6.907948479645152 - 55.974804914610175*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
-1.	0.046148952494339784*Sqrt[6.858694949873478 - 55.504073169627965*(-6*Pair[LorentzIndex[μ], LorentzIndex[ρ]]*Pair[LorentzIndex[ν], Momentum[v]]*Pair[LorentzIndex[σ], Momentum[v]]) . 0]
+0.2	0.09512148654972767
+0.20500000000000002	0.0910919630633589
+0.21000000000000002	0.08785060114456386
+0.21500000000000002	0.0851781029439019
+0.22	0.08292972683747447
+0.225	0.08100588571583305
+0.23	0.07933573580267503
+0.23500000000000001	0.07786748397642806
+0.24000000000000002	0.07656239234773143
+0.245	0.07539092409056374
+0.25	0.0743301836231374
+0.255	0.07336216824043199
+0.26	0.07247254469448171
+0.265	0.07164977479684288
+0.27	0.07088447872351643
+0.275	0.0701689636919321
+0.28	0.06949686989321155
+0.28500000000000003	0.06886290098901288
+0.29000000000000004	0.06826261653749742
+0.29500000000000004	0.06769227040407641
+0.30000000000000004	0.0671486837493108
+0.305	0.06662914431530052
+0.31	0.06613132592392434
+0.315	0.0656532236581375
+0.32	0.06519310131941783
+0.325	0.06474944857230981
+0.33	0.06432094579002758
+0.335	0.06390643506438044
+0.34	0.06350489618134376
+0.345	0.0631154266202883
+0.35	0.06273722483144446
+0.355	0.062369576197903946
+0.36	0.06201184120644241
+0.365	0.061663445443836964
+0.37	0.061323871108164583
+0.375	0.06099264978231139
+0.38	0.0606693562629739
+0.385	0.060353603275358825
+0.39	0.060045036933550296
+0.395	0.05974333283061167
+0.4	0.059448192662091205
+0.405	0.05915934130261731
+0.41000000000000003	0.05887652426839989
+0.41500000000000004	0.05859950550926985
+0.42000000000000004	0.05832806548282007
+0.42500000000000004	0.058061999470621274
+0.43000000000000005	0.05780111610264387
+0.43500000000000005	0.057545236061156566
+0.44	0.05729419093967592
+0.445	0.05704782223614438
+0.45	0.05680598046255443
+0.455	0.056568524355792515
+0.46	0.05633532017664433
+0.465	0.05610624108573418
+0.47000000000000003	0.055881166586731465
+0.47500000000000003	0.055659982028480874
+0.48000000000000004	0.05544257815884539
+0.48500000000000004	0.05522885072401635
+0.49	0.055018700107872576
+0.495	0.05481203100668012
+0.5	0.05460875213503471
+0.505	0.0544087759594735
+0.51	0.054212018456633586
+0.515	0.054018398893231026
+0.52	0.05382783962546316
+0.525	0.05364026591574434
+0.53	0.05345560576492
+0.535	0.053273789758346554
+0.54	0.053094750924399706
+0.545	0.05291842460414924
+0.55	0.05274474833108475
+0.5549999999999999	0.052573661719903554
+0.56	0.05240510636348307
+0.565	0.05223902573725746
+0.5700000000000001	0.052075365110311224
+0.575	0.051914071462562696
+0.5800000000000001	0.0517550934075021
+0.585	0.05159838111997414
+0.5900000000000001	0.05144388626857886
+0.595	0.051291561952298795
+0.6000000000000001	0.05114136264097849
+0.605	0.05099324411936023
+0.6100000000000001	0.05084716343438451
+0.615	0.05070307884548328
+0.62	0.05056094977765666
+0.625	0.05042073677709502
+0.63	0.050282401469183426
+0.635	0.050145906518692177
+0.64	0.05001121559201378
+0.645	0.049878293321280624
+0.65	0.049747105270276266
+0.655	0.04961761790195573
+0.66	0.04948979854753657
+0.665	0.04936361537700438
+0.67	0.04923903737098032
+0.675	0.049116034293841856
+0.6799999999999999	0.048994576668034855
+0.685	0.048874635749499545
+0.69	0.048756183504143125
+0.6950000000000001	0.04863919258530715
+0.7	0.04852363631216089
+0.7050000000000001	0.04840948864898947
+0.71	0.04829672418529317
+0.7150000000000001	0.048185318116703436
+0.72	0.048075246226625165
+0.7250000000000001	0.04796648486860108
+0.73	0.04785901094933566
+0.7350000000000001	0.04775280191237766
+0.74	0.047647835722398835
+0.7450000000000001	0.04754409085004369
+0.75	0.04744154625735813
+0.7550000000000001	0.04734018138370877
+0.76	0.047239976132226774
+0.7650000000000001	0.0471409108567338
+0.77	0.047042966349105535
+0.7750000000000001	0.04694612382708507
+0.78	0.04685036492251518
+0.7849999999999999	0.04675567166996645
+0.79	0.046662026495745454
+0.7949999999999999	0.04656941220727688
+0.8	0.04647781198283485
+0.8049999999999999	0.046387209361611705
+0.81	0.046297588234111654
+0.815	0.046208932832839826
+0.8200000000000001	0.046121227723321064
+0.825	0.046034457795386216
+0.8300000000000001	0.04594860825471802
+0.835	0.04586366461469765
+0.8400000000000001	0.04577961268848509
+0.845	0.04569643858133114
+0.8500000000000001	0.0456141286831701
+0.855	0.045532669661396664
+0.8600000000000001	0.0454520484538692
+0.865	0.04537225226214764
+0.8700000000000001	0.04529326854490374
+0.875	0.0452150850115626
+0.8800000000000001	0.04513768961610989
+0.885	0.045061070551062725
+0.8900000000000001	0.04498521624166286
+0.895	0.04491011534022525
+0.9000000000000001	0.04483575672061309
+0.905	0.04476212947292137
+0.9099999999999999	0.044689222898292066
+0.915	0.04461702650387022
+0.9199999999999999	0.0445455299979257
+0.925	0.044474723285058
+0.9299999999999999	0.04440459646166366
+0.935	0.04433513981131978
+0.94	0.044266343800550494
+0.9450000000000001	0.044198199074489276
+0.95	0.044130696452755774
+0.9550000000000001	0.04406382692551775
+0.96	0.043997581649474725
+0.9650000000000001	0.043931951944145196
+0.97	0.04386692928816369
+0.9750000000000001	0.043802505315613686
+0.98	0.04373867181261818
+0.9850000000000001	0.04367542071386845
+0.99	0.04361274409931361
+0.9950000000000001	0.04355063419100564
+1.	0.04348908334984719

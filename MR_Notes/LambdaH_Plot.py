@@ -50,11 +50,17 @@ lambdaH_115 = np.array(lambdaH_115)
 
 fig, ax = plt.subplots()
 
-plt.ylim(0.10,0.20)
+plt.ylim(0.025,0.15)
 plt.xlim(0.20,1.0)
-ax.plot(M_085, lambdaH_085, "--", color='blue',label='$\omega_{th} = 0.85$ GeV')
-ax.plot(M_10, lambdaH_10, color='black',label='$\omega_{th} = 1.0$ GeV')
-ax.plot(M_115, lambdaH_115,"--",color='red',label='$\omega_{th} = 1.15$ GeV')
+ax.plot(M_085, lambdaH_085, "--", color='blue',label='$\omega_{th} = 1.0$ GeV')
+ax.plot(M_10, lambdaH_10, color='black',label='$\omega_{th} = 1.1$ GeV')
+ax.plot(M_115, lambdaH_115,"--",color='red',label='$\omega_{th} = 1.2$ GeV')
+
+#stability window
+#=================#
+plt.axvline(0.4,0,1,color="black",linewidth=1.2,linestyle="--")
+plt.axvline(0.6,0,1,color="black",linewidth=1.2,linestyle="--")
+#==================#
 
 legend = ax.legend(loc=(0.65,0.07), shadow=True)
 plt.xlabel("$M$ in GeV")
