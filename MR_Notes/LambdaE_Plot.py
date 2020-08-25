@@ -1,22 +1,7 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 
-#=========================================================#
-"""
 
-fig, ax = plt.subplots()
-plt.xlabel("$E_{\\ell}^{cut}$ in GeV")
-plt.ylabel("$<E>$ in GeV")
-plt.xticks((0.5, 0.7,0.9, 1.1, 1.3, 1.5, 1.7))
-ax.plot(x, E1, '-or', color='black',label='Theory: $<E>$')
-ax.plot(x, MC1, 'or', label='MC results')
-plt.fill_between(x,E1-dE1 ,E1+dE1 , color='gray',alpha=0.2)
-legend = ax.legend(loc='lower right', shadow=True)
-plt.grid(True)
-#plt.show()
-plt.savefig("E1.png")
-
-"""
 #=========================================================#
 
 # wth for 0.85 GeV
@@ -66,22 +51,23 @@ lambdaE_115 = np.array(lambdaE_115)
 fig, ax = plt.subplots()
 
 plt.ylim(0.025,0.15)
-plt.xlim(0.20,1.0)
-ax.plot(M_085, lambdaE_085, "--", color='blue',label='$\omega_{th} = 1.0$ GeV')
-ax.plot(M_10, lambdaE_10, color='black',label='$\omega_{th} = 1.1$ GeV')
-ax.plot(M_115, lambdaE_115,"--",color='red',label='$\omega_{th} = 1.2$ GeV')
+plt.xlim(0.20,2)
+#plt.xticks((0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.5,1.6,1.8,2.0))
+ax.plot(M_085, lambdaE_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
+ax.plot(M_10, lambdaE_10, color='black',label='$\omega_{th} = 0.9$ GeV')
+ax.plot(M_115, lambdaE_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
 
 
 
 #stability window
 #=================#
-plt.axvline(0.4,0,1,color="black",linewidth=1.2,linestyle="--")
-plt.axvline(0.6,0,1,color="black",linewidth=1.2,linestyle="--")
+#plt.axvline(0.4,0,1,color="black",linewidth=1.2,linestyle="--")
+#plt.axvline(0.6,0,1,color="black",linewidth=1.2,linestyle="--")
 #==================#
-
-legend = ax.legend(loc=(0.65,0.8), shadow=True)
+plt.rc('legend',fontsize=12) 
+legend = ax.legend(loc='best', shadow=True)
 plt.xlabel("$M$ in GeV")
-plt.ylabel("$\lambda_{E} ^2$ in GeV$^2$")
+plt.ylabel("$\lambda_{E}^{2}$ in GeV$^2$")
 plt.grid(True)
 #plt.show()
 plt.savefig("LambdaE.svg")

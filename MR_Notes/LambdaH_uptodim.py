@@ -64,16 +64,16 @@ lambdaH_5 = np.array(lambdaH_5)
 
 fig, ax = plt.subplots()
 
-plt.ylim(-0.20,0.40)
-plt.xlim(0.20,1.0)
+plt.ylim(-0.15,0.15)
+plt.xlim(0.20,2.0)
 ax.plot(M_0, lambdaH_0, "--", color='blue',label='dim. 0')
-ax.plot(M_3, lambdaH_3, "--",color='orange',label='up to dim. 3')
+ax.plot(M_3, lambdaH_3, "--",color='green',label='up to dim. 3')
 ax.plot(M_4, lambdaH_4,"--",color='red',label='up to dim. 4')
 ax.plot(M_5, lambdaH_5,color='black',label='up to dim. 5')
 
 
-plt.rc('legend',fontsize=10) 
-ax.legend(loc=(0.69,0.035), shadow=True)
+plt.rc('legend',fontsize=12) 
+ax.legend(loc='best', shadow=True)
 plt.xlabel("$M$ in GeV")
 plt.ylabel("$\lambda_{H}^4 \cdot 10^{-1}$ in GeV$^4$")
 plt.grid(True)

@@ -90,7 +90,7 @@ ax.plot(M_10, FalphaS_10,color='red',label='$\omega_{th} = 1.0$ GeV')
 #plt.axvline(0.6,0,1,color="black",linewidth=1.2,linestyle="--")
 #==================#
 
-legend = ax.legend(loc='best', shadow=True)
+legend = ax.legend(loc= (0.015,0.03), shadow=True)
 plt.xlabel("$M$ in GeV")
 plt.ylabel("$F$ in GeV$^{3/2}$")
 plt.grid(True)

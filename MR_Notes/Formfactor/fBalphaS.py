@@ -93,7 +93,7 @@ ax.hlines(0.1920, 0, 1, colors='black', linestyles='--', label='')
 ax.axhspan(fB-dfB, fB+dfB, facecolor="green",alpha=0.5)
 #==================#
 
-legend = ax.legend(loc='best', shadow=True)
+legend = ax.legend(loc= (0.015,0.03), shadow=True)
 plt.xlabel("$M$ in GeV")
 plt.ylabel("$f_{B}$ in GeV")
 plt.grid(True)
