@@ -64,7 +64,7 @@ lambdaH_5 = np.array(lambdaH_5)
 
 fig, ax = plt.subplots()
 
-plt.ylim(-0.15,0.15)
+plt.ylim(0,0.2)
 plt.xlim(0.20,2.0)
 ax.plot(M_0, lambdaH_0, "--", color='blue',label='dim. 0')
 ax.plot(M_3, lambdaH_3, "--",color='green',label='up to dim. 3')

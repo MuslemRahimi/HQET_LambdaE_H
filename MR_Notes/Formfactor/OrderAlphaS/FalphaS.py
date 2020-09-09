@@ -92,7 +92,7 @@ ax.plot(M_10, FalphaS_10,color='red',label='$\omega_{th} = 1.0$ GeV')
 
 legend = ax.legend(loc= (0.015,0.03), shadow=True)
 plt.xlabel("$M$ in GeV")
-plt.ylabel("$F$ in GeV$^{3/2}$")
+plt.ylabel("$F(\mu)$ in GeV$^{3/2}$")
 plt.grid(True)
 #plt.show()
 plt.savefig("FalphaS.svg")
