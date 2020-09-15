@@ -91,7 +91,7 @@ lambdaH_E_115 = np.array(lambdaH_E_115)
 #=========================================================#
 fig, ax = plt.subplots()
 
-plt.ylim(0.07,0.14)
+plt.ylim(0.09,0.14)
 plt.xlim(0.20,2.0)
 ax.plot(M_085, lambdaH_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
 ax.plot(M_10, lambdaH_10, color='black',label='$\omega_{th} = 0.9$ GeV')
@@ -107,7 +107,7 @@ plt.savefig("LambdaH.svg")
 #=========================================================#
 fig, ax = plt.subplots()
 
-plt.ylim(0.05,0.10)
+plt.ylim(0.05,0.15)
 plt.xlim(0.20,2.0)
 ax.plot(M_085, lambdaH_E_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
 ax.plot(M_10, lambdaH_E_10, color='black',label='$\omega_{th} = 0.9$ GeV')

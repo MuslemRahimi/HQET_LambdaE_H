@@ -1,5 +1,6 @@
 import re
 from raw_txt import *
+import os
 from Tdec_func import *
 def momentum_counts(string):
 	# Wir müssen das löschen oder es zählt el1*v als ein Impuls obwohl nur zwei impulse existieren
@@ -14,10 +15,13 @@ def momentum_counts(string):
 
 def Decomposition(string):
 	count = momentum_counts(string)
-	if count ==4:
+	if count == 5:
 		result = Tdec4(string)
 		print("Momentum count: {}".format(count))
-	if count ==3:
+	elif count == 4:
+		result = Tdec4(string)
+		print("Momentum count: {}".format(count))
+	elif count == 3:
 		result = Tdec3(string)
 		print("Momentum count: {}".format(count))
 	elif count == 2:
@@ -30,7 +34,7 @@ def Decomposition(string):
 
 
 
-string = stringw1.strip()
+string = stringw0.strip()
 
 if "DiracGamma[Momentum[el1]]" in string:
 	string=string.replace("DiracGamma[Momentum[el1]]","GAD[x1].Pair[LorentzIndex[x1], Momentum[el1]]")
@@ -45,24 +49,33 @@ string=string.replace(" + ","+")
 string=string.replace(" - ","-")
 string=string.replace("-","+-") #Kleiner Trick von mir, nicht loeschen!
 string=string.split("+")
-string = string[:] #Ignoriere erstes element weil empty
 
-#print(string[1])
-result = ""
-print("========================")
+def main(string):
+	try: 
+		os.remove("Tdec.txt")
+	except:
+		pass
 
-#result =Decomposition(string[1])
-#print(result)
+	result = ""
+	print("========================")
+	for n,i in enumerate(string):
+		result = result+"+"+Decomposition(i)
+		result = result.rstrip()
+		result = result.replace("+-","-")
+		result = result.replace("++","+")
+		result = result.rstrip()
+	print("Number of terms: {}".format(n+1))
+	print("========================")
+	#Das ist um das plus ganz am Anfang wegzubekommen
+	if result[0] == "+":
+		result = result[1:]
+	print(result)
+	result = result.split()
+	open('Tdec.txt', 'a+').write(' '.join([str(i) for i in result]) + '\n')
+	print("========================")
 
-
-for n,i in enumerate(string):
-	result = result+"+"+Decomposition(i)
-	result = result.rstrip()
-	result = result.replace("+-","-")
-	result = result.replace("++","+")
-	result = result.rstrip()
-print("Number of terms: {}".format(n+1))
-print("========================")
-print(result)
-
-print("========================")
+try:
+	main(string[:])
+except:
+	print("We try string[1:] but be careful!")
+	main(string[1:])
