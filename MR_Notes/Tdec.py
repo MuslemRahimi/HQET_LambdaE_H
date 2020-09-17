@@ -34,15 +34,15 @@ def Decomposition(string):
 
 
 
-string = stringw0.strip()
+string = stringw1.strip()
 
 if "DiracGamma[Momentum[el1]]" in string:
-	string=string.replace("DiracGamma[Momentum[el1]]","GAD[x1].Pair[LorentzIndex[x1], Momentum[el1]]")
+	string=string.replace("DiracGamma[Momentum[el1]]","GA[x1].Pair[LorentzIndex[x1], Momentum[el1]]")
 
 if "DiracGamma[Momentum[el2]]" in string:
-	string=string.replace("DiracGamma[Momentum[el2]]","GAD[x2].Pair[LorentzIndex[x2], Momentum[el2]]")
+	string=string.replace("DiracGamma[Momentum[el2]]","GA[x2].Pair[LorentzIndex[x2], Momentum[el2]]")
 if "DiracGamma[Momentum[k]]" in string:
-	string=string.replace("DiracGamma[Momentum[k]]","GAD[x3].Pair[LorentzIndex[x3], Momentum[k]]")
+	string=string.replace("DiracGamma[Momentum[k]]","GA[x3].Pair[LorentzIndex[x3], Momentum[k]]")
 
 string=string.rstrip()
 string=string.replace(" + ","+")

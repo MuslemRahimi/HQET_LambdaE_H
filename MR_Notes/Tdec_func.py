@@ -51,7 +51,7 @@ def Tdec2(string):
 										result = result.replace("*Pair[LorentzIndex[\[Rho]], Momentum[el2]]","")
 										result = result.replace("*Pair[LorentzIndex[\[Sigma]], Momentum[el2]]","")
 																			
-										result = result+"*"+"Tdec[{{%s},{%s}},{v},List->False]" % (comp1,comp2)
+										result = result+"*"+"Tdec[{{%s},{%s}},{v},List->False,Dimension->4]" % (comp1,comp2)
 										condition= True
 									
 									else:
@@ -130,7 +130,7 @@ def Tdec3(string):
 															result = result.replace("Pair[LorentzIndex[\[Sigma]], Momentum[el2]]","")
 
 
-															result = result.replace(".",".Tdec[{{%s},{%s},{%s}},{v},List->False]" % (comp1,comp2,comp3))
+															result = result.replace(".",".Tdec[{{%s},{%s},{%s}},{v},List->False,Dimension->4]" % (comp1,comp2,comp3))
 															condition = True
 														else:
 															pass
@@ -228,7 +228,7 @@ def Tdec4(string):
 																			
 																			result = result.replace(" ","")
 
-																			result = result+"."+"Tdec[{{%s},{%s},{%s},{%s}},{v},List->False]" % (comp1,comp2,comp3,comp4)
+																			result = result+"."+"Tdec[{{%s},{%s},{%s},{%s}},{v},List->False,Dimension->4]" % (comp1,comp2,comp3,comp4)
 																			condition = True
 																			
 																		else:

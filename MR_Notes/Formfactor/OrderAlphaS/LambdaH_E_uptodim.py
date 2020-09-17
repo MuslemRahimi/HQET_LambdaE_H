@@ -170,7 +170,7 @@ ax.plot(M_0, lambdaH_0, "--", color='blue',label='dim. 0')
 ax.plot(M_3, lambdaH_3, "--",color='green',label='up to dim. 3')
 ax.plot(M_4, lambdaH_4,"--",color='red',label='up to dim. 4')
 ax.plot(M_5, lambdaH_5,"--",color='purple',label='up to dim. 5')
-ax.plot(M_6, lambdaH_6,"--",color='cyan',label='up to dim. 6')
+ax.plot(M_6, lambdaH_6,"--",color='orange',label='up to dim. 6')
 ax.plot(M_7, lambdaH_7,color='black',label='up to dim. 7')
 
 
@@ -188,10 +188,10 @@ fig, ax = plt.subplots()
 plt.ylim(0,0.15)
 plt.xlim(0.20,2.0)
 ax.plot(M_0, lambdaH_E_0, "--", color='blue',label='dim. 0')
-ax.plot(M_3, lambdaH_E_3, "--",color='green',label='up to dim. 3')
-ax.plot(M_4, lambdaH_E_4,"--",color='red',label='up to dim. 4')
+#ax.plot(M_3, lambdaH_E_3, "--",color='green',label='up to dim. 3')
+#ax.plot(M_4, lambdaH_E_4,"--",color='red',label='up to dim. 4')
 ax.plot(M_5, lambdaH_E_5,"--",color='purple',label='up to dim. 5')
-ax.plot(M_6, lambdaH_E_6,"--",color='cyan',label='up to dim. 6')
+#ax.plot(M_6, lambdaH_E_6,"--",color='orange',label='up to dim. 6')
 ax.plot(M_7, lambdaH_E_7,color='black',label='up to dim. 7')
 
 
