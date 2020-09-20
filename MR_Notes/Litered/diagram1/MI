@@ -1,0 +1,2943 @@
+BasisDirectory[MI] = StringDrop[DirectoryName[$Input], -1]
+MI /: BasisSectors[MI] := {js[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0], js[MI, 0, 1, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 0, 1, 1, 0, 1, 1], js[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0], 
+   js[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1], js[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 0], js[MI, 0, 0, 1, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 1], js[MI, 0, 0, 1, 0, 1, 0, 1, 1, 0], 
+   js[MI, 0, 0, 1, 0, 1, 1, 1, 0, 0], js[MI, 0, 0, 1, 1, 1, 0, 1, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 0, 1, 1, 0], js[MI, 0, 1, 0, 0, 1, 1, 0, 1, 0], 
+   js[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0], js[MI, 0, 1, 1, 0, 1, 0, 0, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 0, 1, 0, 0], js[MI, 1, 0, 0, 0, 1, 0, 0, 1, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 1], js[MI, 1, 0, 0, 0, 1, 1, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 1, 0, 0], js[MI, 1, 0, 0, 1, 1, 1, 0, 0, 0], 
+   js[MI, 1, 0, 1, 0, 1, 0, 1, 0, 0], js[MI, 1, 0, 1, 0, 1, 1, 0, 0, 0], 
+   js[MI, 1, 1, 0, 0, 1, 0, 0, 1, 0], js[MI, 1, 1, 0, 0, 1, 1, 0, 0, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0], js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 0, 1, 1, 1, 1, 0, 0], js[MI, 1, 0, 0, 1, 1, 0, 1, 1, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 1], js[MI, 1, 1, 1, 1, 1, 0, 0, 0, 0]}
+MI /: CutDs[MI] := {0, 0, 0, 0, 0, 0, 0, 0, 0}
+MI /: Definitions[MI] := {Hold[Vectors`MetricTensor[] === d, SetDim[d]], 
+   Hold[VecQ[k], Declare[k, Vector]], Hold[VecQ[el1], Declare[el1, Vector]], 
+   Hold[VecQ[el2], Declare[el2, Vector]], Hold[VecQ[v], Declare[v, Vector]], 
+   Hold[TypeOf[v] === Vector, Declare[v, Vector]], 
+   Hold[sp[v, v] === 1, sp[v, v] = 1]}
+MI /: Ds[MI] := {sp[k, v], sp[el1, el1], sp[el2, el2], 
+   sp[el1 + k - v*\[Omega], el1 + k - v*\[Omega]], 
+   sp[el1 + el2 + k - v*\[Omega], el1 + el2 + k - v*\[Omega]], sp[el1, el2], 
+   sp[el1, k], sp[el2, k], sp[el1, v]}
+MI /: EMs[MI] := {v}
+MI /: IBP[MI] := 
+  {-2*#5*\[Omega]*j[MI, -1 + #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*\[Omega]*j[MI, -1 + #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] + 
+     2*#5*j[MI, #1, -1 + #2, #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     2*#4*j[MI, #1, -1 + #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9] + 
+     (d - #1 - 2*#4 - #7 - #8)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9] + 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, -1 + #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, -1 + #8, #9] - 
+     4*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] + 
+     2*#5*\[Omega]^2*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     2*#4*j[MI, #1, #2, #3, 1 + #4, #5, #6, -1 + #7, #8, #9] - 
+     4*#4*\[Omega]*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, -1 + #9] + 
+     2*#4*\[Omega]^2*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9], 
+    -(#9*j[MI, -1 + #1, #2, #3, #4, #5, #6, #7, #8, 1 + #9]) - 
+     2*#7*\[Omega]*j[MI, -1 + #1, #2, #3, #4, #5, #6, 1 + #7, #8, #9] - 
+     2*#5*\[Omega]*j[MI, -1 + #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*\[Omega]*j[MI, -1 + #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] + 
+     #7*j[MI, #1, -1 + #2, #3, #4, #5, #6, 1 + #7, #8, #9] + 
+     2*#5*j[MI, #1, -1 + #2, #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     2*#4*j[MI, #1, -1 + #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     #7*j[MI, #1, #2, #3, -1 + #4, #5, #6, 1 + #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9] - 
+     2*(#4 - #7)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9] - 
+     2*#7*\[Omega]*j[MI, #1, #2, #3, #4, #5, #6, 1 + #7, #8, -1 + #9] + 
+     #7*\[Omega]^2*j[MI, #1, #2, #3, #4, #5, #6, 1 + #7, #8, #9] - 
+     #6*j[MI, #1, #2, #3, #4, #5, 1 + #6, #7, -1 + #8, #9] + 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, -1 + #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, -1 + #8, #9] - 
+     4*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] + 
+     2*#5*\[Omega]^2*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     2*#4*j[MI, #1, #2, #3, 1 + #4, #5, #6, -1 + #7, #8, #9] - 
+     4*#4*\[Omega]*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, -1 + #9] + 
+     2*#4*\[Omega]^2*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     2*#2*j[MI, #1, 1 + #2, #3, #4, #5, #6, -1 + #7, #8, #9], 
+    -2*#8*\[Omega]*j[MI, -1 + #1, #2, #3, #4, #5, #6, #7, 1 + #8, #9] - 
+     2*#5*\[Omega]*j[MI, -1 + #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     #8*j[MI, #1, -1 + #2, #3, #4, #5, #6, #7, 1 + #8, #9] + 
+     2*#5*j[MI, #1, -1 + #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     #8*j[MI, #1, #2, #3, -1 + #4, #5, #6, #7, 1 + #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9] + 
+     2*#8*j[MI, #1, #2, #3, #4, #5, #6, -1 + #7, 1 + #8, #9] - 
+     2*#8*\[Omega]*j[MI, #1, #2, #3, #4, #5, #6, #7, 1 + #8, -1 + #9] + 
+     #8*\[Omega]^2*j[MI, #1, #2, #3, #4, #5, #6, #7, 1 + #8, #9] - 
+     #6*j[MI, #1, #2, #3, #4, #5, 1 + #6, -1 + #7, #8, #9] + 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, -1 + #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, -1 + #8, #9] - 
+     4*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] + 
+     2*#5*\[Omega]^2*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#3*j[MI, #1, #2, 1 + #3, #4, #5, #6, #7, -1 + #8, #9], 
+    -(#7*j[MI, #1, -1 + #2, #3, #4, #5, #6, 1 + #7, #8, #9]) - 
+     2*#5*j[MI, #1, -1 + #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*j[MI, #1, -1 + #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     #8*j[MI, #1, #2, #3, #4, #5, -1 + #6, #7, 1 + #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, -1 + #6, #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, -1 + #7, #8, #9] + 
+     2*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] - 
+     2*#4*j[MI, #1, #2, #3, 1 + #4, #5, #6, -1 + #7, #8, #9] + 
+     2*#4*\[Omega]*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, -1 + #9] - 
+     #1*j[MI, 1 + #1, #2, #3, #4, #5, #6, #7, #8, -1 + #9], 
+    -2*#5*j[MI, #1, -1 + #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*j[MI, #1, -1 + #2, #3, 1 + #4, #5, #6, #7, #8, #9] + 
+     (d - 2*#2 - #6 - #7 - #9)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, -1 + #6, #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, -1 + #7, #8, #9] + 
+     2*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] - 
+     2*#4*j[MI, #1, #2, #3, 1 + #4, #5, #6, -1 + #7, #8, #9] + 
+     2*#4*\[Omega]*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, -1 + #9], 
+    -(#6*j[MI, #1, -1 + #2, #3, #4, #5, 1 + #6, #7, #8, #9]) - 
+     2*#5*j[MI, #1, -1 + #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     #8*j[MI, #1, #2, #3, #4, #5, #6, -1 + #7, 1 + #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, -1 + #6, #7, #8, #9] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, -1 + #7, #8, #9] + 
+     2*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] - 
+     2*#3*j[MI, #1, #2, 1 + #3, #4, #5, -1 + #6, #7, #8, #9], 
+    -(#8*j[MI, #1, #2, -1 + #3, #4, #5, #6, #7, 1 + #8, #9]) - 
+     #5*j[MI, #1, #2, -1 + #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     #4*j[MI, #1, #2, -1 + #3, 1 + #4, #5, #6, #7, #8, #9] + 
+     #5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9] - 
+     #7*j[MI, #1, #2, #3, #4, #5, -1 + #6, 1 + #7, #8, #9] + 
+     (#4 - #5)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9] - 
+     #4*j[MI, #1, #2, #3, 1 + #4, -1 + #5, #6, #7, #8, #9] - 
+     (#1*j[MI, 1 + #1, #2, -1 + #3, #4, #5, #6, #7, #8, #9])/(2*\[Omega]) - 
+     (#1*j[MI, 1 + #1, #2, #3, -1 + #4, #5, #6, #7, #8, #9])/(2*\[Omega]) + 
+     (#1*j[MI, 1 + #1, #2, #3, #4, -1 + #5, #6, #7, #8, #9])/(2*\[Omega]) - 
+     (#1*j[MI, 1 + #1, #2, #3, #4, #5, -1 + #6, #7, #8, #9])/\[Omega] - 
+     (#1*j[MI, 1 + #1, #2, #3, #4, #5, #6, #7, -1 + #8, #9])/\[Omega], 
+    -(#9*j[MI, #1, #2, -1 + #3, #4, #5, #6, #7, #8, 1 + #9])/(2*\[Omega]) - 
+     #6*j[MI, #1, #2, -1 + #3, #4, #5, 1 + #6, #7, #8, #9] - 
+     #5*j[MI, #1, #2, -1 + #3, #4, 1 + #5, #6, #7, #8, #9] + 
+     #4*j[MI, #1, #2, -1 + #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     (#9*j[MI, #1, #2, #3, -1 + #4, #5, #6, #7, #8, 1 + #9])/(2*\[Omega]) + 
+     #5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9] + 
+     (#9*j[MI, #1, #2, #3, #4, -1 + #5, #6, #7, #8, 1 + #9])/(2*\[Omega]) - 
+     (#9*j[MI, #1, #2, #3, #4, #5, -1 + #6, #7, #8, 1 + #9])/\[Omega] - 
+     (#9*j[MI, #1, #2, #3, #4, #5, #6, #7, -1 + #8, 1 + #9])/\[Omega] + 
+     (#4 - #5)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9] - 
+     #7*j[MI, #1, #2, #3, #4, #5, #6, 1 + #7, -1 + #8, #9] - 
+     #4*j[MI, #1, #2, #3, 1 + #4, -1 + #5, #6, #7, #8, #9] - 
+     2*#2*j[MI, #1, 1 + #2, #3, #4, #5, -1 + #6, #7, #8, #9], 
+    -(#5*j[MI, #1, #2, -1 + #3, #4, 1 + #5, #6, #7, #8, #9]) + 
+     #5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9] + 
+     (d - 2*#3 - #5 - #6 - #8)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9], 
+    -2*#5*j[MI, -1 + #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*j[MI, -1 + #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     (#8*j[MI, #1, #2, -1 + #3, #4, #5, #6, #7, 1 + #8, #9])/(2*\[Omega]) - 
+     (#5*j[MI, #1, #2, -1 + #3, #4, 1 + #5, #6, #7, #8, #9])/\[Omega] - 
+     (#8*j[MI, #1, #2, #3, -1 + #4, #5, #6, #7, 1 + #8, #9])/(2*\[Omega]) - 
+     (#5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9])/\[Omega] + 
+     (#8*j[MI, #1, #2, #3, #4, -1 + #5, #6, #7, 1 + #8, #9])/(2*\[Omega]) - 
+     (#8*j[MI, #1, #2, #3, #4, #5, -1 + #6, #7, 1 + #8, #9])/\[Omega] + 
+     ((#5 - #8)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9])/\[Omega] - 
+     #7*j[MI, #1, #2, #3, #4, #5, #6, 1 + #7, #8, -1 + #9] - 
+     (2*#5*j[MI, #1, #2, #3, #4, 1 + #5, -1 + #6, #7, #8, #9])/\[Omega] - 
+     (2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, -1 + #8, #9])/\[Omega] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] + 
+     2*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, -1 + #9] + 
+     2*#4*\[Omega]*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     #1*j[MI, 1 + #1, #2, #3, #4, #5, #6, #7, #8, #9], 
+    -(#7*j[MI, -1 + #1, #2, #3, #4, #5, #6, 1 + #7, #8, #9]) - 
+     2*#5*j[MI, -1 + #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*j[MI, -1 + #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     (#6*j[MI, #1, #2, -1 + #3, #4, #5, 1 + #6, #7, #8, #9])/(2*\[Omega]) - 
+     (#5*j[MI, #1, #2, -1 + #3, #4, 1 + #5, #6, #7, #8, #9])/\[Omega] - 
+     (#6*j[MI, #1, #2, #3, -1 + #4, #5, 1 + #6, #7, #8, #9])/(2*\[Omega]) - 
+     (#5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9])/\[Omega] + 
+     (#6*j[MI, #1, #2, #3, #4, -1 + #5, 1 + #6, #7, #8, #9])/(2*\[Omega]) + 
+     ((#5 - #6)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9])/\[Omega] - 
+     #9*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, 1 + #9] - 
+     (#6*j[MI, #1, #2, #3, #4, #5, 1 + #6, #7, -1 + #8, #9])/\[Omega] - 
+     (2*#5*j[MI, #1, #2, #3, #4, 1 + #5, -1 + #6, #7, #8, #9])/\[Omega] - 
+     (2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, -1 + #8, #9])/\[Omega] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] + 
+     2*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     2*#4*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, -1 + #9] + 
+     2*#4*\[Omega]*j[MI, #1, #2, #3, 1 + #4, #5, #6, #7, #8, #9] - 
+     2*#2*j[MI, #1, 1 + #2, #3, #4, #5, #6, #7, #8, -1 + #9], 
+    -(#8*j[MI, -1 + #1, #2, #3, #4, #5, #6, #7, 1 + #8, #9]) - 
+     2*#5*j[MI, -1 + #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     (#5*j[MI, #1, #2, -1 + #3, #4, 1 + #5, #6, #7, #8, #9])/\[Omega] - 
+     (#5*j[MI, #1, #2, #3, -1 + #4, 1 + #5, #6, #7, #8, #9])/\[Omega] - 
+     ((#3 - #5)*j[MI, #1, #2, #3, #4, #5, #6, #7, #8, #9])/\[Omega] - 
+     #6*j[MI, #1, #2, #3, #4, #5, 1 + #6, #7, #8, -1 + #9] - 
+     (2*#5*j[MI, #1, #2, #3, #4, 1 + #5, -1 + #6, #7, #8, #9])/\[Omega] - 
+     (2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, -1 + #8, #9])/\[Omega] - 
+     2*#5*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, -1 + #9] + 
+     2*#5*\[Omega]*j[MI, #1, #2, #3, #4, 1 + #5, #6, #7, #8, #9] - 
+     (#3*j[MI, #1, #2, 1 + #3, -1 + #4, #5, #6, #7, #8, #9])/\[Omega] + 
+     (#3*j[MI, #1, #2, 1 + #3, #4, -1 + #5, #6, #7, #8, #9])/\[Omega] - 
+     (2*#3*j[MI, #1, #2, 1 + #3, #4, #5, -1 + #6, #7, #8, #9])/\[Omega] - 
+     (2*#3*j[MI, #1, #2, 1 + #3, #4, #5, #6, #7, -1 + #8, #9])/\[Omega]} & 
+MI /: Information[MI] := (If[ValueQ[MI::usage], 
+    Information[MI, LongForm -> False]]; 
+   Print[Grid[Partition[Union[Replace[Replace[First /@ UpValues[MI] /. 
+          HoldPattern -> HoldForm, 
+         {HoldPattern[HoldForm[(LiteRed`Private`f$_)[MI, __]]] :> 
+           HoldForm[LiteRed`Private`f$[MI, "\[Ellipsis]"]]}, {1}], 
+        {HoldPattern[LiteRed`Private`x$:HoldForm[(LiteRed`Private`f$_)[MI, 
+              ___]]] :> Button[LiteRed`Private`x$, 
+           (SelectionMove[ButtonNotebook[], All, GeneratedCell]; 
+             NotebookDelete[]; Information[Evaluate[LiteRed`Private`x$[[1,
+                0]]], LongForm -> False]; Print[TableForm[Cases[UpValues[MI], 
+                 HoldPattern[LiteRed`Private`a$_ :> LiteRed`Private`b$_] /; 
+                  MatchQ[LiteRed`Private`a$[[1,0]], LiteRed`Private`x$[[1,
+                    0]]]] /. HoldPattern -> HoldForm]]) & , 
+           Appearance -> "Frameless", BaseStyle -> "InformationLink"]}, 
+        {1}]], 5], DefaultBaseStyle -> "InfoGrid"]])
+MI /: jRules[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 0, 1, 1, 0, 1, 1] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 0, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 0, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 0, 0, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 0, 1, 0, 0]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 0, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 0, 1, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 0, 1, 0, 0, 1, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+      (n7_)?NonPositive, (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 0, 1, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 0, 1, 0, 1, 1, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 0, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 0, 1, 1, 0, 1, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 0, 1, 0, 0, 1, 1, 0, 1, 1] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 0, 1, 0, 0, 1, 1, 1, 1, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 0, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 1, 0, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 1, 1, 0, 0]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 0, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 0, 0, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 0, 1, 0, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 0, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 1, 0, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 0, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 0, 0, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 0, 1, 0, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 1, 0, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 1, 1, 0, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 0, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 0, 1, 1, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 0, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 0, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 0, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 0, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 1, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 1, 1, 0, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 0, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 0, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 0, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+      (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 0, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 0, 1, 0, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 0, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 0, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 0, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 0, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 0, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 1, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 1, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 0, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 0, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+      (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 0, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+      (n9_)?Positive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+      (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+         0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+        2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+         j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0])^n2]}
+MI /: jRules[MI, 1, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 0, 1, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 0, 1, 0, 0, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+      (n7_)?NonPositive, (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 1, 0, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 0, 1, 0, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 0, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 0, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 0, 1, 1, 0, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 0, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 0, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 0, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 1, 1, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+      (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+      (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}
+MI /: jRules[MI, 1, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 0, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 0, 0, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 0, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 0, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 0, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 0, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 1, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 0, 1, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 0, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 0, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 0, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+      (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 0, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 0, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 0, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 0, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 1, 0, 0] := 
+  {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+      (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+      (n9_)?NonPositive] /; True :> 
+    Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+      ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+         j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+         j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+         j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+       (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 0, 1, 1, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 0, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 0, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 0, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 0, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 1, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 1, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 0, 1, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 0, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 0, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 0, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 0, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 0, 1, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 1, 0, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 1, 0, 1]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 1, 1, 0]"]]
+MI /: jRules[MI, 1, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  Get[StringJoin[BasisDirectory[MI], 
+    "/jRules[MI, 1, 1, 1, 1, 1, 1, 1, 1, 1]"]]
+MI /: jSymmetries[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+          2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+          2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, n3, 0, 0, n5, n8, n6, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n2)]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, 0, 0, n2, 0, n5, n7, n8, n6, n1]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+          2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 0, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+          2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 0, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n5, n4, n3, 0, n7, 0, n1]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n8*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n2*(-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 
+             0]) + j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 
+            0, 0, 0, -1] + \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^
+         n6)]}, {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 0, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 0, 1, 0, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n5, n4, n3, 0, n7, 0, n1]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n8*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n2*(-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 
+             0]) + j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 
+            0, 0, 0, -1] + \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^
+         n6)]}, {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 0, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+          2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, 0, n2, 0, 0, n5, n7, n6, n8, n9]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n1*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n3*(j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 
+          2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n4)]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n5, n3, 0, n2, 0, 0, n8, 0]/
+       ((-j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/2 + j[MI, 0, 0, 0, -1, 0, 0, 0, 
+            0, 0]/2 - j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/2)^n6*
+        (j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+           0] + 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0])^n4*
+        (-j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+            0]/(2*\[Omega]) - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/
+           (2*\[Omega]) + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega] - j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, -1] + \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n7)]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}}
+MI /: jSymmetries[MI, 0, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 0, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?NonPositive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 0, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 0, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 0, 0, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 0, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 0, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 0, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 0, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 0, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?NonPositive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 1, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 1, 0, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n5, n4, n3, 0, n7, 0, n1]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n8*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n2*(-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 
+             0]) + j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 
+            0, 0, 0, -1] + \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n6)]}}
+MI /: jSymmetries[MI, 1, 0, 1, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 1, 0, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 1, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 1, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 1, 1, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, 
+        n1]/(2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - 
+         j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 
+          0] - 2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+         2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - 
+         \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n2]}, 
+   {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n9, 0, n5, n4, n3, 0, n7, 0, 
+        n1]/((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 
+           0, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n8*
+        (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0])^n2*(-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 
+             0]) + j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 
+           0, 0, 0, 0] + j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 
+            0, 0, 0, -1] + \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n6)]}}
+MI /: jSymmetries[MI, 1, 0, 1, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 0, 1, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 0, 1, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?NonPositive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n9, 0, n3, n4, n5, n8, n7, n6, n1]/
+       (2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, -1, 0, 0, 0, 
+          0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+         2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+          j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] - \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, 0])^n2]}}
+MI /: jSymmetries[MI, 1, 1, 0, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 0, 1, 1, 0, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 0, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 0, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 0, 0, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 0, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 0, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 0, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 1, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 0, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?NonPositive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n5, 0, n2, 0, n8, 0, 0]/
+       ((j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+           0] + 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0])^n4*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+            0]/(2*\[Omega]) - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/
+           (2*\[Omega]) + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega] - j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, -1] + \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n7)]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n5, n2, 0, n3, 0, 0, n7, 0]/
+       ((-j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/2 + j[MI, 0, 0, 0, -1, 0, 0, 0, 
+            0, 0]/2 - j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/2)^n6*
+        (j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n5, n3, 0, n2, 0, 0, n8, 0]/
+       ((-j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/2 + j[MI, 0, 0, 0, -1, 0, 0, 0, 
+            0, 0]/2 - j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/2)^n6*
+        (j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+           0] + 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0])^n4*
+        (-j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+            0]/(2*\[Omega]) - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/
+           (2*\[Omega]) + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega] - j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, -1] + \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n7)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 0, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 0, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, 
+       (n7_)?NonPositive, (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n5, n3, 0, n2, 0, 0, n8, 0]/
+       ((-j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/2 + j[MI, 0, 0, 0, -1, 0, 0, 0, 
+            0, 0]/2 - j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/2)^n6*
+        (j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+           0] + 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0])^n4*
+        (-j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 
+            0]/(2*\[Omega]) - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/
+           (2*\[Omega]) + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] - 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega] - j[MI, 0, 0, 0, 0, 0, 
+           0, 0, 0, -1] + \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n9*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n7)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 0, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 0, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 0, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?NonPositive, (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, 
+       (n8_)?Positive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n3, n2, 0, n5, n6, n8, n7, 0]/
+       ((j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0]/(2*\[Omega]) - 
+          j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 0]/(2*\[Omega]) + 
+          j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0]/\[Omega] + 
+          j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0]/\[Omega])^n9*
+        (-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+           0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+          2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 2*\[Omega]*
+           j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n4)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 0, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?NonPositive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 0, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 0, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, n8, n9]]}, 
+   {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 0, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 1, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?NonPositive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}, {j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, 
+       (n4_)?Positive, (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, 
+       (n8_)?NonPositive, (n9_)?Positive] /; True :> 
+     Expand[j[MI, n1, n2, n5, n4, n3, 0, n7, 0, n9]/
+       ((-j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] - j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 
+           0] - j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+          \[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1])^n6*
+        (-(\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]) + j[MI, 0, -1, 0, 0, 
+           0, 0, 0, 0, 0] - j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + 
+          j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] - j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 
+           0] - 2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1] + 
+          \[Omega]^2*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0])^n8)]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 1, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 0, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?NonPositive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 0, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 0, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 0, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 0, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?NonPositive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 1, 0, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 1, 0, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?NonPositive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 1, 1, 0] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?NonPositive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: jSymmetries[MI, 1, 1, 1, 1, 1, 1, 1, 1, 1] := 
+  {{j[MI, (n1_)?Positive, (n2_)?Positive, (n3_)?Positive, (n4_)?Positive, 
+       (n5_)?Positive, (n6_)?Positive, (n7_)?Positive, (n8_)?Positive, 
+       (n9_)?Positive] /; True :> Expand[j[MI, n1, n2, n3, n4, n5, n6, n7, 
+       n8, n9]]}}
+MI /: LI[MI] := {} & 
+MI /: LMs[MI] := {k, el1, el2}
+MI /: MappedSectors[MI] := {js[MI, 0, 1, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 0, 0, 1, 1, 0, 1, 1], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 0], js[MI, 0, 0, 1, 0, 1, 1, 1, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 0, 1, 1, 0], js[MI, 0, 1, 0, 0, 1, 1, 0, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 0, 1, 0, 0], js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 1, 0], js[MI, 1, 0, 0, 0, 1, 1, 1, 0, 0], 
+   js[MI, 1, 0, 0, 1, 1, 1, 0, 0, 0], js[MI, 1, 0, 1, 0, 1, 0, 1, 0, 0], 
+   js[MI, 1, 0, 1, 0, 1, 1, 0, 0, 0], js[MI, 1, 1, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 1, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 1, 1, 1, 1, 1, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 1, 0, 1, 1], js[MI, 0, 1, 0, 0, 1, 1, 1, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 1, 1, 0, 0], js[MI, 1, 0, 0, 0, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 1, 1, 0], js[MI, 1, 0, 0, 1, 1, 0, 1, 1, 0], 
+   js[MI, 1, 0, 0, 1, 1, 1, 0, 0, 1], js[MI, 1, 0, 0, 1, 1, 1, 0, 1, 0], 
+   js[MI, 1, 0, 0, 1, 1, 1, 1, 0, 0], js[MI, 1, 0, 1, 0, 1, 0, 1, 1, 0], 
+   js[MI, 1, 0, 1, 0, 1, 1, 0, 0, 1], js[MI, 1, 0, 1, 0, 1, 1, 0, 1, 0], 
+   js[MI, 1, 0, 1, 0, 1, 1, 1, 0, 0], js[MI, 1, 0, 1, 1, 1, 0, 1, 0, 0], 
+   js[MI, 1, 0, 1, 1, 1, 1, 0, 0, 0], js[MI, 1, 1, 0, 0, 1, 0, 1, 1, 0], 
+   js[MI, 1, 1, 0, 0, 1, 1, 0, 1, 0], js[MI, 1, 1, 0, 0, 1, 1, 1, 0, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 1, 0, 0], js[MI, 1, 0, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 0, 1, 1, 1, 1, 1, 0], js[MI, 1, 0, 1, 0, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 1, 1, 0], js[MI, 1, 0, 1, 1, 1, 0, 1, 1, 0], 
+   js[MI, 1, 0, 1, 1, 1, 1, 0, 0, 1], js[MI, 1, 0, 1, 1, 1, 1, 0, 1, 0], 
+   js[MI, 1, 0, 1, 1, 1, 1, 1, 0, 0], js[MI, 1, 1, 0, 0, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 0, 1, 1, 1, 0, 0], js[MI, 1, 0, 1, 1, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 1, 1, 1, 1, 1, 1, 0]}
+MI /: MIs[MI] := {j[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1], 
+   j[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0], j[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0], 
+   j[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1], j[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0], 
+   j[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0], j[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0], 
+   j[MI, 0, 0, 0, 0, 1, 1, 1, 1, 1], j[MI, 0, 0, 0, 1, 1, 0, 1, 1, 1], 
+   j[MI, 0, 0, 1, 0, 1, 0, 1, 1, 1], j[MI, 0, 1, 0, 1, 1, 0, 1, 1, 0], 
+   j[MI, 0, 1, 1, 0, 1, 0, 1, 1, 0], j[MI, 1, 0, 1, 0, 1, 0, 1, 0, 1], 
+   j[MI, 1, 1, 0, 1, 1, 0, 0, 1, 0], j[MI, 1, 1, 1, 0, 1, 0, 0, 1, 0], 
+   j[MI, 0, 0, 0, 2, 1, 0, 1, 1, 1], j[MI, 0, 0, 0, 1, 1, 1, 2, 1, 0], 
+   j[MI, 0, 0, 2, 0, 1, 0, 1, 1, 1], j[MI, 2, 1, 0, 1, 1, 0, 0, 1, 0], 
+   j[MI, 0, 0, 0, 1, 1, 1, 1, 1, 1], j[MI, 1, 0, 0, 1, 1, 0, 1, 1, 1], 
+   j[MI, 1, 0, 1, 0, 1, 0, 1, 1, 1], j[MI, 1, 1, 0, 1, 1, 0, 0, 1, 1], 
+   j[MI, 1, 1, 0, 1, 1, 0, 1, 1, 0], j[MI, 1, 1, 0, 1, 1, 1, 0, 1, 0], 
+   j[MI, 1, 1, 1, 0, 1, 0, 0, 1, 1], j[MI, 1, 1, 1, 0, 1, 0, 1, 1, 0], 
+   j[MI, 2, 1, 0, 1, 1, 0, 0, 1, 1], j[MI, 2, 1, 0, 1, 1, 1, 0, 1, 0], 
+   j[MI, 2, 1, 1, 0, 1, 0, 0, 1, 1], j[MI, 1, 0, 0, 1, 1, 1, 1, 1, 1], 
+   j[MI, 1, 0, 1, 0, 1, 1, 1, 1, 1]}
+MI /: NonZeroSectors[MI] := {js[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0], js[MI, 0, 1, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 0, 1, 1, 0, 1, 1], js[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0], 
+   js[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1], js[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 0], js[MI, 0, 0, 1, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 1], js[MI, 0, 0, 1, 0, 1, 0, 1, 1, 0], 
+   js[MI, 0, 0, 1, 0, 1, 1, 1, 0, 0], js[MI, 0, 0, 1, 1, 1, 0, 1, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 0, 0, 1, 1], js[MI, 0, 1, 0, 0, 1, 0, 1, 1, 0], 
+   js[MI, 0, 1, 0, 0, 1, 1, 0, 1, 0], js[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 0, 0, 1, 0], js[MI, 0, 1, 1, 0, 1, 0, 1, 0, 0], 
+   js[MI, 1, 0, 0, 0, 1, 0, 0, 1, 1], js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 1, 0], js[MI, 1, 0, 0, 0, 1, 1, 1, 0, 0], 
+   js[MI, 1, 0, 0, 1, 1, 1, 0, 0, 0], js[MI, 1, 0, 1, 0, 1, 0, 1, 0, 0], 
+   js[MI, 1, 0, 1, 0, 1, 1, 0, 0, 0], js[MI, 1, 1, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 1, 0, 0, 1, 1, 0, 0, 0], js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0], 
+   js[MI, 0, 0, 0, 0, 1, 1, 1, 1, 1], js[MI, 0, 0, 0, 1, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 1, 1, 1, 0, 1, 1], js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 1, 0], js[MI, 0, 0, 1, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 1, 0, 1, 1], js[MI, 0, 0, 1, 0, 1, 1, 1, 0, 1], 
+   js[MI, 0, 0, 1, 0, 1, 1, 1, 1, 0], js[MI, 0, 0, 1, 1, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 1, 1, 0, 1, 0, 1], js[MI, 0, 0, 1, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 0, 1, 1, 1, 1, 1, 0, 0], js[MI, 0, 1, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 0, 0, 1, 1, 0, 1, 1], js[MI, 0, 1, 0, 0, 1, 1, 1, 1, 0], 
+   js[MI, 0, 1, 0, 1, 1, 0, 0, 1, 1], js[MI, 0, 1, 0, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 1, 0, 1, 1, 1, 0, 1, 0], js[MI, 0, 1, 0, 1, 1, 1, 1, 0, 0], 
+   js[MI, 0, 1, 1, 0, 1, 0, 0, 1, 1], js[MI, 0, 1, 1, 0, 1, 0, 1, 0, 1], 
+   js[MI, 0, 1, 1, 0, 1, 0, 1, 1, 0], js[MI, 0, 1, 1, 0, 1, 1, 0, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 1, 1, 0, 0], js[MI, 0, 1, 1, 1, 1, 0, 0, 1, 0], 
+   js[MI, 0, 1, 1, 1, 1, 0, 1, 0, 0], js[MI, 1, 0, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 1, 1], js[MI, 1, 0, 0, 0, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 1, 1, 0], js[MI, 1, 0, 0, 1, 1, 0, 0, 1, 1], 
+   js[MI, 1, 0, 0, 1, 1, 0, 1, 1, 0], js[MI, 1, 0, 0, 1, 1, 1, 0, 0, 1], 
+   js[MI, 1, 0, 0, 1, 1, 1, 0, 1, 0], js[MI, 1, 0, 0, 1, 1, 1, 1, 0, 0], 
+   js[MI, 1, 0, 1, 0, 1, 0, 0, 1, 1], js[MI, 1, 0, 1, 0, 1, 0, 1, 0, 1], 
+   js[MI, 1, 0, 1, 0, 1, 0, 1, 1, 0], js[MI, 1, 0, 1, 0, 1, 1, 0, 0, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 0, 1, 0], js[MI, 1, 0, 1, 0, 1, 1, 1, 0, 0], 
+   js[MI, 1, 0, 1, 1, 1, 0, 1, 0, 0], js[MI, 1, 0, 1, 1, 1, 1, 0, 0, 0], 
+   js[MI, 1, 1, 0, 0, 1, 0, 0, 1, 1], js[MI, 1, 1, 0, 0, 1, 0, 1, 1, 0], 
+   js[MI, 1, 1, 0, 0, 1, 1, 0, 0, 1], js[MI, 1, 1, 0, 0, 1, 1, 0, 1, 0], 
+   js[MI, 1, 1, 0, 0, 1, 1, 1, 0, 0], js[MI, 1, 1, 0, 1, 1, 0, 0, 1, 0], 
+   js[MI, 1, 1, 0, 1, 1, 1, 0, 0, 0], js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 1], 
+   js[MI, 1, 1, 1, 0, 1, 0, 0, 1, 0], js[MI, 1, 1, 1, 0, 1, 0, 1, 0, 0], 
+   js[MI, 1, 1, 1, 0, 1, 1, 0, 0, 0], js[MI, 1, 1, 1, 1, 1, 0, 0, 0, 0], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 1, 1], js[MI, 0, 0, 1, 0, 1, 1, 1, 1, 1], 
+   js[MI, 0, 0, 1, 1, 1, 0, 1, 1, 1], js[MI, 0, 0, 1, 1, 1, 1, 0, 1, 1], 
+   js[MI, 0, 0, 1, 1, 1, 1, 1, 0, 1], js[MI, 0, 0, 1, 1, 1, 1, 1, 1, 0], 
+   js[MI, 0, 1, 0, 0, 1, 1, 1, 1, 1], js[MI, 0, 1, 0, 1, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 0, 1, 1, 1, 0, 1, 1], js[MI, 0, 1, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 0, 1, 1, 1, 1, 1, 0], js[MI, 0, 1, 1, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 0, 1, 1], js[MI, 0, 1, 1, 0, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 1, 1, 0], js[MI, 0, 1, 1, 1, 1, 0, 0, 1, 1], 
+   js[MI, 0, 1, 1, 1, 1, 0, 1, 0, 1], js[MI, 0, 1, 1, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 1, 1, 1, 1, 1, 0, 1, 0], js[MI, 0, 1, 1, 1, 1, 1, 1, 0, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 1, 1, 1], js[MI, 1, 0, 0, 1, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 0, 1, 1, 1, 0, 1, 1], js[MI, 1, 0, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 0, 1, 1, 1, 1, 1, 0], js[MI, 1, 0, 1, 0, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 0, 1, 1], js[MI, 1, 0, 1, 0, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 1, 1, 0], js[MI, 1, 0, 1, 1, 1, 0, 0, 1, 1], 
+   js[MI, 1, 0, 1, 1, 1, 0, 1, 0, 1], js[MI, 1, 0, 1, 1, 1, 0, 1, 1, 0], 
+   js[MI, 1, 0, 1, 1, 1, 1, 0, 0, 1], js[MI, 1, 0, 1, 1, 1, 1, 0, 1, 0], 
+   js[MI, 1, 0, 1, 1, 1, 1, 1, 0, 0], js[MI, 1, 1, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 1, 1, 0, 0, 1, 1, 0, 1, 1], js[MI, 1, 1, 0, 0, 1, 1, 1, 0, 1], 
+   js[MI, 1, 1, 0, 0, 1, 1, 1, 1, 0], js[MI, 1, 1, 0, 1, 1, 0, 0, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 0, 1, 1, 0], js[MI, 1, 1, 0, 1, 1, 1, 0, 0, 1], 
+   js[MI, 1, 1, 0, 1, 1, 1, 0, 1, 0], js[MI, 1, 1, 0, 1, 1, 1, 1, 0, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 0, 1, 1], js[MI, 1, 1, 1, 0, 1, 0, 1, 0, 1], 
+   js[MI, 1, 1, 1, 0, 1, 0, 1, 1, 0], js[MI, 1, 1, 1, 0, 1, 1, 0, 0, 1], 
+   js[MI, 1, 1, 1, 0, 1, 1, 0, 1, 0], js[MI, 1, 1, 1, 0, 1, 1, 1, 0, 0], 
+   js[MI, 1, 1, 1, 1, 1, 0, 0, 0, 1], js[MI, 1, 1, 1, 1, 1, 0, 0, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 0, 1, 0, 0], js[MI, 1, 1, 1, 1, 1, 1, 0, 0, 0], 
+   js[MI, 0, 0, 1, 1, 1, 1, 1, 1, 1], js[MI, 0, 1, 0, 1, 1, 1, 1, 1, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 1, 1, 1], js[MI, 0, 1, 1, 1, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 1, 1, 1, 1, 0, 1, 1], js[MI, 0, 1, 1, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 1, 1, 1, 1, 1, 1, 0], js[MI, 1, 0, 0, 1, 1, 1, 1, 1, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 1, 1, 1], js[MI, 1, 0, 1, 1, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 1, 1, 1, 1, 0, 1, 1], js[MI, 1, 0, 1, 1, 1, 1, 1, 0, 1], 
+   js[MI, 1, 0, 1, 1, 1, 1, 1, 1, 0], js[MI, 1, 1, 0, 0, 1, 1, 1, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 0, 1, 1, 1], js[MI, 1, 1, 0, 1, 1, 1, 0, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 1, 1, 0, 1], js[MI, 1, 1, 0, 1, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 1, 1, 1], js[MI, 1, 1, 1, 0, 1, 1, 0, 1, 1], 
+   js[MI, 1, 1, 1, 0, 1, 1, 1, 0, 1], js[MI, 1, 1, 1, 0, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 0, 0, 1, 1], js[MI, 1, 1, 1, 1, 1, 0, 1, 0, 1], 
+   js[MI, 1, 1, 1, 1, 1, 0, 1, 1, 0], js[MI, 1, 1, 1, 1, 1, 1, 0, 0, 1], 
+   js[MI, 1, 1, 1, 1, 1, 1, 0, 1, 0], js[MI, 1, 1, 1, 1, 1, 1, 1, 0, 0], 
+   js[MI, 0, 1, 1, 1, 1, 1, 1, 1, 1], js[MI, 1, 0, 1, 1, 1, 1, 1, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 1, 1, 1, 1], js[MI, 1, 1, 1, 0, 1, 1, 1, 1, 1], 
+   js[MI, 1, 1, 1, 1, 1, 0, 1, 1, 1], js[MI, 1, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[MI, 1, 1, 1, 1, 1, 1, 1, 0, 1], js[MI, 1, 1, 1, 1, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+MI /: SimpleSectors[MI] := {js[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0], js[MI, 0, 1, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0], 
+   js[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0], js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0]}
+MI /: SPs[MI] := {sp[el1, el1], sp[el1, el2], sp[el1, k], sp[el1, v], 
+   sp[el2, el2], sp[el2, k], sp[el2, v], sp[k, k], sp[k, v]}
+MI /: SR[MI] := Module[{LiteRed`Private`jsc$ = jSector[j[MI, ##1]]}, 
+    If[MemberQ[UniqueSectors[MI], LiteRed`Private`jsc$], 
+     DeleteCases[DeleteDuplicates[Collectj[j[MI, ##1] - 
+         (j[MI, ##1] /. jSymmetries @@ LiteRed`Private`jsc$)]], 0], {}]] & 
+MI /: Toj[MI] := {sp[el1, el1] -> j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0], 
+   sp[el1, el2] -> j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0], 
+   sp[el1, k] -> j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0], 
+   sp[el1, v] -> j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1], 
+   sp[el2, el2] -> j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0], 
+   sp[el2, k] -> j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0], 
+   sp[el2, v] -> -(-j[MI, 0, 0, -1, 0, 0, 0, 0, 0, 0] - 
+       j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, 0, -1, 0, 0, 0, 
+        0] - 2*j[MI, 0, 0, 0, 0, 0, -1, 0, 0, 0] - 
+       2*j[MI, 0, 0, 0, 0, 0, 0, 0, -1, 0])/(2*\[Omega]), 
+   sp[k, k] -> -\[Omega]^2 + 2*\[Omega]*j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0] - 
+     j[MI, 0, -1, 0, 0, 0, 0, 0, 0, 0] + j[MI, 0, 0, 0, -1, 0, 0, 0, 0, 0] - 
+     2*j[MI, 0, 0, 0, 0, 0, 0, -1, 0, 0] + 
+     2*\[Omega]*j[MI, 0, 0, 0, 0, 0, 0, 0, 0, -1], 
+   sp[k, v] -> j[MI, -1, 0, 0, 0, 0, 0, 0, 0, 0]}
+MI /: UniqueSectors[MI] := {js[MI, 0, 0, 0, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 0], js[MI, 0, 0, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 0, 1, 1, 1, 1, 0], js[MI, 0, 0, 0, 1, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 0, 1, 1, 0, 1, 1, 0], js[MI, 0, 0, 1, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 0, 1, 0, 1], js[MI, 0, 0, 1, 0, 1, 0, 1, 1, 0], 
+   js[MI, 0, 0, 1, 1, 1, 0, 1, 0, 0], js[MI, 0, 1, 0, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 1, 0, 1, 1, 0, 0, 1, 0], js[MI, 0, 1, 1, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 0, 0, 1, 1], js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 0], 
+   js[MI, 0, 0, 0, 0, 1, 1, 1, 1, 1], js[MI, 0, 0, 0, 1, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 1, 1, 1, 0, 1, 1], js[MI, 0, 0, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 1, 0], js[MI, 0, 0, 1, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 0, 1, 0, 1, 1, 0, 1, 1], js[MI, 0, 0, 1, 0, 1, 1, 1, 0, 1], 
+   js[MI, 0, 0, 1, 0, 1, 1, 1, 1, 0], js[MI, 0, 0, 1, 1, 1, 0, 0, 1, 1], 
+   js[MI, 0, 0, 1, 1, 1, 0, 1, 0, 1], js[MI, 0, 0, 1, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 1, 0, 0, 1, 0, 1, 1, 1], js[MI, 0, 1, 0, 1, 1, 0, 0, 1, 1], 
+   js[MI, 0, 1, 0, 1, 1, 0, 1, 1, 0], js[MI, 0, 1, 0, 1, 1, 1, 0, 1, 0], 
+   js[MI, 0, 1, 0, 1, 1, 1, 1, 0, 0], js[MI, 0, 1, 1, 0, 1, 0, 0, 1, 1], 
+   js[MI, 0, 1, 1, 0, 1, 0, 1, 0, 1], js[MI, 0, 1, 1, 0, 1, 0, 1, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 1, 0, 1, 0], js[MI, 0, 1, 1, 1, 1, 0, 0, 1, 0], 
+   js[MI, 0, 1, 1, 1, 1, 0, 1, 0, 0], js[MI, 1, 0, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 0, 0, 1, 1, 0, 1, 1], js[MI, 1, 0, 0, 1, 1, 0, 0, 1, 1], 
+   js[MI, 1, 0, 1, 0, 1, 0, 0, 1, 1], js[MI, 1, 0, 1, 0, 1, 0, 1, 0, 1], 
+   js[MI, 1, 1, 0, 0, 1, 0, 0, 1, 1], js[MI, 1, 1, 0, 0, 1, 1, 0, 0, 1], 
+   js[MI, 1, 1, 0, 1, 1, 0, 0, 1, 0], js[MI, 1, 1, 0, 1, 1, 1, 0, 0, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 0, 0, 1], js[MI, 1, 1, 1, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 1, 1, 0, 1, 1, 0, 0, 0], js[MI, 1, 1, 1, 1, 1, 0, 0, 0, 0], 
+   js[MI, 0, 0, 0, 1, 1, 1, 1, 1, 1], js[MI, 0, 0, 1, 0, 1, 1, 1, 1, 1], 
+   js[MI, 0, 0, 1, 1, 1, 0, 1, 1, 1], js[MI, 0, 0, 1, 1, 1, 1, 0, 1, 1], 
+   js[MI, 0, 0, 1, 1, 1, 1, 1, 0, 1], js[MI, 0, 0, 1, 1, 1, 1, 1, 1, 0], 
+   js[MI, 0, 1, 0, 0, 1, 1, 1, 1, 1], js[MI, 0, 1, 0, 1, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 0, 1, 1, 1, 0, 1, 1], js[MI, 0, 1, 0, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 0, 1, 1, 1, 1, 1, 0], js[MI, 0, 1, 1, 0, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 0, 1, 1], js[MI, 0, 1, 1, 0, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 1, 1, 0], js[MI, 0, 1, 1, 1, 1, 0, 0, 1, 1], 
+   js[MI, 0, 1, 1, 1, 1, 0, 1, 0, 1], js[MI, 0, 1, 1, 1, 1, 0, 1, 1, 0], 
+   js[MI, 0, 1, 1, 1, 1, 1, 0, 1, 0], js[MI, 0, 1, 1, 1, 1, 1, 1, 0, 0], 
+   js[MI, 1, 0, 0, 0, 1, 1, 1, 1, 1], js[MI, 1, 0, 0, 1, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 0, 1, 1, 1, 0, 1, 1], js[MI, 1, 0, 1, 0, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 0, 1, 1], js[MI, 1, 0, 1, 1, 1, 0, 0, 1, 1], 
+   js[MI, 1, 0, 1, 1, 1, 0, 1, 0, 1], js[MI, 1, 1, 0, 0, 1, 0, 1, 1, 1], 
+   js[MI, 1, 1, 0, 0, 1, 1, 0, 1, 1], js[MI, 1, 1, 0, 0, 1, 1, 1, 0, 1], 
+   js[MI, 1, 1, 0, 1, 1, 0, 0, 1, 1], js[MI, 1, 1, 0, 1, 1, 0, 1, 1, 0], 
+   js[MI, 1, 1, 0, 1, 1, 1, 0, 0, 1], js[MI, 1, 1, 0, 1, 1, 1, 0, 1, 0], 
+   js[MI, 1, 1, 0, 1, 1, 1, 1, 0, 0], js[MI, 1, 1, 1, 0, 1, 0, 0, 1, 1], 
+   js[MI, 1, 1, 1, 0, 1, 0, 1, 0, 1], js[MI, 1, 1, 1, 0, 1, 0, 1, 1, 0], 
+   js[MI, 1, 1, 1, 0, 1, 1, 0, 0, 1], js[MI, 1, 1, 1, 0, 1, 1, 0, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 0, 0, 0, 1], js[MI, 1, 1, 1, 1, 1, 0, 0, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 0, 1, 0, 0], js[MI, 1, 1, 1, 1, 1, 1, 0, 0, 0], 
+   js[MI, 0, 0, 1, 1, 1, 1, 1, 1, 1], js[MI, 0, 1, 0, 1, 1, 1, 1, 1, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 1, 1, 1], js[MI, 0, 1, 1, 1, 1, 0, 1, 1, 1], 
+   js[MI, 0, 1, 1, 1, 1, 1, 0, 1, 1], js[MI, 0, 1, 1, 1, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 1, 1, 1, 1, 1, 1, 0], js[MI, 1, 0, 0, 1, 1, 1, 1, 1, 1], 
+   js[MI, 1, 0, 1, 0, 1, 1, 1, 1, 1], js[MI, 1, 0, 1, 1, 1, 0, 1, 1, 1], 
+   js[MI, 1, 0, 1, 1, 1, 1, 0, 1, 1], js[MI, 1, 1, 0, 0, 1, 1, 1, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 0, 1, 1, 1], js[MI, 1, 1, 0, 1, 1, 1, 0, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 1, 1, 0, 1], js[MI, 1, 1, 0, 1, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 0, 1, 0, 1, 1, 1], js[MI, 1, 1, 1, 0, 1, 1, 0, 1, 1], 
+   js[MI, 1, 1, 1, 0, 1, 1, 1, 0, 1], js[MI, 1, 1, 1, 0, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 0, 0, 1, 1], js[MI, 1, 1, 1, 1, 1, 0, 1, 0, 1], 
+   js[MI, 1, 1, 1, 1, 1, 0, 1, 1, 0], js[MI, 1, 1, 1, 1, 1, 1, 0, 0, 1], 
+   js[MI, 1, 1, 1, 1, 1, 1, 0, 1, 0], js[MI, 1, 1, 1, 1, 1, 1, 1, 0, 0], 
+   js[MI, 0, 1, 1, 1, 1, 1, 1, 1, 1], js[MI, 1, 0, 1, 1, 1, 1, 1, 1, 1], 
+   js[MI, 1, 1, 0, 1, 1, 1, 1, 1, 1], js[MI, 1, 1, 1, 0, 1, 1, 1, 1, 1], 
+   js[MI, 1, 1, 1, 1, 1, 0, 1, 1, 1], js[MI, 1, 1, 1, 1, 1, 1, 0, 1, 1], 
+   js[MI, 1, 1, 1, 1, 1, 1, 1, 0, 1], js[MI, 1, 1, 1, 1, 1, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+MI /: ZerojRule[MI] := LiteRed`Private`jjj:j[MI, __] :> 
+   0 /; Module[{LiteRed`Private`jjs = 
+       Rest[List @@ jSector[LiteRed`Private`jjj]]}, 
+     Or @@ (BitOr[LiteRed`Private`jjs, #1] === #1 & ) /@ 
+       {{1, 1, 1, 1, 0, 1, 1, 1, 1}, {0, 0, 1, 1, 1, 1, 0, 1, 0}, 
+        {1, 1, 0, 1, 1, 0, 1, 0, 1}, {0, 1, 0, 0, 1, 1, 1, 0, 1}, 
+        {1, 0, 1, 1, 1, 0, 0, 1, 0}, {1, 0, 1, 1, 1, 0, 0, 0, 1}, 
+        {0, 1, 1, 1, 1, 1, 0, 0, 1}, {1, 0, 0, 0, 1, 0, 1, 1, 0}}]
+MI /: ZeroSectors[MI] := {js[MI, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+   js[MI, 0, 0, 0, 0, 0, 0, 0, 0, 1], js[MI, 0, 0, 0, 0, 0, 0, 0, 1, 0], 
+   js[MI, 0, 0, 0, 0, 0, 0, 1, 0, 0], js[MI, 0, 0, 0, 0, 0, 1, 0, 0, 0], 
+   js[MI, 0, 0, 0, 0, 1, 0, 0, 0, 0], js[MI, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
+   js[MI, 0, 0, 1, 0, 0, 0, 0, 0, 0], js[MI, 0, 1, 0, 0, 0, 0, 0, 0, 0], 
+   js[MI, 1, 0, 0, 0, 0, 0, 0, 0, 0], js[MI, 0, 0, 0, 0, 0, 0, 0, 1, 1], 
+   js[MI, 0, 0, 0, 0, 0, 0, 1, 0, 1], js[MI, 0, 0, 0, 0, 0, 0, 1, 1, 0], 
+   js[MI, 0, 0, 0, 0, 0, 1, 0, 0, 1], js[MI, 0, 0, 0, 0, 0, 1, 0, 1, 0], 
+   js[MI, 0, 0, 0, 0, 0, 1, 1, 0, 0], js[MI, 0, 0, 0, 0, 1, 0, 0, 0, 1], 
+   js[MI, 0, 0, 0, 0, 1, 0, 0, 1, 0], js[MI, 0, 0, 0, 0, 1, 0, 1, 0, 0], 
+   js[MI, 0, 0, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 0, 1, 0, 0, 0, 0, 1], 
+   js[MI, 0, 0, 0, 1, 0, 0, 0, 1, 0], js[MI, 0, 0, 0, 1, 0, 0, 1, 0, 0], 
+   js[MI, 0, 0, 0, 1, 0, 1, 0, 0, 0], js[MI, 0, 0, 0, 1, 1, 0, 0, 0, 0], 
+   js[MI, 0, 0, 1, 0, 0, 0, 0, 0, 1], js[MI, 0, 0, 1, 0, 0, 0, 0, 1, 0], 
+   js[MI, 0, 0, 1, 0, 0, 0, 1, 0, 0], js[MI, 0, 0, 1, 0, 0, 1, 0, 0, 0], 
+   js[MI, 0, 0, 1, 0, 1, 0, 0, 0, 0], js[MI, 0, 0, 1, 1, 0, 0, 0, 0, 0], 
+   js[MI, 0, 1, 0, 0, 0, 0, 0, 0, 1], js[MI, 0, 1, 0, 0, 0, 0, 0, 1, 0], 
+   js[MI, 0, 1, 0, 0, 0, 0, 1, 0, 0], js[MI, 0, 1, 0, 0, 0, 1, 0, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 0, 0, 0, 0], js[MI, 0, 1, 0, 1, 0, 0, 0, 0, 0], 
+   js[MI, 0, 1, 1, 0, 0, 0, 0, 0, 0], js[MI, 1, 0, 0, 0, 0, 0, 0, 0, 1], 
+   js[MI, 1, 0, 0, 0, 0, 0, 0, 1, 0], js[MI, 1, 0, 0, 0, 0, 0, 1, 0, 0], 
+   js[MI, 1, 0, 0, 0, 0, 1, 0, 0, 0], js[MI, 1, 0, 0, 0, 1, 0, 0, 0, 0], 
+   js[MI, 1, 0, 0, 1, 0, 0, 0, 0, 0], js[MI, 1, 0, 1, 0, 0, 0, 0, 0, 0], 
+   js[MI, 1, 1, 0, 0, 0, 0, 0, 0, 0], js[MI, 0, 0, 0, 0, 0, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 0, 0, 1, 0, 1, 1], js[MI, 0, 0, 0, 0, 0, 1, 1, 0, 1], 
+   js[MI, 0, 0, 0, 0, 0, 1, 1, 1, 0], js[MI, 0, 0, 0, 0, 1, 0, 1, 0, 1], 
+   js[MI, 0, 0, 0, 0, 1, 0, 1, 1, 0], js[MI, 0, 0, 0, 0, 1, 1, 0, 0, 1], 
+   js[MI, 0, 0, 0, 0, 1, 1, 0, 1, 0], js[MI, 0, 0, 0, 0, 1, 1, 1, 0, 0], 
+   js[MI, 0, 0, 0, 1, 0, 0, 0, 1, 1], js[MI, 0, 0, 0, 1, 0, 0, 1, 0, 1], 
+   js[MI, 0, 0, 0, 1, 0, 0, 1, 1, 0], js[MI, 0, 0, 0, 1, 0, 1, 0, 0, 1], 
+   js[MI, 0, 0, 0, 1, 0, 1, 0, 1, 0], js[MI, 0, 0, 0, 1, 0, 1, 1, 0, 0], 
+   js[MI, 0, 0, 0, 1, 1, 0, 0, 0, 1], js[MI, 0, 0, 0, 1, 1, 0, 0, 1, 0], 
+   js[MI, 0, 0, 0, 1, 1, 0, 1, 0, 0], js[MI, 0, 0, 0, 1, 1, 1, 0, 0, 0], 
+   js[MI, 0, 0, 1, 0, 0, 0, 0, 1, 1], js[MI, 0, 0, 1, 0, 0, 0, 1, 0, 1], 
+   js[MI, 0, 0, 1, 0, 0, 0, 1, 1, 0], js[MI, 0, 0, 1, 0, 0, 1, 0, 0, 1], 
+   js[MI, 0, 0, 1, 0, 0, 1, 0, 1, 0], js[MI, 0, 0, 1, 0, 0, 1, 1, 0, 0], 
+   js[MI, 0, 0, 1, 0, 1, 0, 0, 0, 1], js[MI, 0, 0, 1, 0, 1, 0, 0, 1, 0], 
+   js[MI, 0, 0, 1, 0, 1, 1, 0, 0, 0], js[MI, 0, 0, 1, 1, 0, 0, 0, 0, 1], 
+   js[MI, 0, 0, 1, 1, 0, 0, 0, 1, 0], js[MI, 0, 0, 1, 1, 0, 0, 1, 0, 0], 
+   js[MI, 0, 0, 1, 1, 0, 1, 0, 0, 0], js[MI, 0, 0, 1, 1, 1, 0, 0, 0, 0], 
+   js[MI, 0, 1, 0, 0, 0, 0, 0, 1, 1], js[MI, 0, 1, 0, 0, 0, 0, 1, 0, 1], 
+   js[MI, 0, 1, 0, 0, 0, 0, 1, 1, 0], js[MI, 0, 1, 0, 0, 0, 1, 0, 0, 1], 
+   js[MI, 0, 1, 0, 0, 0, 1, 0, 1, 0], js[MI, 0, 1, 0, 0, 0, 1, 1, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 0, 0, 0, 1], js[MI, 0, 1, 0, 0, 1, 0, 1, 0, 0], 
+   js[MI, 0, 1, 0, 0, 1, 1, 0, 0, 0], js[MI, 0, 1, 0, 1, 0, 0, 0, 0, 1], 
+   js[MI, 0, 1, 0, 1, 0, 0, 0, 1, 0], js[MI, 0, 1, 0, 1, 0, 0, 1, 0, 0], 
+   js[MI, 0, 1, 0, 1, 0, 1, 0, 0, 0], js[MI, 0, 1, 0, 1, 1, 0, 0, 0, 0], 
+   js[MI, 0, 1, 1, 0, 0, 0, 0, 0, 1], js[MI, 0, 1, 1, 0, 0, 0, 0, 1, 0], 
+   js[MI, 0, 1, 1, 0, 0, 0, 1, 0, 0], js[MI, 0, 1, 1, 0, 0, 1, 0, 0, 0], 
+   js[MI, 0, 1, 1, 0, 1, 0, 0, 0, 0], js[MI, 0, 1, 1, 1, 0, 0, 0, 0, 0], 
+   js[MI, 1, 0, 0, 0, 0, 0, 0, 1, 1], js[MI, 1, 0, 0, 0, 0, 0, 1, 0, 1], 
+   js[MI, 1, 0, 0, 0, 0, 0, 1, 1, 0], js[MI, 1, 0, 0, 0, 0, 1, 0, 0, 1], 
+   js[MI, 1, 0, 0, 0, 0, 1, 0, 1, 0], js[MI, 1, 0, 0, 0, 0, 1, 1, 0, 0], 
+   js[MI, 1, 0, 0, 0, 1, 0, 0, 0, 1], js[MI, 1, 0, 0, 0, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 0, 1, 0, 0], js[MI, 1, 0, 0, 1, 0, 0, 0, 0, 1], 
+   js[MI, 1, 0, 0, 1, 0, 0, 0, 1, 0], js[MI, 1, 0, 0, 1, 0, 0, 1, 0, 0], 
+   js[MI, 1, 0, 0, 1, 0, 1, 0, 0, 0], js[MI, 1, 0, 0, 1, 1, 0, 0, 0, 0], 
+   js[MI, 1, 0, 1, 0, 0, 0, 0, 0, 1], js[MI, 1, 0, 1, 0, 0, 0, 0, 1, 0], 
+   js[MI, 1, 0, 1, 0, 0, 0, 1, 0, 0], js[MI, 1, 0, 1, 0, 0, 1, 0, 0, 0], 
+   js[MI, 1, 0, 1, 0, 1, 0, 0, 0, 0], js[MI, 1, 0, 1, 1, 0, 0, 0, 0, 0], 
+   js[MI, 1, 1, 0, 0, 0, 0, 0, 0, 1], js[MI, 1, 1, 0, 0, 0, 0, 0, 1, 0], 
+   js[MI, 1, 1, 0, 0, 0, 0, 1, 0, 0], js[MI, 1, 1, 0, 0, 0, 1, 0, 0, 0], 
+   js[MI, 1, 1, 0, 0, 1, 0, 0, 0, 0], js[MI, 1, 1, 0, 1, 0, 0, 0, 0, 0], 
+   js[MI, 1, 1, 1, 0, 0, 0, 0, 0, 0], js[MI, 0, 0, 0, 0, 0, 1, 1, 1, 1], 
+   js[MI, 0, 0, 0, 0, 1, 1, 1, 0, 1], js[MI, 0, 0, 0, 1, 0, 0, 1, 1, 1], 
+   js[MI, 0, 0, 0, 1, 0, 1, 0, 1, 1], js[MI, 0, 0, 0, 1, 0, 1, 1, 0, 1], 
+   js[MI, 0, 0, 0, 1, 0, 1, 1, 1, 0], js[MI, 0, 0, 0, 1, 1, 0, 1, 0, 1], 
+   js[MI, 0, 0, 0, 1, 1, 1, 0, 0, 1], js[MI, 0, 0, 0, 1, 1, 1, 0, 1, 0], 
+   js[MI, 0, 0, 1, 0, 0, 0, 1, 1, 1], js[MI, 0, 0, 1, 0, 0, 1, 0, 1, 1], 
+   js[MI, 0, 0, 1, 0, 0, 1, 1, 0, 1], js[MI, 0, 0, 1, 0, 0, 1, 1, 1, 0], 
+   js[MI, 0, 0, 1, 0, 1, 1, 0, 0, 1], js[MI, 0, 0, 1, 0, 1, 1, 0, 1, 0], 
+   js[MI, 0, 0, 1, 1, 0, 0, 0, 1, 1], js[MI, 0, 0, 1, 1, 0, 0, 1, 0, 1], 
+   js[MI, 0, 0, 1, 1, 0, 0, 1, 1, 0], js[MI, 0, 0, 1, 1, 0, 1, 0, 0, 1], 
+   js[MI, 0, 0, 1, 1, 0, 1, 0, 1, 0], js[MI, 0, 0, 1, 1, 0, 1, 1, 0, 0], 
+   js[MI, 0, 0, 1, 1, 1, 0, 0, 0, 1], js[MI, 0, 0, 1, 1, 1, 0, 0, 1, 0], 
+   js[MI, 0, 0, 1, 1, 1, 1, 0, 0, 0], js[MI, 0, 1, 0, 0, 0, 0, 1, 1, 1], 
+   js[MI, 0, 1, 0, 0, 0, 1, 0, 1, 1], js[MI, 0, 1, 0, 0, 0, 1, 1, 0, 1], 
+   js[MI, 0, 1, 0, 0, 0, 1, 1, 1, 0], js[MI, 0, 1, 0, 0, 1, 0, 1, 0, 1], 
+   js[MI, 0, 1, 0, 0, 1, 1, 0, 0, 1], js[MI, 0, 1, 0, 0, 1, 1, 1, 0, 0], 
+   js[MI, 0, 1, 0, 1, 0, 0, 0, 1, 1], js[MI, 0, 1, 0, 1, 0, 0, 1, 0, 1], 
+   js[MI, 0, 1, 0, 1, 0, 0, 1, 1, 0], js[MI, 0, 1, 0, 1, 0, 1, 0, 0, 1], 
+   js[MI, 0, 1, 0, 1, 0, 1, 0, 1, 0], js[MI, 0, 1, 0, 1, 0, 1, 1, 0, 0], 
+   js[MI, 0, 1, 0, 1, 1, 0, 0, 0, 1], js[MI, 0, 1, 0, 1, 1, 0, 1, 0, 0], 
+   js[MI, 0, 1, 0, 1, 1, 1, 0, 0, 0], js[MI, 0, 1, 1, 0, 0, 0, 0, 1, 1], 
+   js[MI, 0, 1, 1, 0, 0, 0, 1, 0, 1], js[MI, 0, 1, 1, 0, 0, 0, 1, 1, 0], 
+   js[MI, 0, 1, 1, 0, 0, 1, 0, 0, 1], js[MI, 0, 1, 1, 0, 0, 1, 0, 1, 0], 
+   js[MI, 0, 1, 1, 0, 0, 1, 1, 0, 0], js[MI, 0, 1, 1, 0, 1, 0, 0, 0, 1], 
+   js[MI, 0, 1, 1, 0, 1, 1, 0, 0, 0], js[MI, 0, 1, 1, 1, 0, 0, 0, 0, 1], 
+   js[MI, 0, 1, 1, 1, 0, 0, 0, 1, 0], js[MI, 0, 1, 1, 1, 0, 0, 1, 0, 0], 
+   js[MI, 0, 1, 1, 1, 0, 1, 0, 0, 0], js[MI, 0, 1, 1, 1, 1, 0, 0, 0, 0], 
+   js[MI, 1, 0, 0, 0, 0, 0, 1, 1, 1], js[MI, 1, 0, 0, 0, 0, 1, 0, 1, 1], 
+   js[MI, 1, 0, 0, 0, 0, 1, 1, 0, 1], js[MI, 1, 0, 0, 0, 0, 1, 1, 1, 0], 
+   js[MI, 1, 0, 0, 0, 1, 0, 1, 0, 1], js[MI, 1, 0, 0, 0, 1, 0, 1, 1, 0], 
+   js[MI, 1, 0, 0, 1, 0, 0, 0, 1, 1], js[MI, 1, 0, 0, 1, 0, 0, 1, 0, 1], 
+   js[MI, 1, 0, 0, 1, 0, 0, 1, 1, 0], js[MI, 1, 0, 0, 1, 0, 1, 0, 0, 1], 
+   js[MI, 1, 0, 0, 1, 0, 1, 0, 1, 0], js[MI, 1, 0, 0, 1, 0, 1, 1, 0, 0], 
+   js[MI, 1, 0, 0, 1, 1, 0, 0, 0, 1], js[MI, 1, 0, 0, 1, 1, 0, 0, 1, 0], 
+   js[MI, 1, 0, 0, 1, 1, 0, 1, 0, 0], js[MI, 1, 0, 1, 0, 0, 0, 0, 1, 1], 
+   js[MI, 1, 0, 1, 0, 0, 0, 1, 0, 1], js[MI, 1, 0, 1, 0, 0, 0, 1, 1, 0], 
+   js[MI, 1, 0, 1, 0, 0, 1, 0, 0, 1], js[MI, 1, 0, 1, 0, 0, 1, 0, 1, 0], 
+   js[MI, 1, 0, 1, 0, 0, 1, 1, 0, 0], js[MI, 1, 0, 1, 0, 1, 0, 0, 0, 1], 
+   js[MI, 1, 0, 1, 0, 1, 0, 0, 1, 0], js[MI, 1, 0, 1, 1, 0, 0, 0, 0, 1], 
+   js[MI, 1, 0, 1, 1, 0, 0, 0, 1, 0], js[MI, 1, 0, 1, 1, 0, 0, 1, 0, 0], 
+   js[MI, 1, 0, 1, 1, 0, 1, 0, 0, 0], js[MI, 1, 0, 1, 1, 1, 0, 0, 0, 0], 
+   js[MI, 1, 1, 0, 0, 0, 0, 0, 1, 1], js[MI, 1, 1, 0, 0, 0, 0, 1, 0, 1], 
+   js[MI, 1, 1, 0, 0, 0, 0, 1, 1, 0], js[MI, 1, 1, 0, 0, 0, 1, 0, 0, 1], 
+   js[MI, 1, 1, 0, 0, 0, 1, 0, 1, 0], js[MI, 1, 1, 0, 0, 0, 1, 1, 0, 0], 
+   js[MI, 1, 1, 0, 0, 1, 0, 0, 0, 1], js[MI, 1, 1, 0, 0, 1, 0, 1, 0, 0], 
+   js[MI, 1, 1, 0, 1, 0, 0, 0, 0, 1], js[MI, 1, 1, 0, 1, 0, 0, 0, 1, 0], 
+   js[MI, 1, 1, 0, 1, 0, 0, 1, 0, 0], js[MI, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
+   js[MI, 1, 1, 0, 1, 1, 0, 0, 0, 0], js[MI, 1, 1, 1, 0, 0, 0, 0, 0, 1], 
+   js[MI, 1, 1, 1, 0, 0, 0, 0, 1, 0], js[MI, 1, 1, 1, 0, 0, 0, 1, 0, 0], 
+   js[MI, 1, 1, 1, 0, 0, 1, 0, 0, 0], js[MI, 1, 1, 1, 1, 0, 0, 0, 0, 0], 
+   js[MI, 0, 0, 0, 1, 0, 1, 1, 1, 1], js[MI, 0, 0, 1, 0, 0, 1, 1, 1, 1], 
+   js[MI, 0, 0, 1, 1, 0, 0, 1, 1, 1], js[MI, 0, 0, 1, 1, 0, 1, 0, 1, 1], 
+   js[MI, 0, 0, 1, 1, 0, 1, 1, 0, 1], js[MI, 0, 0, 1, 1, 0, 1, 1, 1, 0], 
+   js[MI, 0, 0, 1, 1, 1, 1, 0, 0, 1], js[MI, 0, 0, 1, 1, 1, 1, 0, 1, 0], 
+   js[MI, 0, 1, 0, 0, 0, 1, 1, 1, 1], js[MI, 0, 1, 0, 0, 1, 1, 1, 0, 1], 
+   js[MI, 0, 1, 0, 1, 0, 0, 1, 1, 1], js[MI, 0, 1, 0, 1, 0, 1, 0, 1, 1], 
+   js[MI, 0, 1, 0, 1, 0, 1, 1, 0, 1], js[MI, 0, 1, 0, 1, 0, 1, 1, 1, 0], 
+   js[MI, 0, 1, 0, 1, 1, 0, 1, 0, 1], js[MI, 0, 1, 0, 1, 1, 1, 0, 0, 1], 
+   js[MI, 0, 1, 1, 0, 0, 0, 1, 1, 1], js[MI, 0, 1, 1, 0, 0, 1, 0, 1, 1], 
+   js[MI, 0, 1, 1, 0, 0, 1, 1, 0, 1], js[MI, 0, 1, 1, 0, 0, 1, 1, 1, 0], 
+   js[MI, 0, 1, 1, 0, 1, 1, 0, 0, 1], js[MI, 0, 1, 1, 1, 0, 0, 0, 1, 1], 
+   js[MI, 0, 1, 1, 1, 0, 0, 1, 0, 1], js[MI, 0, 1, 1, 1, 0, 0, 1, 1, 0], 
+   js[MI, 0, 1, 1, 1, 0, 1, 0, 0, 1], js[MI, 0, 1, 1, 1, 0, 1, 0, 1, 0], 
+   js[MI, 0, 1, 1, 1, 0, 1, 1, 0, 0], js[MI, 0, 1, 1, 1, 1, 0, 0, 0, 1], 
+   js[MI, 0, 1, 1, 1, 1, 1, 0, 0, 0], js[MI, 1, 0, 0, 0, 0, 1, 1, 1, 1], 
+   js[MI, 1, 0, 0, 1, 0, 0, 1, 1, 1], js[MI, 1, 0, 0, 1, 0, 1, 0, 1, 1], 
+   js[MI, 1, 0, 0, 1, 0, 1, 1, 0, 1], js[MI, 1, 0, 0, 1, 0, 1, 1, 1, 0], 
+   js[MI, 1, 0, 0, 1, 1, 0, 1, 0, 1], js[MI, 1, 0, 1, 0, 0, 0, 1, 1, 1], 
+   js[MI, 1, 0, 1, 0, 0, 1, 0, 1, 1], js[MI, 1, 0, 1, 0, 0, 1, 1, 0, 1], 
+   js[MI, 1, 0, 1, 0, 0, 1, 1, 1, 0], js[MI, 1, 0, 1, 1, 0, 0, 0, 1, 1], 
+   js[MI, 1, 0, 1, 1, 0, 0, 1, 0, 1], js[MI, 1, 0, 1, 1, 0, 0, 1, 1, 0], 
+   js[MI, 1, 0, 1, 1, 0, 1, 0, 0, 1], js[MI, 1, 0, 1, 1, 0, 1, 0, 1, 0], 
+   js[MI, 1, 0, 1, 1, 0, 1, 1, 0, 0], js[MI, 1, 0, 1, 1, 1, 0, 0, 0, 1], 
+   js[MI, 1, 0, 1, 1, 1, 0, 0, 1, 0], js[MI, 1, 1, 0, 0, 0, 0, 1, 1, 1], 
+   js[MI, 1, 1, 0, 0, 0, 1, 0, 1, 1], js[MI, 1, 1, 0, 0, 0, 1, 1, 0, 1], 
+   js[MI, 1, 1, 0, 0, 0, 1, 1, 1, 0], js[MI, 1, 1, 0, 0, 1, 0, 1, 0, 1], 
+   js[MI, 1, 1, 0, 1, 0, 0, 0, 1, 1], js[MI, 1, 1, 0, 1, 0, 0, 1, 0, 1], 
+   js[MI, 1, 1, 0, 1, 0, 0, 1, 1, 0], js[MI, 1, 1, 0, 1, 0, 1, 0, 0, 1], 
+   js[MI, 1, 1, 0, 1, 0, 1, 0, 1, 0], js[MI, 1, 1, 0, 1, 0, 1, 1, 0, 0], 
+   js[MI, 1, 1, 0, 1, 1, 0, 0, 0, 1], js[MI, 1, 1, 0, 1, 1, 0, 1, 0, 0], 
+   js[MI, 1, 1, 1, 0, 0, 0, 0, 1, 1], js[MI, 1, 1, 1, 0, 0, 0, 1, 0, 1], 
+   js[MI, 1, 1, 1, 0, 0, 0, 1, 1, 0], js[MI, 1, 1, 1, 0, 0, 1, 0, 0, 1], 
+   js[MI, 1, 1, 1, 0, 0, 1, 0, 1, 0], js[MI, 1, 1, 1, 0, 0, 1, 1, 0, 0], 
+   js[MI, 1, 1, 1, 1, 0, 0, 0, 0, 1], js[MI, 1, 1, 1, 1, 0, 0, 0, 1, 0], 
+   js[MI, 1, 1, 1, 1, 0, 0, 1, 0, 0], js[MI, 1, 1, 1, 1, 0, 1, 0, 0, 0], 
+   js[MI, 0, 0, 1, 1, 0, 1, 1, 1, 1], js[MI, 0, 1, 0, 1, 0, 1, 1, 1, 1], 
+   js[MI, 0, 1, 1, 0, 0, 1, 1, 1, 1], js[MI, 0, 1, 1, 1, 0, 0, 1, 1, 1], 
+   js[MI, 0, 1, 1, 1, 0, 1, 0, 1, 1], js[MI, 0, 1, 1, 1, 0, 1, 1, 0, 1], 
+   js[MI, 0, 1, 1, 1, 0, 1, 1, 1, 0], js[MI, 0, 1, 1, 1, 1, 1, 0, 0, 1], 
+   js[MI, 1, 0, 0, 1, 0, 1, 1, 1, 1], js[MI, 1, 0, 1, 0, 0, 1, 1, 1, 1], 
+   js[MI, 1, 0, 1, 1, 0, 0, 1, 1, 1], js[MI, 1, 0, 1, 1, 0, 1, 0, 1, 1], 
+   js[MI, 1, 0, 1, 1, 0, 1, 1, 0, 1], js[MI, 1, 0, 1, 1, 0, 1, 1, 1, 0], 
+   js[MI, 1, 1, 0, 0, 0, 1, 1, 1, 1], js[MI, 1, 1, 0, 1, 0, 0, 1, 1, 1], 
+   js[MI, 1, 1, 0, 1, 0, 1, 0, 1, 1], js[MI, 1, 1, 0, 1, 0, 1, 1, 0, 1], 
+   js[MI, 1, 1, 0, 1, 0, 1, 1, 1, 0], js[MI, 1, 1, 0, 1, 1, 0, 1, 0, 1], 
+   js[MI, 1, 1, 1, 0, 0, 0, 1, 1, 1], js[MI, 1, 1, 1, 0, 0, 1, 0, 1, 1], 
+   js[MI, 1, 1, 1, 0, 0, 1, 1, 0, 1], js[MI, 1, 1, 1, 0, 0, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 1, 0, 0, 0, 1, 1], js[MI, 1, 1, 1, 1, 0, 0, 1, 0, 1], 
+   js[MI, 1, 1, 1, 1, 0, 0, 1, 1, 0], js[MI, 1, 1, 1, 1, 0, 1, 0, 0, 1], 
+   js[MI, 1, 1, 1, 1, 0, 1, 0, 1, 0], js[MI, 1, 1, 1, 1, 0, 1, 1, 0, 0], 
+   js[MI, 0, 1, 1, 1, 0, 1, 1, 1, 1], js[MI, 1, 0, 1, 1, 0, 1, 1, 1, 1], 
+   js[MI, 1, 1, 0, 1, 0, 1, 1, 1, 1], js[MI, 1, 1, 1, 0, 0, 1, 1, 1, 1], 
+   js[MI, 1, 1, 1, 1, 0, 0, 1, 1, 1], js[MI, 1, 1, 1, 1, 0, 1, 0, 1, 1], 
+   js[MI, 1, 1, 1, 1, 0, 1, 1, 0, 1], js[MI, 1, 1, 1, 1, 0, 1, 1, 1, 0], 
+   js[MI, 1, 1, 1, 1, 0, 1, 1, 1, 1]}
+MI::usage = "3-loop basis with 1 external momenta.\nUse Information[MI] to \
+get basis summary.\nThis string can be redefined by setting \
+MI::usage=\"\[Ellipsis]\""; Information[MI, LongForm -> False]; 
+LiteRed`Private`CheckDefs[MI]
+BasisDirectory[MI]
