@@ -12,7 +12,7 @@ def Denrule(string):
 	a7 = 0
 	a8 = 0
 	a9 = 0
-	for i in range(990,1011):
+	for i in range(980,1020):
 		if "Den1[vk]^%s" % (i) in string:
 			result = result.replace("Den1[vk]^%s" %(i),"")
 			a1 = i - 1000
@@ -40,7 +40,7 @@ def Denrule(string):
 		if "Den9[vel1]^%s" % (i) in string:
 			result = result.replace("Den9[vel1]^%s" %(i),"")
 			a9 = 1000 - i
-	result = result+"*"+"j[MI,%s,%s,%s,%s,%s,%s,%s,%s,%s]" % (a1,a2,a3,a4,a5,a6,a7,a8,a9)
+	result = result+"*"+" j[MI,%s,%s,%s,%s,%s,%s,%s,%s,%s]" % (a1,a2,a3,a4,a5,a6,a7,a8,a9)
 	result = result.replace(" . ",".")
 	result = result.replace("*","")
 	result = result.replace("\[Omega]","\[Omega] ")
@@ -49,10 +49,21 @@ def Denrule(string):
 	return result
 
 if __name__=='__main__':
-	stringDen=stringDen.replace("/((1 - D)\[Omega] )","/((1 - D)\[Omega] )$")
 	stringDen=stringDen.replace("/(1 - D)","/(1 - D)$")
-	stringDen=stringDen.replace("/((1 - D^2)\[Omega] )","/((1 - D^2)\[Omega] )$")
 	stringDen=stringDen.replace("/(1 - D^2)","/(1 - D^2)$")
+	stringDen=stringDen.replace("/((1 - D)*(1 + D))","/((1 - D)*(1 + D))$")
+	stringDen=stringDen.replace("/((D - 1)*(D + 1))","/((D - 1)*(D + 1))$")
+
+	stringDen=stringDen.replace("/((1 - D)*\[Omega])","/((1 - D)*\[Omega])$")
+	stringDen = stringDen.replace("((1 - D^2)*\[Omega])","((1 - D^2)*\[Omega])$")
+
+	for i in range(-500,500):
+		stringDen = stringDen.replace("({}*(1 - D^2))".format(i),"({}*(1 - D^2))$".format(i))
+		stringDen = stringDen.replace("({}*(1 - D))".format(i),"({}*(1 - D))$".format(i))
+
+		stringDen = stringDen.replace("({}*(1 - D^2)*\[Omega])".format(i),"({}*(1 - D^2)*\[Omega])$".format(i))
+		stringDen = stringDen.replace("({}*(1 - D)*\[Omega])".format(i),"({}*(1 - D)*\[Omega])$".format(i))
+
 	# Trick um es in N terme zu splitten
 	#stringDen = stringDen.replace("D)*\[Omega]","D)*\[Omega])+")
 	stringDen = stringDen.split("$")
@@ -67,4 +78,9 @@ if __name__=='__main__':
 	except:
 		pass
 	open('Denrule.txt', 'a+').write(' '.join([str(i) for i in result]) + '\n')
+	print("====================================")
+	print("Denrule compiled!")
+	print("Ready for Mathematica to get loaded")
+	print("====================================")
+
 	
