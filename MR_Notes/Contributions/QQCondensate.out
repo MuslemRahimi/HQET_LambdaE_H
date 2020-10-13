@@ -1,0 +1,7 @@
+(\[Omega]^3*Log[-(\[Omega]/\[Mu])]*
+  (2*FV[v, \[Nu]]*(FV[v, \[Sigma]]*MT[\[Mu], \[Rho]] - 
+     FV[v, \[Rho]]*MT[\[Mu], \[Sigma]]) + MT[\[Mu], \[Sigma]]*
+    MT[\[Nu], \[Rho]] - MT[\[Mu], \[Rho]]*MT[\[Nu], \[Sigma]] + 
+   FV[v, \[Mu]]*(-2*FV[v, \[Sigma]]*MT[\[Nu], \[Rho]] + 
+     2*FV[v, \[Rho]]*MT[\[Nu], \[Sigma]]))*Subscript[C, F]*
+  Subscript[\[Alpha], S])/(6*Pi)

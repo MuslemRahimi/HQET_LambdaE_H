@@ -1,0 +1,4 @@
+((I/96)*qGC*\[Omega]*(GA[\[Rho]] . GA[\[Sigma]] - GA[\[Sigma]] . GA[\[Rho]] + 
+   2*GA[\[Sigma]] . GS[v]*FV[v, \[Rho]] - 2*GA[\[Rho]] . GS[v]*
+    FV[v, \[Sigma]])*Log[-(\[Omega]/\[Mu])]*Subscript[C, F]*
+  Subscript[\[Alpha], S])/Pi

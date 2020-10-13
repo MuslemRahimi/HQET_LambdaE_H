@@ -1,0 +1,60 @@
+(gggC*GA[\[Nu]] . GA[\[Sigma]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(3072*Pi^2) + 
+ (gggC*GA[\[Nu]] . GS[v] . GA[\[Sigma]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(6144*Pi^2) - 
+ (gggC*GA[\[Sigma]] . GA[\[Nu]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(3072*Pi^2) - 
+ (gggC*GA[\[Sigma]] . GS[v] . GA[\[Nu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(6144*Pi^2) + 
+ (gggC*GS[v] . GA[\[Nu]] . GA[\[Sigma]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(2048*Pi^2) - 
+ (gggC*GS[v] . GA[\[Sigma]] . GA[\[Nu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(2048*Pi^2) + 
+ (gggC*FV[v, \[Sigma]]*GA[\[Nu]]*Log[-(\[Omega]/\[Mu])]*MT[\[Mu], \[Rho]])/
+  (3072*Pi^2) - (gggC*FV[v, \[Nu]]*GA[\[Sigma]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]])/(3072*Pi^2) - 
+ (gggC*GA[\[Nu]] . GA[\[Rho]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(3072*Pi^2) - 
+ (gggC*GA[\[Nu]] . GS[v] . GA[\[Rho]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(6144*Pi^2) + 
+ (gggC*GA[\[Rho]] . GA[\[Nu]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(3072*Pi^2) + 
+ (gggC*GA[\[Rho]] . GS[v] . GA[\[Nu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(6144*Pi^2) - 
+ (gggC*GS[v] . GA[\[Nu]] . GA[\[Rho]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(2048*Pi^2) + 
+ (gggC*GS[v] . GA[\[Rho]] . GA[\[Nu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(2048*Pi^2) - 
+ (gggC*FV[v, \[Rho]]*GA[\[Nu]]*Log[-(\[Omega]/\[Mu])]*MT[\[Mu], \[Sigma]])/
+  (3072*Pi^2) + (gggC*FV[v, \[Nu]]*GA[\[Rho]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Sigma]])/(3072*Pi^2) - 
+ (gggC*GA[\[Mu]] . GA[\[Sigma]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(3072*Pi^2) - 
+ (gggC*GA[\[Mu]] . GS[v] . GA[\[Sigma]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(6144*Pi^2) + 
+ (gggC*GA[\[Sigma]] . GA[\[Mu]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(3072*Pi^2) + 
+ (gggC*GA[\[Sigma]] . GS[v] . GA[\[Mu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(6144*Pi^2) - 
+ (gggC*GS[v] . GA[\[Mu]] . GA[\[Sigma]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(2048*Pi^2) + 
+ (gggC*GS[v] . GA[\[Sigma]] . GA[\[Mu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(2048*Pi^2) - 
+ (gggC*FV[v, \[Sigma]]*GA[\[Mu]]*Log[-(\[Omega]/\[Mu])]*MT[\[Nu], \[Rho]])/
+  (3072*Pi^2) + (gggC*FV[v, \[Mu]]*GA[\[Sigma]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]])/(3072*Pi^2) + 
+ (gggC*GA[\[Mu]] . GA[\[Rho]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(3072*Pi^2) + 
+ (gggC*GA[\[Mu]] . GS[v] . GA[\[Rho]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(6144*Pi^2) - 
+ (gggC*GA[\[Rho]] . GA[\[Mu]] . GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(3072*Pi^2) - 
+ (gggC*GA[\[Rho]] . GS[v] . GA[\[Mu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(6144*Pi^2) + 
+ (gggC*GS[v] . GA[\[Mu]] . GA[\[Rho]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(2048*Pi^2) - 
+ (gggC*GS[v] . GA[\[Rho]] . GA[\[Mu]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(2048*Pi^2) + 
+ (gggC*FV[v, \[Rho]]*GA[\[Mu]]*Log[-(\[Omega]/\[Mu])]*MT[\[Nu], \[Sigma]])/
+  (3072*Pi^2) - (gggC*FV[v, \[Mu]]*GA[\[Rho]]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Sigma]])/(3072*Pi^2)

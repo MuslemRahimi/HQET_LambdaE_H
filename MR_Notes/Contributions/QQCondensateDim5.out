@@ -1,0 +1,3 @@
+(\[Omega]*Log[-(\[Omega]/\[Mu])]*(MT[\[Mu], \[Sigma]]*MT[\[Nu], \[Rho]] - 
+   MT[\[Mu], \[Rho]]*MT[\[Nu], \[Sigma]])*Subscript[C, F]*
+  Subscript[\[Alpha], S])/(12*Pi)

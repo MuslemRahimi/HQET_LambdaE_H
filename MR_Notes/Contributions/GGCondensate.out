@@ -1,0 +1,3 @@
+-(ggC*\[Omega]^2*(MTD[\[Mu], \[Rho]] . MTD[\[Nu], \[Sigma]] - 
+    MTD[\[Mu], \[Sigma]] . MTD[\[Nu], \[Rho]])*GS[v]*Log[-(\[Omega]/\[Mu])]*
+   Subscript[\[Alpha], S])/(24*Pi)

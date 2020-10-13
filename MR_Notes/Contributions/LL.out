@@ -1,0 +1,15 @@
+(\[Omega]^6*FV[v, \[Nu]]*FV[v, \[Sigma]]*GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Mu], \[Rho]]*Subscript[C, F]*Subscript[N, C]*Subscript[\[Alpha], S])/
+  (180*Pi^3) - (\[Omega]^6*FV[v, \[Nu]]*FV[v, \[Rho]]*GS[v]*
+   Log[-(\[Omega]/\[Mu])]*MT[\[Mu], \[Sigma]]*Subscript[C, F]*Subscript[N, C]*
+   Subscript[\[Alpha], S])/(180*Pi^3) - 
+ (\[Omega]^6*FV[v, \[Mu]]*FV[v, \[Sigma]]*GS[v]*Log[-(\[Omega]/\[Mu])]*
+   MT[\[Nu], \[Rho]]*Subscript[C, F]*Subscript[N, C]*Subscript[\[Alpha], S])/
+  (180*Pi^3) + (\[Omega]^6*GS[v]*Log[-(\[Omega]/\[Mu])]*MT[\[Mu], \[Sigma]]*
+   MT[\[Nu], \[Rho]]*Subscript[C, F]*Subscript[N, C]*Subscript[\[Alpha], S])/
+  (360*Pi^3) + (\[Omega]^6*FV[v, \[Mu]]*FV[v, \[Rho]]*GS[v]*
+   Log[-(\[Omega]/\[Mu])]*MT[\[Nu], \[Sigma]]*Subscript[C, F]*Subscript[N, C]*
+   Subscript[\[Alpha], S])/(180*Pi^3) - 
+ (\[Omega]^6*GS[v]*Log[-(\[Omega]/\[Mu])]*MT[\[Mu], \[Rho]]*
+   MT[\[Nu], \[Sigma]]*Subscript[C, F]*Subscript[N, C]*
+   Subscript[\[Alpha], S])/(360*Pi^3)
