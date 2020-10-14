@@ -1,23 +1,33 @@
 (qGC*\[Omega]*Log[-(\[Omega]/\[Mu])]*
-  (GA[\[Mu]] . GA[\[Sigma]]*FV[v, \[Nu]]*FV[v, \[Rho]] - 
-   GA[\[Sigma]] . GA[\[Mu]]*FV[v, \[Nu]]*FV[v, \[Rho]] + 
-   GA[\[Nu]] . GA[\[Rho]]*FV[v, \[Mu]]*FV[v, \[Sigma]] - 
-   GA[\[Rho]] . GA[\[Nu]]*FV[v, \[Mu]]*FV[v, \[Sigma]] - 
-   GA[\[Mu]] . GA[\[Rho]]*FV[v, \[Nu]]*FV[v, \[Sigma]] + 
-   GA[\[Rho]] . GA[\[Mu]]*FV[v, \[Nu]]*FV[v, \[Sigma]] + 
-   GA[\[Sigma]] . GA[\[Nu]]*(FV[v, \[Mu]]*FV[v, \[Rho]] - 
-     MT[\[Mu], \[Rho]]) + GA[\[Sigma]] . GS[v]*FV[v, \[Nu]]*
-    MT[\[Mu], \[Rho]] - GS[v] . GA[\[Sigma]]*FV[v, \[Nu]]*MT[\[Mu], \[Rho]] + 
-   GA[\[Nu]] . GA[\[Sigma]]*(-(FV[v, \[Mu]]*FV[v, \[Rho]]) + 
-     MT[\[Mu], \[Rho]]) - GA[\[Nu]] . GA[\[Rho]]*MT[\[Mu], \[Sigma]] + 
-   GA[\[Rho]] . GA[\[Nu]]*MT[\[Mu], \[Sigma]] - 
+  (2*GA[\[Mu]] . GA[\[Sigma]]*FV[v, \[Nu]]*FV[v, \[Rho]] - 
+   2*GA[\[Sigma]] . GA[\[Mu]]*FV[v, \[Nu]]*FV[v, \[Rho]] + 
+   2*GA[\[Nu]] . GA[\[Rho]]*FV[v, \[Mu]]*FV[v, \[Sigma]] - 
+   2*GA[\[Rho]] . GA[\[Nu]]*FV[v, \[Mu]]*FV[v, \[Sigma]] - 
+   2*GA[\[Mu]] . GA[\[Rho]]*FV[v, \[Nu]]*FV[v, \[Sigma]] + 
+   2*GA[\[Rho]] . GA[\[Mu]]*FV[v, \[Nu]]*FV[v, \[Sigma]] + 
+   GA[\[Sigma]] . GS[v]*FV[v, \[Nu]]*MT[\[Mu], \[Rho]] - 
+   GS[v] . GA[\[Sigma]]*FV[v, \[Nu]]*MT[\[Mu], \[Rho]] - 
+   GA[\[Nu]] . GS[v]*FV[v, \[Sigma]]*MT[\[Mu], \[Rho]] + 
+   GS[v] . GA[\[Nu]]*FV[v, \[Sigma]]*MT[\[Mu], \[Rho]] + 
+   2*GA[\[Nu]] . GA[\[Sigma]]*(-(FV[v, \[Mu]]*FV[v, \[Rho]]) + 
+     MT[\[Mu], \[Rho]]) - 2*GA[\[Sigma]] . GA[\[Nu]]*
+    (-(FV[v, \[Mu]]*FV[v, \[Rho]]) + MT[\[Mu], \[Rho]]) - 
+   2*GA[\[Nu]] . GA[\[Rho]]*MT[\[Mu], \[Sigma]] + 
+   2*GA[\[Rho]] . GA[\[Nu]]*MT[\[Mu], \[Sigma]] - 
    GA[\[Rho]] . GS[v]*FV[v, \[Nu]]*MT[\[Mu], \[Sigma]] + 
-   GS[v] . GA[\[Rho]]*FV[v, \[Nu]]*MT[\[Mu], \[Sigma]] - 
-   GA[\[Mu]] . GA[\[Sigma]]*MT[\[Nu], \[Rho]] + GA[\[Sigma]] . GA[\[Mu]]*
-    MT[\[Nu], \[Rho]] - GA[\[Sigma]] . GS[v]*FV[v, \[Mu]]*MT[\[Nu], \[Rho]] + 
+   GS[v] . GA[\[Rho]]*FV[v, \[Nu]]*MT[\[Mu], \[Sigma]] + 
+   GA[\[Nu]] . GS[v]*FV[v, \[Rho]]*MT[\[Mu], \[Sigma]] - 
+   GS[v] . GA[\[Nu]]*FV[v, \[Rho]]*MT[\[Mu], \[Sigma]] - 
+   2*GA[\[Mu]] . GA[\[Sigma]]*MT[\[Nu], \[Rho]] + 
+   2*GA[\[Sigma]] . GA[\[Mu]]*MT[\[Nu], \[Rho]] - 
+   GA[\[Sigma]] . GS[v]*FV[v, \[Mu]]*MT[\[Nu], \[Rho]] + 
    GS[v] . GA[\[Sigma]]*FV[v, \[Mu]]*MT[\[Nu], \[Rho]] + 
-   GA[\[Mu]] . GA[\[Rho]]*MT[\[Nu], \[Sigma]] - GA[\[Rho]] . GA[\[Mu]]*
-    MT[\[Nu], \[Sigma]] + GA[\[Rho]] . GS[v]*FV[v, \[Mu]]*
-    MT[\[Nu], \[Sigma]] - GS[v] . GA[\[Rho]]*FV[v, \[Mu]]*
-    MT[\[Nu], \[Sigma]])*Subscript[C, A]^2*Subscript[C, F]*
-  Subscript[\[Alpha], S])/(192*Pi*Subscript[N, C])
+   GA[\[Mu]] . GS[v]*FV[v, \[Sigma]]*MT[\[Nu], \[Rho]] - 
+   GS[v] . GA[\[Mu]]*FV[v, \[Sigma]]*MT[\[Nu], \[Rho]] + 
+   2*GA[\[Mu]] . GA[\[Rho]]*MT[\[Nu], \[Sigma]] - 
+   2*GA[\[Rho]] . GA[\[Mu]]*MT[\[Nu], \[Sigma]] + 
+   GA[\[Rho]] . GS[v]*FV[v, \[Mu]]*MT[\[Nu], \[Sigma]] - 
+   GS[v] . GA[\[Rho]]*FV[v, \[Mu]]*MT[\[Nu], \[Sigma]] - 
+   GA[\[Mu]] . GS[v]*FV[v, \[Rho]]*MT[\[Nu], \[Sigma]] + 
+   GS[v] . GA[\[Mu]]*FV[v, \[Rho]]*MT[\[Nu], \[Sigma]])*Subscript[C, A]^2*
+  Subscript[C, F]*Subscript[\[Alpha], S])/(384*Pi*Subscript[N, C])
