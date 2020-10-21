@@ -1,0 +1,4 @@
+{j[MI, (n1_)?Positive, (n2_)?Positive] /; n2 != 1 -> 
+  j[MI, -1 + n1, n2]/\[Omega] + ((-2 - d + n1 + 2*n2)*j[MI, n1, -1 + n2])/
+    (2*(-1 + n2)*\[Omega]^2), j[MI, (n1_)?Positive, (n2_)?Positive] /; 
+   n1 != 1 -> ((-1 - d + n1 + 2*n2)*j[MI, -1 + n1, n2])/((-1 + n1)*\[Omega])}
