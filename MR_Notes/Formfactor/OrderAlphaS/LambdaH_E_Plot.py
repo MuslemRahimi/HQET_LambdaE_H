@@ -151,11 +151,11 @@ plt.savefig("LambdaH.svg")
 #=========================================================#
 fig, ax = plt.subplots()
 
-plt.ylim(0.0,0.15)
-plt.xlim(0.20,1.0)
-ax.plot(M_E_085, lambdaE_085, "--", color='blue',label='$\omega_{th} = 0.55$ GeV')
-ax.plot(M_E_10, lambdaE_10, color='black',label='$\omega_{th} = 0.60$ GeV')
-ax.plot(M_E_115, lambdaE_115,"--",color='red',label='$\omega_{th} = 0.65$ GeV')
+plt.ylim(0.0,0.10)
+plt.xlim(0.20,0.5)
+ax.plot(M_E_085, lambdaE_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
+ax.plot(M_E_10, lambdaE_10, color='black',label='$\omega_{th} = 0.9$ GeV')
+ax.plot(M_E_115, lambdaE_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
 
 plt.rc('legend',fontsize=12) 
 legend = ax.legend(loc='best', shadow=True)
