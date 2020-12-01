@@ -120,10 +120,10 @@ ax.plot(M_115, Relation2_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
 
 plt.rc('legend',fontsize=12) 
 
-ax.yaxis.set_label_coords(-0.05, 0.6) 
+ax.yaxis.set_label_coords(-0.08, 0.6) 
 legend = ax.legend(loc='best', shadow=True)
 plt.xlabel("$M$ in GeV")
-plt.ylabel("$\\frac{(F^{2}(\mu)+\lambda_{H}^{4})}{(F^{2}(\mu)-\lambda_{E}^{4})}$",fontsize=14)
+plt.ylabel("$\\frac{(F^{2}(\mu)+\lambda_{H}^{4})}{(F^{2}(\mu)-\lambda_{E}^{4})}$ in GeV$^2$",fontsize=11)
 plt.grid(True)
 #plt.show()
 plt.savefig("Relation2.svg")
