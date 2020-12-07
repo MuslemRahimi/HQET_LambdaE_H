@@ -79,6 +79,18 @@ with open("LambdaH_dim7.txt", "r") as data:
 
 M_7 = np.array(M_7)
 lambdaH_7 = np.array(lambdaH_7)
+
+
+M_7 = []
+lambdaH_uptodim7 = []
+with open("LambdaH_uptodim7.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaH_uptodim7.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaH_uptodim7 = np.array(lambdaH_uptodim7)
 #=========================================================#
 #=========================================================#
 #=========================================================#
@@ -120,6 +132,18 @@ with open("LambdaH_E_dim7.txt", "r") as data:
 
 M_7 = np.array(M_7)
 lambdaH_E_7 = np.array(lambdaH_E_7)
+
+
+M_7 = []
+lambdaH_E_uptodim7 = []
+with open("LambdaH_E_uptodim7.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaH_E_uptodim7.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaH_E_uptodim7 = np.array(lambdaH_E_uptodim7)
 
 #=========================================================#
 #=========================================================#
@@ -202,6 +226,18 @@ with open("LambdaE_dim7.txt", "r") as data:
 M_7 = np.array(M_7)
 lambdaE_7 = np.array(lambdaE_7)
 
+M_7 = []
+lambdaE_uptodim7 = []
+with open("LambdaE_uptodim7.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaE_uptodim7.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaE_uptodim7 = np.array(lambdaE_uptodim7)
+
+
 
 #=========================================================#
 fig, ax = plt.subplots()
@@ -212,7 +248,9 @@ ax.plot(M_3, lambdaH_3, "--",color='green',label='dimension 3')
 ax.plot(M_4, lambdaH_4,"--",color='red',label='dimension 4')
 ax.plot(M_5, lambdaH_5,"--",color='purple',label='dimension 5')
 ax.plot(M_6, lambdaH_6,"--",color='orange',label='dimension 6')
-ax.plot(M_7, lambdaH_7,color='black',label='dimension 7')
+ax.plot(M_7, lambdaH_7,"--",color='black',label='dimension 7')
+#ax.plot(M_7, lambdaH_uptodim7,color='black',label='total')
+
 
 
 plt.rc('legend',fontsize=12) 
@@ -230,7 +268,7 @@ plt.xlim(0.20,1.0)
 ax.plot(M_0, lambdaH_E_0, "--", color='blue',label='perturbative')
 #ax.plot(M_3, lambdaH_E_3, "--",color='green',label='up to dim. 3')
 #ax.plot(M_4, lambdaH_E_4,"--",color='red',label='up to dim. 4')
-ax.plot(M_5, lambdaH_E_5,"--",color='purple',label='dimension 3')
+ax.plot(M_5, lambdaH_E_5,"--",color='purple',label='dimension 5')
 #ax.plot(M_6, lambdaH_E_6,"--",color='orange',label='up to dim. 6')
 ax.plot(M_7, lambdaH_E_7,color='black',label='dimension 7')
 
