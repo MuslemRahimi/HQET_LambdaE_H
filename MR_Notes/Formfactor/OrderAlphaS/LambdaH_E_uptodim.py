@@ -80,17 +80,43 @@ with open("LambdaH_dim7.txt", "r") as data:
 M_7 = np.array(M_7)
 lambdaH_7 = np.array(lambdaH_7)
 
+#=========================================================#
 
 M_7 = []
-lambdaH_uptodim7 = []
-with open("LambdaH_uptodim7.txt", "r") as data:
+lambdaH_uptodim7_08 = []
+with open("LambdaH_uptodim7_08.txt", "r") as data:
 	data = data.readlines()
 	for i in data:
 		M_7.append(float(i.split()[0]))
-		lambdaH_uptodim7.append(float(i.split()[1]))
+		lambdaH_uptodim7_08.append(float(i.split()[1]))
 
 M_7 = np.array(M_7)
-lambdaH_uptodim7 = np.array(lambdaH_uptodim7)
+lambdaH_uptodim7_08 = np.array(lambdaH_uptodim7_08)
+#=========================================================#
+
+M_7 = []
+lambdaH_uptodim7_09 = []
+with open("LambdaH_uptodim7_09.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaH_uptodim7_09.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaH_uptodim7_09 = np.array(lambdaH_uptodim7_09)
+#=========================================================#
+
+M_7 = []
+lambdaH_uptodim7_10 = []
+with open("LambdaH_uptodim7_10.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaH_uptodim7_10.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaH_uptodim7_10 = np.array(lambdaH_uptodim7_10)
+
 #=========================================================#
 #=========================================================#
 #=========================================================#
@@ -132,18 +158,42 @@ with open("LambdaH_E_dim7.txt", "r") as data:
 
 M_7 = np.array(M_7)
 lambdaH_E_7 = np.array(lambdaH_E_7)
-
+#=========================================================#
 
 M_7 = []
-lambdaH_E_uptodim7 = []
-with open("LambdaH_E_uptodim7.txt", "r") as data:
+lambdaH_E_uptodim7_08 = []
+with open("LambdaH_E_uptodim7_08.txt", "r") as data:
 	data = data.readlines()
 	for i in data:
 		M_7.append(float(i.split()[0]))
-		lambdaH_E_uptodim7.append(float(i.split()[1]))
+		lambdaH_E_uptodim7_08.append(float(i.split()[1]))
 
 M_7 = np.array(M_7)
-lambdaH_E_uptodim7 = np.array(lambdaH_E_uptodim7)
+lambdaH_E_uptodim7_08 = np.array(lambdaH_E_uptodim7_08)
+#=========================================================#
+
+M_7 = []
+lambdaH_E_uptodim7_09 = []
+with open("LambdaH_E_uptodim7_09.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaH_E_uptodim7_09.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaH_E_uptodim7_09 = np.array(lambdaH_E_uptodim7_09)
+#=========================================================#
+
+M_7 = []
+lambdaH_E_uptodim7_10 = []
+with open("LambdaH_E_uptodim7_10.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaH_E_uptodim7_10.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaH_E_uptodim7_10 = np.array(lambdaH_E_uptodim7_10)
 
 #=========================================================#
 #=========================================================#
@@ -227,78 +277,154 @@ M_7 = np.array(M_7)
 lambdaE_7 = np.array(lambdaE_7)
 
 M_7 = []
-lambdaE_uptodim7 = []
-with open("LambdaE_uptodim7.txt", "r") as data:
+lambdaE_uptodim7_08 = []
+with open("LambdaE_uptodim7_08.txt", "r") as data:
 	data = data.readlines()
 	for i in data:
 		M_7.append(float(i.split()[0]))
-		lambdaE_uptodim7.append(float(i.split()[1]))
+		lambdaE_uptodim7_08.append(float(i.split()[1]))
 
 M_7 = np.array(M_7)
-lambdaE_uptodim7 = np.array(lambdaE_uptodim7)
-
-
-
+lambdaE_uptodim7_08 = np.array(lambdaE_uptodim7_08)
 #=========================================================#
-fig, ax = plt.subplots()
+
+M_7 = []
+lambdaE_uptodim7_09 = []
+with open("LambdaE_uptodim7_09.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaE_uptodim7_09.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaE_uptodim7_09 = np.array(lambdaE_uptodim7_09)
+#=========================================================#
+
+M_7 = []
+lambdaE_uptodim7_10 = []
+with open("LambdaE_uptodim7_10.txt", "r") as data:
+	data = data.readlines()
+	for i in data:
+		M_7.append(float(i.split()[0]))
+		lambdaE_uptodim7_10.append(float(i.split()[1]))
+
+M_7 = np.array(M_7)
+lambdaE_uptodim7_10 = np.array(lambdaE_uptodim7_10)
+#=========================================================#
+#=========================================================#
+#=========================================================#
+#=========================================================#
+
+
+"""
+#=========================================================#
+plt.subplot(2,1,1)
 
 plt.xlim(0.20,1.0)
-ax.plot(M_0, lambdaH_0, "--", color='blue',label='perturbative')
-ax.plot(M_3, lambdaH_3, "--",color='green',label='dimension 3')
-ax.plot(M_4, lambdaH_4,"--",color='red',label='dimension 4')
-ax.plot(M_5, lambdaH_5,"--",color='purple',label='dimension 5')
-ax.plot(M_6, lambdaH_6,"--",color='orange',label='dimension 6')
-ax.plot(M_7, lambdaH_7,"--",color='black',label='dimension 7')
-#ax.plot(M_7, lambdaH_uptodim7,color='black',label='total')
-
-
-
-plt.rc('legend',fontsize=12) 
-ax.legend(loc='best', shadow=True)
-plt.xlabel("$M$ in GeV")
-plt.ylabel("$\lambda_{H}^4$ in GeV$^4$")
+plt.plot(M_7, lambdaH_E_uptodim7_08,"--",color='red',linewidth=2,label='OPE for $\omega_{th} = 0.8$ GeV')
+plt.plot(M_7, lambdaH_E_uptodim7_09, color='black',linewidth=2,label='OPE for $\omega_{th} = 0.9$ GeV')
+plt.plot(M_7, lambdaH_E_uptodim7_10,"--",color='blue',linewidth=2,label='OPE for $\omega_{th} = 1.0$ GeV')
 plt.grid(True)
-#plt.show()
-plt.savefig("LambdaH_uptodim.svg")
-
-#=========================================================#
-fig, ax = plt.subplots()
-
-plt.xlim(0.20,1.0)
-ax.plot(M_0, lambdaH_E_0, "--", color='blue',label='perturbative')
-#ax.plot(M_3, lambdaH_E_3, "--",color='green',label='up to dim. 3')
-#ax.plot(M_4, lambdaH_E_4,"--",color='red',label='up to dim. 4')
-ax.plot(M_5, lambdaH_E_5,"--",color='purple',label='dimension 5')
-#ax.plot(M_6, lambdaH_E_6,"--",color='orange',label='up to dim. 6')
-ax.plot(M_7, lambdaH_E_7,color='black',label='dimension 7')
-
-
+plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=12)
 plt.rc('legend',fontsize=12) 
-ax.legend(loc='best', shadow=True)
-plt.xlabel("$M$ in GeV")
-plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$")
+plt.yticks(np.arange(0,0.050,step=0.01))
+plt.legend(loc='best', shadow=True)
+plt.xlabel("$M$ in GeV",fontsize=12)
+#plt.subplots_adjust(hspace=0.3)
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(7.5, 7.5)
+
+plt.subplot(2, 1, 2)
+plt.xlim(0.20,1.0)
+plt.yticks(np.arange(0,0.020,step=0.005))
+plt.plot(M_0, lambdaH_E_0, "--", color='blue',linewidth=2,label='perturbative')
+plt.plot(M_5, lambdaE_5,"--",color='purple',linewidth=2,label='dimension 5')
+plt.plot(M_7, lambdaE_7,"--",color='black',linewidth=2,label='dimension 7')
+plt.rc('legend',fontsize=12) 
+plt.legend(loc='best', shadow=True)
+plt.xlabel("$M$ in GeV",fontsize=12)
+plt.tight_layout()
+fig = plt.gcf()
+#plt.yaxis.set_label_coords(-0.12, 0.6) 
+plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=12)
 plt.grid(True)
 #plt.show()
 plt.savefig("LambdaH_E_uptodim.svg")
 
-
 #=========================================================#
-fig, ax = plt.subplots()
+
+plt.subplot(2,1,1)
 
 plt.xlim(0.20,1.0)
-ax.plot(M_0, lambdaE_0, "--", color='blue',label='perturbative')
-ax.plot(M_3, lambdaE_3, "--",color='green',label='dimension 3')
-ax.plot(M_4, lambdaE_4,"--",color='red',label='dimension 4')
-ax.plot(M_5, lambdaE_5,"--",color='purple',label='dimension 5')
-ax.plot(M_6, lambdaE_6,"--",color='orange',label='dimension 6')
-ax.plot(M_7, lambdaE_7,color='black',label='dimension 7')
-
-
+plt.plot(M_7, lambdaE_uptodim7_08,"--",color='red',linewidth=2,label='OPE for $\omega_{th} = 0.55$ GeV')
+plt.plot(M_7, lambdaE_uptodim7_09, color='black',linewidth=2,label='OPE for $\omega_{th} = 0.60$ GeV')
+plt.plot(M_7, lambdaE_uptodim7_10,"--",color='blue', linewidth=2,label='OPE for $\omega_{th} = 0.65$ GeV')
+plt.grid(True)
+plt.ylabel("$\lambda_{E}^{4}$ in GeV$^4$",fontsize = 12)
 plt.rc('legend',fontsize=12) 
-ax.legend(loc='best', shadow=True)
-plt.xlabel("$M$ in GeV")
-ax.yaxis.set_label_coords(-0.12, 0.6) 
-plt.ylabel("$\lambda_{E}^{4}$ in GeV$^4$")
+plt.legend(loc='best', shadow=True)
+plt.xlabel("$M$ in GeV",fontsize=12)
+plt.yticks(np.arange(0,0.020,step=0.005))
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(7.5, 7.5)
+
+plt.subplot(2, 1, 2)
+plt.xlim(0.20,1.0)
+plt.yticks(np.arange(0,0.020,step=0.005))
+plt.plot(M_0, lambdaE_0, "--", color='blue',linewidth=2,label='perturbative')
+plt.plot(M_3, lambdaE_3, "--",color='green',linewidth=2,label='dimension 3')
+plt.plot(M_4, lambdaE_4,"--",color='red',linewidth=2,label='dimension 4')
+plt.plot(M_5, lambdaE_5,"--",color='purple',linewidth=2,label='dimension 5')
+plt.plot(M_6, lambdaE_6,"--",color='orange',linewidth=2,label='dimension 6')
+plt.plot(M_7, lambdaE_7,"--",color='black',linewidth=2,label='dimension 7')
+plt.rc('legend',fontsize=12) 
+plt.legend(loc='best', shadow=True)
+plt.xlabel("$M$ in GeV",fontsize=12)
+plt.tight_layout()
+fig = plt.gcf()
+#plt.yaxis.set_label_coords(-0.12, 0.6) 
+plt.ylabel("$\lambda_{E}^{4}$ in GeV$^4$",fontsize=12)
 plt.grid(True)
 #plt.show()
 plt.savefig("LambdaE_uptodim.svg")
+
+
+#=========================================================#
+"""
+plt.subplot(2,1,1)
+
+plt.xlim(0.20,1.0)
+plt.plot(M_7, lambdaH_uptodim7_08,"--",linewidth=2,color='red',label='OPE for $\omega_{th} = 0.8$ GeV')
+plt.plot(M_7, lambdaH_uptodim7_09, color='black',linewidth=2,label='OPE for $\omega_{th} = 0.9$ GeV')
+plt.plot(M_7, lambdaH_uptodim7_10,"--",color='blue',linewidth=2,label='OPE for $\omega_{th} = 1.0$ GeV')
+
+plt.grid(True)
+plt.ylabel("$\lambda_{H}^{4}$ in GeV$^4$",fontsize=12)
+plt.rc('legend',fontsize=12) 
+plt.legend(loc='best', shadow=True)
+plt.xlabel("$M$ in GeV",fontsize = 12)
+plt.yticks(np.arange(0.01,0.030,step=0.005))
+plt.tight_layout()
+fig = plt.gcf()
+fig.set_size_inches(7.5, 7.5)
+
+plt.subplot(2, 1, 2)
+plt.xlim(0.20,1.0)
+plt.yticks(np.arange(0,0.020,step=0.005))
+plt.plot(M_0, lambdaH_0, "--", color='blue',linewidth=2,label='perturbative')
+plt.plot(M_3, lambdaH_3, "--",color='green',linewidth=2,label='dimension 3')
+plt.plot(M_4, lambdaH_4,"--",color='red',linewidth=2,label='dimension 4')
+plt.plot(M_5, lambdaH_5,"--",color='purple',linewidth=2,label='dimension 5')
+plt.plot(M_6, lambdaH_6,"--",color='orange',linewidth=2,label='dimension 6')
+plt.plot(M_7, lambdaH_7,"--",color='black',linewidth=2,label='dimension 7')
+plt.rc('legend',fontsize=12) 
+plt.legend(loc='best', shadow=True)
+plt.xlabel("$M$ in GeV",fontsize = 12)
+plt.tight_layout()
+fig = plt.gcf()
+plt.ylabel("$\lambda_{H}^{4}$ in GeV$^4$",fontsize = 12)
+plt.grid(True)
+#plt.show()
+plt.savefig("LambdaH_uptodim.svg")

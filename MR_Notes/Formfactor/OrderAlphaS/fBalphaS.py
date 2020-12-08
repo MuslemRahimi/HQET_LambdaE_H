@@ -76,11 +76,11 @@ fig, ax = plt.subplots()
 
 plt.ylim(0.1,0.3)
 plt.xlim(0.20,1.0)
-ax.plot(M_06, fBalphaS_06, color='blue',label='$\omega_{th} = 0.6$ GeV')
-ax.plot(M_07, fBalphaS_07, color='orange',label='$\omega_{th} = 0.7$ GeV')
-ax.plot(M_08, fBalphaS_08,color='purple',label='$\omega_{th} = 0.8$ GeV')
-ax.plot(M_09, fBalphaS_09,color='black',label='$\omega_{th} = 0.9$ GeV')
-ax.plot(M_10, fBalphaS_10,color='red',label='$\omega_{th} = 1.0$ GeV')
+ax.plot(M_06, fBalphaS_06, color='blue',linewidth = 2,label='$\omega_{th} = 0.6$ GeV')
+ax.plot(M_07, fBalphaS_07, color='orange',linewidth = 2,label='$\omega_{th} = 0.7$ GeV')
+ax.plot(M_08, fBalphaS_08,color='purple',linewidth = 2,label='$\omega_{th} = 0.8$ GeV')
+ax.plot(M_09, fBalphaS_09,color='black',linewidth = 2,label='$\omega_{th} = 0.9$ GeV')
+ax.plot(M_10, fBalphaS_10,color='red',linewidth = 2,label='$\omega_{th} = 1.0$ GeV')
 
 
 
@@ -89,13 +89,13 @@ ax.plot(M_10, fBalphaS_10,color='red',label='$\omega_{th} = 1.0$ GeV')
 #plt.axvline(0.4,0,1,color="black",linewidth=1.2,linestyle="--")
 fB= 0.1920
 dfB= 0.0046
-ax.hlines(0.1920, 0, 1, colors='black', linestyles='--', label='')
+ax.hlines(0.1920, 0, 1, colors='black', linewidth = 2,linestyles='--', label='')
 ax.axhspan(fB-dfB, fB+dfB, facecolor="green",alpha=0.5)
 #==================#
 
 legend = ax.legend(loc= (0.015,0.03), shadow=True)
-plt.xlabel("$M$ in GeV")
-plt.ylabel("$f_{B}$ in GeV")
+plt.xlabel("$M$ in GeV",fontsize = 12)
+plt.ylabel("$f_{B}$ in GeV",fontsize = 12)
 plt.grid(True)
 #plt.show()
 plt.savefig("fBalphaS.svg")

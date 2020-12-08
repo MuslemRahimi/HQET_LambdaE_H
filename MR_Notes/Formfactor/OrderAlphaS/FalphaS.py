@@ -76,11 +76,11 @@ fig, ax = plt.subplots()
 
 plt.ylim(0.2,0.6)
 plt.xlim(0.20,1.0)
-ax.plot(M_06, FalphaS_06, color='blue',label='$\omega_{th} = 0.6$ GeV')
-ax.plot(M_07, FalphaS_07, color='orange',label='$\omega_{th} = 0.7$ GeV')
-ax.plot(M_08, FalphaS_08,color='purple',label='$\omega_{th} = 0.8$ GeV')
-ax.plot(M_09, FalphaS_09,color='black',label='$\omega_{th} = 0.9$ GeV')
-ax.plot(M_10, FalphaS_10,color='red',label='$\omega_{th} = 1.0$ GeV')
+ax.plot(M_06, FalphaS_06, color='blue',linewidth=2,label='$\omega_{th} = 0.6$ GeV')
+ax.plot(M_07, FalphaS_07, color='orange',linewidth=2,label='$\omega_{th} = 0.7$ GeV')
+ax.plot(M_08, FalphaS_08,color='purple',linewidth=2,label='$\omega_{th} = 0.8$ GeV')
+ax.plot(M_09, FalphaS_09,color='black',linewidth=2,label='$\omega_{th} = 0.9$ GeV')
+ax.plot(M_10, FalphaS_10,color='red',linewidth=2,label='$\omega_{th} = 1.0$ GeV')
 
 
 
@@ -91,8 +91,8 @@ ax.plot(M_10, FalphaS_10,color='red',label='$\omega_{th} = 1.0$ GeV')
 #==================#
 
 legend = ax.legend(loc= (0.015,0.03), shadow=True)
-plt.xlabel("$M$ in GeV")
-plt.ylabel("$F(\mu)$ in GeV$^{3/2}$")
+plt.xlabel("$M$ in GeV",fontsize =12)
+plt.ylabel("$F(\mu)$ in GeV$^{3/2}$", fontsize =12)
 plt.grid(True)
 #plt.show()
 plt.savefig("FalphaS.svg")
