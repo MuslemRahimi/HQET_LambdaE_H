@@ -96,14 +96,16 @@ Relation2_115 = np.array(Relation2_115)
 #=========================================================#
 fig, ax = plt.subplots()
 
-
+plt.ylim(1,1.5)
 ax.plot(M_085, Relation1_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
 ax.plot(M_10, Relation1_10, color='black',label='$\omega_{th} = 0.9$ GeV')
 ax.plot(M_115, Relation1_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
-
 plt.rc('legend',fontsize=12) 
-legend = ax.legend(loc='best', shadow=True)
-plt.xlabel("$M$ in GeV")
+ax.axvspan(0.5, 0.8, alpha=0.4, color='green')
+legend = ax.legend(loc=1,bbox_to_anchor=(1,1), shadow=True)
+#plt.tight_layout()
+#fig.set_size_inches(8, 5.5)
+plt.xlabel("$M$ in GeV",fontsize=12)
 plt.ylabel("$(1+\\mathcal{R})^{2}$",fontsize=12)
 plt.grid(True)
 #plt.show()
@@ -113,17 +115,19 @@ fig, ax = plt.subplots()
 
 
 plt.ylim(1,1.05)
-plt.yticks(np.arange(1, 1.05, step=0.02))
+plt.yticks(np.arange(1, 1.05, step=0.01))
 ax.plot(M_085, Relation2_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
 ax.plot(M_10, Relation2_10, color='black',label='$\omega_{th} = 0.9$ GeV')
 ax.plot(M_115, Relation2_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
 
 plt.rc('legend',fontsize=12) 
 
-ax.yaxis.set_label_coords(-0.05, 0.6) 
-legend = ax.legend(loc='best', shadow=True)
-plt.xlabel("$M$ in GeV")
-plt.ylabel("$\\frac{(F^{2}(\mu)+\lambda_{H}^{4})}{(F^{2}(\mu)-\lambda_{E}^{4})}$",fontsize=15)
+ax.yaxis.set_label_coords(-0.07, 0.6) 
+plt.xlabel("$M$ in GeV",fontsize = 12)
+plt.ylabel("$\\frac{(F(\mu)^{2}+\lambda_{H}^{4})}{(F(\mu)^{2}-\lambda_{E}^{4})}$",fontsize=15)
 plt.grid(True)
+ax.axvspan(0.5, 0.8, alpha=0.4, color='green')
+legend = ax.legend(loc=1,bbox_to_anchor=(1,1), shadow=True)
+
 #plt.show()
 plt.savefig("Relation2.svg")
