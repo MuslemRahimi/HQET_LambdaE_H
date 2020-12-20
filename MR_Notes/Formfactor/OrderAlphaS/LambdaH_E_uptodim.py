@@ -316,7 +316,7 @@ lambdaE_uptodim7_10 = np.array(lambdaE_uptodim7_10)
 #=========================================================#
 
 
-"""
+
 #=========================================================#
 plt.subplot(2,1,1)
 
@@ -337,10 +337,10 @@ fig.set_size_inches(7.5, 7.5)
 
 plt.subplot(2, 1, 2)
 plt.xlim(0.20,1.0)
-plt.yticks(np.arange(0,0.020,step=0.005))
+plt.yticks(np.arange(0,0.040,step=0.005))
 plt.plot(M_0, lambdaH_E_0, "--", color='blue',linewidth=2,label='perturbative')
-plt.plot(M_5, lambdaE_5,"--",color='purple',linewidth=2,label='dimension 5')
-plt.plot(M_7, lambdaE_7,"--",color='black',linewidth=2,label='dimension 7')
+plt.plot(M_5, lambdaH_E_5,"--",color='purple',linewidth=2,label='dimension 5')
+plt.plot(M_7, lambdaH_E_7,"--",color='black',linewidth=2,label='dimension 7')
 plt.rc('legend',fontsize=12) 
 plt.legend(loc='best', shadow=True)
 plt.xlabel("$M$ in GeV",fontsize=12)
@@ -351,7 +351,7 @@ plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=12)
 plt.grid(True)
 #plt.show()
 plt.savefig("LambdaH_E_uptodim.svg")
-
+"""
 #=========================================================#
 
 plt.subplot(2,1,1)
@@ -392,7 +392,7 @@ plt.savefig("LambdaE_uptodim.svg")
 
 
 #=========================================================#
-"""
+
 plt.subplot(2,1,1)
 
 plt.xlim(0.20,1.0)
@@ -428,3 +428,4 @@ plt.ylabel("$\lambda_{H}^{4}$ in GeV$^4$",fontsize = 12)
 plt.grid(True)
 #plt.show()
 plt.savefig("LambdaH_uptodim.svg")
+"""
