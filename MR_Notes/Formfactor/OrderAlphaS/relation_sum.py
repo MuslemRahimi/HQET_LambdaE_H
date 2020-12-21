@@ -109,7 +109,7 @@ plt.xlabel("$M$ in GeV",fontsize=12)
 plt.ylabel("$(1+\\mathcal{R})^{2}$",fontsize=12)
 plt.grid(True)
 #plt.show()
-plt.savefig("Relation1.svg")
+plt.savefig("Relation1.pdf")
 #=========================================================#
 fig, ax = plt.subplots()
 
@@ -130,4 +130,4 @@ ax.axvspan(0.5, 0.8, alpha=0.4, color='green')
 legend = ax.legend(loc=1,bbox_to_anchor=(1,1), shadow=True)
 
 #plt.show()
-plt.savefig("Relation2.svg")
+plt.savefig("Relation2.pdf")
