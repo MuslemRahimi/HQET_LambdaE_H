@@ -316,7 +316,7 @@ lambdaE_uptodim7_10 = np.array(lambdaE_uptodim7_10)
 #=========================================================#
 
 
-
+"""
 #=========================================================#
 plt.subplot(2,1,1)
 
@@ -350,8 +350,8 @@ fig = plt.gcf()
 plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=12)
 plt.grid(True)
 #plt.show()
-plt.savefig("LambdaH_E_uptodim.svg")
-"""
+plt.savefig("LambdaH_E_uptodim.pdf")
+
 #=========================================================#
 
 plt.subplot(2,1,1)
@@ -388,9 +388,10 @@ fig = plt.gcf()
 plt.ylabel("$\lambda_{E}^{4}$ in GeV$^4$",fontsize=12)
 plt.grid(True)
 #plt.show()
-plt.savefig("LambdaE_uptodim.svg")
+plt.savefig("LambdaE_uptodim.pdf")
 
 
+"""
 #=========================================================#
 
 plt.subplot(2,1,1)
@@ -427,5 +428,4 @@ fig = plt.gcf()
 plt.ylabel("$\lambda_{H}^{4}$ in GeV$^4$",fontsize = 12)
 plt.grid(True)
 #plt.show()
-plt.savefig("LambdaH_uptodim.svg")
-"""
+plt.savefig("LambdaH_uptodim.pdf")
