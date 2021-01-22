@@ -1,0 +1,19 @@
+ output = 'qlist.yaml' ;
+
+ style = 'q2e3.sty' ;
+
+ model = 'qcd.lag' ;
+
+ in =  s;
+
+ out = ;
+
+ loops = 2 ;
+
+ loop_momentum = k ;
+
+ options = ;
+
+ true = bridge[fq,ft,c,g,0,0];
+
+ true = iprop[ft,1,99];

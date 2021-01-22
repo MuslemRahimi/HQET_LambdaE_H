@@ -1,0 +1,18 @@
+*  propagators
+
+  [fq,fQ,-]
+  [ft,fT,-]
+  [g,g,+,notadpole]
+  [c,C,-]
+  [sigma,sigma,+,notadpole]
+  [s,s,+]
+
+
+*  vertices
+
+  [fQ,fq,g]
+  [fT,ft,g]
+  [C,c,g]
+  [g,g,g]
+  [g,g,sigma]
+  [fT,ft,g,s]
