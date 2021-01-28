@@ -1,0 +1,15 @@
+Wieso hatte GrozinNeubert die Renormalisierung im pertubativen Anteil und im diagonalfall wir nicht?
+
+wir brauchen nur den imaginärteil der wilson koeffizientennach dem optischen theorem gehen also auch cutting rules 
+. unser perturbativer koeff. ist diagonal und es gibt nur einen cut, es ist ein tree-level diagramm und dort muss nicht ernormiert werden(tree-level nach dem cut)aber bei grozin neubert gibt es den 3 teilchen cut und auch noch den zwei-teilchen cut, wo das gluon nicht geschnitten wird und bei dem zwei-teilchen schnitt bleibt also eine schleife übrig, die renormiert werden muss
+
+
+<< wann genau verwendet man RGE, also z.b. tanaka hatte alphaS^0 und alphaS beiträge und diese zwei beiträge waren an zwie verschiedenen skalen deshalb musste man mit RGE alles auf einer skala sprich 1 GeV runterschrauben oder
+
+>> der leitenden ordnung gibt es keine RGE, also erst bei alpha_s für die dim.5 beiträge und dann gibt es logarithmen im resultat, die durch die weit auseinanderliegenden skalen (also bei 1 GeV und iwo im UV) groß werden können, daher RGE , um diese möglichen instabilitäten zu beseitigen
+>> schau dir (51), (52) in tanakas paper anhast omega und mu im log, omega ist ja <<0 und mu bei 1 GeV -> großer logund schau dir (61),(62) nach RGE an, Nun M / mu, die in der gleichen Odnung sind, also log unter kontrolle1
+
+<< In Gl. 61 und 62 ist ja schon alles fertig renormmiert. aber was ist dann genau RGE improved was macht das genau .
+<<sorry habs grad selber im text gelesen "The correct renormalization-group properties obeyed by Eqs. (61), (62) and (71) allow us to improve these sum rulesfurther, such that the logarithmic effects associated withαsln(M/μ) are resummed to all orders" 
+
+>>ja, mu war noch an der UV skala, mein fehler
