@@ -1,6 +1,11 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 
+plt.rc('text', usetex=True)
+
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
+
 
 #Without RGE improved, F with 1 order is defined 
 #in Nishikawa & Tanaka paper, Eq. (71)
@@ -73,11 +78,11 @@ fig, ax = plt.subplots()
 
 #plt.ylim(0.1,0.3)
 plt.xlim(0.20,2.0)
-ax.plot(M_11, fB1_11, color='blue',linewidth = 2,label='$\omega_{th} = 0.8$ GeV')
-ax.plot(M_12, fB1_12, color='orange',linewidth = 2,label='$\omega_{th} = 0.9$ GeV')
-ax.plot(M_13, fB1_13,color='purple',linewidth = 2,label='$\omega_{th} = 1.0$ GeV')
-ax.plot(M_14, fB1_14,color='black',linewidth = 2,label='$\omega_{th} = 1.1$ GeV')
-ax.plot(M_15, fB1_15,color='red',linewidth = 2,label='$\omega_{th} = 1.2$ GeV')
+ax.plot(M_11, fB1_11, color='blue',linewidth = 2,label='$\\omega_{th} = 0.8$ GeV')
+ax.plot(M_12, fB1_12, color='orange',linewidth = 2,label='$\\omega_{th} = 0.9$ GeV')
+ax.plot(M_13, fB1_13,color='purple',linewidth = 2,label='$\\omega_{th} = 1.0$ GeV')
+ax.plot(M_14, fB1_14,color='black',linewidth = 2,label='$\\omega_{th} = 1.1$ GeV')
+ax.plot(M_15, fB1_15,color='red',linewidth = 2,label='$\\omega_{th} = 1.2$ GeV')
 
 
 

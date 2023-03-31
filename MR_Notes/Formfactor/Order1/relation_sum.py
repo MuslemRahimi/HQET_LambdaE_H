@@ -1,6 +1,11 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 
+plt.rc('text', usetex=True)
+
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
+
 
 #=========================================================#
 
@@ -97,9 +102,9 @@ Relation2_115 = np.array(Relation2_115)
 fig, ax = plt.subplots()
 
 plt.ylim(1,1.5)
-ax.plot(M_085, Relation1_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
-ax.plot(M_10, Relation1_10, color='black',label='$\omega_{th} = 0.9$ GeV')
-ax.plot(M_115, Relation1_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
+ax.plot(M_085, Relation1_085, "--", color='blue',label='$\\omega_{th} = 0.8$ GeV')
+ax.plot(M_10, Relation1_10, color='black',label='$\\omega_{th} = 0.9$ GeV')
+ax.plot(M_115, Relation1_115,"--",color='red',label='$\\omega_{th} = 1.0$ GeV')
 plt.rc('legend',fontsize=12)
 ax.axvspan(0.5, 0.8, alpha=0.4, color='green')
 legend = ax.legend(loc=1,bbox_to_anchor=(1,1), shadow=True)
@@ -117,15 +122,15 @@ fig, ax = plt.subplots()
 
 plt.ylim(1,1.05)
 plt.yticks(np.arange(1, 1.05, step=0.01))
-ax.plot(M_085, Relation2_085, "--", color='blue',label='$\omega_{th} = 0.8$ GeV')
-ax.plot(M_10, Relation2_10, color='black',label='$\omega_{th} = 0.9$ GeV')
-ax.plot(M_115, Relation2_115,"--",color='red',label='$\omega_{th} = 1.0$ GeV')
+ax.plot(M_085, Relation2_085, "--", color='blue',label='$\\omega_{th} = 0.8$ GeV')
+ax.plot(M_10, Relation2_10, color='black',label='$\\omega_{th} = 0.9$ GeV')
+ax.plot(M_115, Relation2_115,"--",color='red',label='$\\omega_{th} = 1.0$ GeV')
 
 plt.rc('legend',fontsize=12)
 
 ax.yaxis.set_label_coords(-0.09, 0.6)
 plt.xlabel("$M$ in GeV",fontsize = 14)
-plt.ylabel("$\\frac{(F(\mu)^{2} e^{-\\bar{\Lambda}/M} + F(\mu)^{2} e^{-\\bar{\Lambda}/M} \lambda_{H}^{4})}{(F(\mu)^{2} e^{-\\bar{\Lambda}/M} - F(\mu)^{2} e^{-\\bar{\Lambda}/M} \lambda_{E}^{4})}$",fontsize=16)
+plt.ylabel("$\\frac{(F(\\mu)^{2} e^{-\\bar{\\Lambda}/M} + F(\\mu)^{2} e^{-\\bar{\\Lambda}/M} \\lambda_{H}^{4})}{(F(\\mu)^{2} e^{-\\bar{\\Lambda}/M} - F(\\mu)^{2} e^{-\\bar{\\Lambda}/M} \\lambda_{E}^{4})}$",fontsize=16)
 plt.grid(True)
 plt.tight_layout()
 ax.axvspan(0.5, 0.8, alpha=0.4, color='green')

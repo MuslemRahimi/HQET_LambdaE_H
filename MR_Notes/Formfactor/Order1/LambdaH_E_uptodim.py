@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 
+plt.rc('text', usetex=True)
+
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
 
 #=========================================================#
 
@@ -324,9 +328,9 @@ def lambdaH_E_uptodim():
 
 	plt.ylim(0,0.1)
 	plt.xlim(0.25,1.0)
-	plt.plot(M_7, lambdaH_E_uptodim7_08,"--",color='red',linewidth=2,label='OPE for $\omega_{th} = 0.8$ GeV')
-	plt.plot(M_7, lambdaH_E_uptodim7_09, color='black',linewidth=2,label='OPE for $\omega_{th} = 0.9$ GeV')
-	plt.plot(M_7, lambdaH_E_uptodim7_10,"--",color='blue',linewidth=2,label='OPE for $\omega_{th} = 1.0$ GeV')
+	plt.plot(M_7, lambdaH_E_uptodim7_08,"--",color='red',linewidth=2,label='OPE for $\\omega_{th} = 0.8$ GeV')
+	plt.plot(M_7, lambdaH_E_uptodim7_09, color='black',linewidth=2,label='OPE for $\\omega_{th} = 0.9$ GeV')
+	plt.plot(M_7, lambdaH_E_uptodim7_10,"--",color='blue',linewidth=2,label='OPE for $\\omega_{th} = 1.0$ GeV')
 	plt.grid(True)
 	plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=14)
 	plt.rc('legend',fontsize=12) 
@@ -351,7 +355,7 @@ def lambdaH_E_uptodim():
 	plt.tight_layout()
 	fig = plt.gcf()
 	#plt.yaxis.set_label_coords(-0.12, 0.6) 
-	plt.ylabel("$(\lambda_{H}^{2}+\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=12)
+	plt.ylabel("$(\\lambda_{H}^{2}+\\lambda_{E}^{2})^{2}$ in GeV$^4$",fontsize=12)
 	plt.grid(True)
 	#plt.show()
 	plt.savefig("plots/LambdaH_E_uptodim.pdf")
@@ -359,14 +363,15 @@ def lambdaH_E_uptodim():
 #=========================================================#
 
 def lambdaE_uptodim():
-	ax2=plt.subplot(2,1,1)
+	
+	plt.subplot(2,1,1)
 	plt.ylim(0,0.015)
 	plt.xlim(0.25,1.0)
-	plt.plot(M_7, lambdaE_uptodim7_08,"--",color='red',linewidth=2,label='OPE for $\omega_{th} = 0.55$ GeV')
-	plt.plot(M_7, lambdaE_uptodim7_09, color='black',linewidth=2,label='OPE for $\omega_{th} = 0.60$ GeV')
-	plt.plot(M_7, lambdaE_uptodim7_10,"--",color='blue', linewidth=2,label='OPE for $\omega_{th} = 0.65$ GeV')
+	plt.plot(M_7, lambdaE_uptodim7_08,"--",color='red',linewidth=2,label='OPE for $\\omega_{th} = 0.55$ GeV')
+	plt.plot(M_7, lambdaE_uptodim7_09, color='black',linewidth=2,label='OPE for $\\omega_{th} = 0.60$ GeV')
+	plt.plot(M_7, lambdaE_uptodim7_10,"--",color='blue', linewidth=2,label='OPE for $\\omega_{th} = 0.65$ GeV')
 	plt.grid(True)
-	plt.ylabel("$\lambda_{E}^{4}$ in GeV$^4$",fontsize=14)
+	plt.ylabel("$\\lambda_{E}^{4}$ in GeV$^4$",fontsize=14)
 	plt.rc('legend',fontsize=12) 
 	plt.legend(loc='best', shadow=True)
 	plt.xlabel("$M$ in GeV",fontsize=14)
@@ -391,7 +396,7 @@ def lambdaE_uptodim():
 	plt.tight_layout()
 	fig = plt.gcf()
 	#plt.yaxis.set_label_coords(-0.12, 0.6) 
-	plt.ylabel("$\lambda_{E}^{4}$ in GeV$^4$",fontsize=14)
+	plt.ylabel("$\\lambda_{E}^{4}$ in GeV$^4$",fontsize=14)
 	plt.grid(True)
 	#plt.show()
 	plt.savefig("plots/LambdaE_uptodim.pdf")
@@ -405,12 +410,12 @@ def lambdaH_uptodim():
 
 	plt.ylim(0,0.1)
 	plt.xlim(0.25,1.0)
-	plt.plot(M_7, lambdaH_uptodim7_08,"--",linewidth=2,color='red',label='OPE for $\omega_{th} = 0.8$ GeV')
-	plt.plot(M_7, lambdaH_uptodim7_09, color='black',linewidth=2,label='OPE for $\omega_{th} = 0.9$ GeV')
-	plt.plot(M_7, lambdaH_uptodim7_10,"--",color='blue',linewidth=2,label='OPE for $\omega_{th} = 1.0$ GeV')
+	plt.plot(M_7, lambdaH_uptodim7_08,"--",linewidth=2,color='red',label='OPE for $\\omega_{th} = 0.8$ GeV')
+	plt.plot(M_7, lambdaH_uptodim7_09, color='black',linewidth=2,label='OPE for $\\omega_{th} = 0.9$ GeV')
+	plt.plot(M_7, lambdaH_uptodim7_10,"--",color='blue',linewidth=2,label='OPE for $\\omega_{th} = 1.0$ GeV')
 
 	plt.grid(True)
-	plt.ylabel("$\lambda_{H}^{4}$ in GeV$^4$",fontsize=14)
+	plt.ylabel("$\\lambda_{H}^{4}$ in GeV$^4$",fontsize=14)
 	plt.rc('legend',fontsize=12) 
 	plt.legend(loc='best', shadow=True)
 	plt.xlabel("$M$ in GeV",fontsize = 14)
@@ -434,13 +439,13 @@ def lambdaH_uptodim():
 	plt.xlabel("$M$ in GeV",fontsize = 14)
 	plt.tight_layout()
 	fig = plt.gcf()
-	plt.ylabel("$\lambda_{H}^{4}$ in GeV$^4$",fontsize = 14)
+	plt.ylabel("$\\lambda_{H}^{4}$ in GeV$^4$",fontsize = 14)
 	plt.grid(True)
 	#plt.show()
 	plt.savefig("plots/LambdaH_uptodim.pdf")
 
 
 #call function plots
-#lambdaH_E_uptodim()
-lambdaH_uptodim()
+lambdaH_E_uptodim()
+#lambdaH_uptodim()
 #lambdaE_uptodim()
